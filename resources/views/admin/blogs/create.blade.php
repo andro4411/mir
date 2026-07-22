@@ -69,10 +69,10 @@
                                         <div class="tom-select-custom">
                                             <select class="js-select form-select" autocomplete="off" name="category_id"
                                                     data-hs-tom-select-options='{
-                                                      "placeholder": "Select a category",
+                                                      "placeholder": "@lang("Select a category")",
                                                       "hideSearch": true
                                                     }'>
-                                                <option value="">Select a category</option>
+                                                <option value="">@lang("Select a category")</option>
                                                 @foreach($blogCategory as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                 @endforeach
