@@ -44,8 +44,8 @@
                                     <i class="bi bi-info-circle text-body ms-1"
                                        data-bs-toggle="tooltip"
                                        data-bs-placement="top"
-                                       aria-label="@lang('The Badge Name is an optional label that can be associated with this plan. It can be a short description or identifier, such as 'Gold Member' or 'Premium'.')"
-                                       data-bs-original-title="@lang('The Badge Name is an optional label that can be associated with this plan. It can be a short description or identifier, such as 'Gold Member' or 'Premium'.')"
+                                       aria-label="@lang('The Badge Name is an optional label that can be associated with this plan. It can be a short description or identifier, such as \'Gold Member\' or \'Premium\'.')"
+                                       data-bs-original-title="@lang('The Badge Name is an optional label that can be associated with this plan. It can be a short description or identifier, such as \'Gold Member\' or \'Premium\'.')"
                                     ></i>
                                     <div class=" mb-4">
                                         <input type="text" name="badge" value="{{old('badge',$data->badge)}}" id="badge" class="form-control @error('badge') is-invalid @enderror" placeholder="@lang('e.g : premium , popular')">
