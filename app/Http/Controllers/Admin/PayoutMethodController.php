@@ -285,30 +285,35 @@ class PayoutMethodController extends Controller
         if (!$updateForMethods) {
             return back()->with('warning', 'Something went wrong');
         }
-        $autoCurrencyUpdate = CurrencyLayerService::getCurrencyRate();
 
-        $autoUp = [];
-        foreach ($autoCurrencyUpdate->quotes as $key => $quote) {
-            $strReplace = str_replace($autoCurrencyUpdate->source, '', $key);
-            $autoUp[$strReplace] = $quote;
-        }
+        try {
+            $autoCurrencyUpdate = CurrencyLayerService::getCurrencyRate();
 
-        $usdToBase = 1.00;
-        $currenciesArr = [];
-        foreach ($updateForMethods->payout_currencies as $key => $payout_currency) {
-            foreach ($payout_currency as $key1 => $item) {
-                $resRate = $this->getCheck($payout_currency->name, $autoUp);
-                $curRate = round($resRate / $usdToBase, 2);
-                if ($resRate && $key1 == 'conversion_rate') {
-                    $currenciesArr[$key][$key1] = $curRate;
-                } else {
-                    $currenciesArr[$key][$key1] = $item;
+            $autoUp = [];
+            foreach ($autoCurrencyUpdate->quotes as $key => $quote) {
+                $strReplace = str_replace($autoCurrencyUpdate->source, '', $key);
+                $autoUp[$strReplace] = $quote;
+            }
+
+            $usdToBase = 1.00;
+            $currenciesArr = [];
+            foreach ($updateForMethods->payout_currencies as $key => $payout_currency) {
+                foreach ($payout_currency as $key1 => $item) {
+                    $resRate = $this->getCheck($payout_currency->name, $autoUp);
+                    $curRate = round($resRate / $usdToBase, 2);
+                    if ($resRate && $key1 == 'conversion_rate') {
+                        $currenciesArr[$key][$key1] = $curRate;
+                    } else {
+                        $currenciesArr[$key][$key1] = $item;
+                    }
                 }
             }
+            $updateForMethods->payout_currencies = $currenciesArr;
+            $updateForMethods->save();
+            return back()->with('success', 'Auto Currency Updated Successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
         }
-        $updateForMethods->payout_currencies = $currenciesArr;
-        $updateForMethods->save();
-        return back()->with('success', 'Auto Currency Updated Successfully');
     }
 
 

@@ -1,4 +1,4 @@
-```
+```gitignore
 # Compiled and build artifacts
 *.pyc
 __pycache__/
@@ -16,15 +16,29 @@ node_modules/
 vendor/
 composer.lock
 *.lock
-.env
-.env.local
-*.env.*
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
 *.swo
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
 coverage/
 htmlcov/
 .coverage
@@ -33,22 +47,4 @@ htmlcov/
 dist/
 build/
 target/
-public/storage
-bootstrap/cache/
-storage/
-
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS specific
-.DS_Store
-Thumbs.db
-
-# PHP/Laravel specific
-.php_cs.cache
-.npm
-.yarn
 ```
