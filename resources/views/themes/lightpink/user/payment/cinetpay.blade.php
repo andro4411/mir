@@ -30,7 +30,7 @@
                                 <div class="card">
                                     <img
                                         src="{{getFile(optional($deposit->gateway)->driver, optional($deposit->gateway)->image)}}"
-                                        class="card-img-top gateway-img" alt="..">
+                                        class="card-img-top gateway-img" alt="@lang('..')">
                                 </div>
                             </div>
                             <div class="col-md-6">

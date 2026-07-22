@@ -6,7 +6,7 @@
                 <div class="footer-widget">
                     <div class="widget-logo">
                         <a href="{{route('page')}}"><img class="logo" src="{{logo()}}"
-                                                 alt="EstateRise"></a>
+                                                 alt="@lang('EstateRise')"></a>
                     </div>
                     <p>
                         {!! $footer['single']['short_description']??'' !!}

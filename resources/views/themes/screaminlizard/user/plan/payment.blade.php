@@ -83,7 +83,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="investModalLabel">@lang('Invest Now')</h4>
-                                        <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                                             <i class="fal fa-times"></i>
                                         </button>
                                     </div>

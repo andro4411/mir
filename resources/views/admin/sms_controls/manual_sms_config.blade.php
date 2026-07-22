@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">@lang('Dashboard')</a>
@@ -91,7 +91,7 @@
                                         <input type="url"
                                                class="form-control  @error('actionUrl') is-invalid @enderror"
                                                name="actionUrl" id="urlLabel"
-                                               placeholder="URl" aria-label="URL"
+                                               placeholder="@lang('URl')" aria-label="@lang('URL')"
                                                value="{{ old('actionUrl',$manualSMSMethod->action_url) }}">
                                         @error('actionUrl')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -173,7 +173,7 @@
                                                             <div class="col-sm-4 mb-2 mb-sm-0">
                                                                 <input type="text" class="form-control"
                                                                        name="headerDataKeys[]"
-                                                                       placeholder="Key" aria-label="Key">
+                                                                       placeholder="@lang('Key')" aria-label="@lang('Key')">
                                                                 <span class="invalid-feedback">
                                                                         @error("headerDataKeys") @lang($message)@enderror
                                                                     </span>
@@ -181,7 +181,7 @@
                                                             <div class="col-sm-7">
                                                                 <input type="text" class="form-control"
                                                                        name="headerDataValues[]"
-                                                                       placeholder="Value" aria-label="Value">
+                                                                       placeholder="@lang('Value')" aria-label="@lang('Value')">
                                                             </div>
                                                             <div class="col-sm-1">
                                                                 <button type="button"
@@ -197,7 +197,7 @@
                                                                     <input type="text"
                                                                            class="form-control  @error('headerDataKeys.'.$loop->index) is-invalid @enderror"
                                                                            name="headerDataKeys[]" value="{{$key}}"
-                                                                           placeholder="Key" aria-label="Key"
+                                                                           placeholder="@lang('Key')" aria-label="@lang('Key')"
                                                                            autocomplete="off">
                                                                     @error('headerDataKeys.'.$loop->index)
                                                                     <span class="invalid-feedback">
@@ -209,7 +209,7 @@
                                                                     <input type="text"
                                                                            class="form-control @error('headerDataValues.'.$loop->index) is-invalid @enderror"
                                                                            name="headerDataValues[]" value="{{$value}}"
-                                                                           placeholder="Value" aria-label="Value"
+                                                                           placeholder="@lang('Value')" aria-label="@lang('Value')"
                                                                            autocomplete="off">
                                                                     <span class="invalid-feedback">
                                                                         @error("headerDataValues.".$loop->index) @lang($message)@enderror
@@ -246,13 +246,13 @@
                                                             <div class="col-sm-4 mb-2 mb-sm-0">
                                                                 <input type="text" class="form-control"
                                                                        name="paramKeys[]"
-                                                                       placeholder="Key" aria-label="Key">
+                                                                       placeholder="@lang('Key')" aria-label="@lang('Key')">
                                                             </div>
 
                                                             <div class="col-sm-7">
                                                                 <input type="text" class="form-control"
                                                                        name="paramValues[]"
-                                                                       placeholder="Value" aria-label="Value">
+                                                                       placeholder="@lang('Value')" aria-label="@lang('Value')">
                                                             </div>
                                                             <div class="col-sm-1">
                                                                 <button type="button"
@@ -281,7 +281,7 @@
                                                                     <input type="text"
                                                                            class="form-control @error('paramValues.'.$loop->index) is-invalid @enderror"
                                                                            name="paramValues[]" value="{{$value}}"
-                                                                           placeholder="Value" aria-label="Value"
+                                                                           placeholder="@lang('Value')" aria-label="@lang('Value')"
                                                                            autocomplete="off">
                                                                     <span class="invalid-feedback">
                                                                         @error("paramValues.".$loop->index) @lang($message)
@@ -315,12 +315,12 @@
                                                             <div class="col-sm-4 mb-2 mb-sm-0">
                                                                 <input type="text" class="form-control"
                                                                        name="formDataKeys[]"
-                                                                       placeholder="Key" aria-label="Key">
+                                                                       placeholder="@lang('Key')" aria-label="@lang('Key')">
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <input type="text" class="form-control"
                                                                        name="formDataValues[]"
-                                                                       placeholder="Value" aria-label="Value">
+                                                                       placeholder="@lang('Value')" aria-label="@lang('Value')">
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <button type="button"
@@ -336,7 +336,7 @@
                                                                     <input type="text"
                                                                            class="form-control  @error('formDataKeys.'.$loop->index) is-invalid @enderror"
                                                                            name="formDataKeys[]" value="{{$key}}"
-                                                                           placeholder="Key" aria-label="Key"
+                                                                           placeholder="@lang('Key')" aria-label="@lang('Key')"
                                                                            autocomplete="off">
                                                                     <span class="invalid-feedback">
                                                                         @error("formDataKeys.".$loop->index) @lang($message)
@@ -347,7 +347,7 @@
                                                                     <input type="text"
                                                                            class="form-control @error('formDataValues.'.$loop->index) is-invalid @enderror"
                                                                            name="formDataValues[]" value="{{$value}}"
-                                                                           placeholder="Value" aria-label="Value"
+                                                                           placeholder="@lang('Value')" aria-label="@lang('Value')"
                                                                            autocomplete="off">
                                                                     <span class="invalid-feedback">
                                                                         @error("formDataValues.".$loop->index) @lang($message)

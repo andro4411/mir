@@ -290,7 +290,7 @@
                             </div>
                         </button>
                         <a class="navbar-brand" href="{{route('page')}}">
-                            <img src="{{logo()}}" alt="homepage">
+                            <img src="{{logo()}}" alt="@lang('homepage')">
                         </a>
                     </div>
 
@@ -334,7 +334,7 @@
         <!-- SIDENAVBAR -->
         <div id="sidenavbar">
             <div class="sidenav-header">
-                <p class="sidenav-close">&times;</p>
+                <p class="sidenav-close">@lang('&times;')</p>
             </div>
             <div class="sidenavbar-wrapper">
                 <div class="dashboard-nav">

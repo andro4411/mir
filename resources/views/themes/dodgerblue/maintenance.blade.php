@@ -119,7 +119,7 @@
 </style>
 <div class="maintenance">
     <div class="maintenance_contain">
-        <img src="{{ getFile($maintenanceMode->image_driver, $maintenanceMode->image) }}" alt="maintenance">
+        <img src="{{ getFile($maintenanceMode->image_driver, $maintenanceMode->image) }}" alt="@lang('maintenance')">
         <span class="pp-infobox-title-prefix">@lang('WE ARE COMING SOON')</span>
         <div class="pp-infobox-title-wrapper">
             <h3 class="pp-infobox-title">@lang($maintenanceMode->heading)</h3>

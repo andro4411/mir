@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">@lang('Dashboard')</a>
@@ -23,8 +23,8 @@
         <div class="alert alert-soft-dark" role="alert">
             <div class="d-sm-flex">
                 <div class="flex-shrink-0">
-                    <img class="avatar avatar-xl mb-2 mb-sm-0" src="{{ asset('assets/admin/img/oc-megaphone.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
-                    <img class="avatar avatar-xl mb-2 mb-sm-0" src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
+                    <img class="avatar avatar-xl mb-2 mb-sm-0" src="{{ asset('assets/admin/img/oc-megaphone.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                    <img class="avatar avatar-xl mb-2 mb-sm-0" src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                 </div>
 
                 <div class="flex-grow-1 ms-sm-4" id="control-panel-notice">
@@ -74,11 +74,11 @@
                                 <div class="text-center p-4">
                                     <img class="dataTables-image mb-3"
                                          src="{{ asset("assets/admin/img/oc-error.svg") }}"
-                                         alt="Image Description"
+                                         alt="@lang('Image Description')"
                                          data-hs-theme-appearance="default">
                                     <img class="dataTables-image mb-3"
                                          src="{{ asset("assets/admin/img/oc-error-light.svg") }}"
-                                         alt="Image Description" data-hs-theme-appearance="dark">
+                                         alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                     <p class="mb-0">@lang("No data to show")</p>
                                 </div>
                             </div>
@@ -206,10 +206,10 @@
                                             <div class="text-center p-4">
                                                 <img class="dataTables-image mb-3"
                                                      src="{{ asset('assets/admin/img/oc-error.svg') }}"
-                                                     alt="Image Description" data-hs-theme-appearance="default">
+                                                     alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                                 <img class="dataTables-image mb-3"
                                                      src="{{ asset('assets/admin/img/oc-error-light.svg') }}"
-                                                     alt="Image Description" data-hs-theme-appearance="dark">
+                                                     alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                                 <p class="mb-0">@lang("No data to show")</p>
                                             </div>
                                         </tr>
@@ -234,7 +234,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="deleteModalLabel"><i
                             class="bi bi-check2-square"></i> @lang("Confirmation")</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="" method="post" class="setRoute">
                     @csrf

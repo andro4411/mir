@@ -17,19 +17,19 @@
                                 <div class="contact-info">
                                     <h4 class="h4 mb-30 font-weight-medium">{!! $contact_section['single']['title']??'' !!}</h4>
                                     <div class="media mb-30">
-                                        <img src="{{asset(template(true).'images/icon/contact_icon_1.png')}}" alt="Image Missing">
+                                        <img src="{{asset(template(true).'images/icon/contact_icon_1.png')}}" alt="@lang('Image Missing')">
                                         <div class="media-body ml-20">
                                             <p class="p">{!! $contact_section['single']['location']??'' !!}</p>
                                         </div>
                                     </div>
                                     <div class="media mb-30">
-                                        <img src="{{asset(template(true).'images/icon/contact_icon_2.png')}}" alt="Image Missing">
+                                        <img src="{{asset(template(true).'images/icon/contact_icon_2.png')}}" alt="@lang('Image Missing')">
                                         <div class="media-body ml-20">
                                             <p class="p">{!! $contact_section['single']['email']??'' !!}</p>
                                         </div>
                                     </div>
                                     <div class="media">
-                                        <img src="{{asset(template(true).'images/icon/contact_icon_3.png')}}" alt="Image Missing">
+                                        <img src="{{asset(template(true).'images/icon/contact_icon_3.png')}}" alt="@lang('Image Missing')">
                                         <div class="media-body ml-20">
                                             <p class="p"> {!! $contact_section['single']['telephone']??'' !!} </p>
                                         </div>

@@ -1,7 +1,7 @@
 <div class="profile-cover">
     <div class="profile-cover-img-wrapper">
         <img id="profileCoverImg" class="profile-cover-img" src="{{ asset('assets/admin/img/img1.jpg') }}"
-             alt="Image Description"/>
+             alt="@lang('Image Description')"/>
     </div>
 </div>
 
@@ -9,7 +9,7 @@
     <label class="avatar avatar-xxl avatar-circle avatar-uploader profile-cover-avatar"
            for="editAvatarUploaderModal">
         <img id="editAvatarImgModal" class="avatar-img"
-             src="{{ getFile($user->image_driver, $user->image) }}" alt="Image Description"/>
+             src="{{ getFile($user->image_driver, $user->image) }}" alt="@lang('Image Description')"/>
         <span class="avatar-uploader-trigger"><i class="bi-pencil-fill avatar-uploader-icon shadow-sm"></i></span>
     </label>
 
@@ -18,7 +18,7 @@
         @if($user->email_verification && $user->sms_verification)
             <i class="bi-patch-check-fill fs-2 text-primary" data-bs-toggle="tooltip"
                data-bs-placement="top"
-               title="Verified Profile"></i>
+               title="@lang('Verified Profile')"></i>
         @endif
     </h1>
 

@@ -17,7 +17,7 @@
                  data-hs-theme-appearance="default">
             <img class="navbar-brand-logo-mini"
                  src="{{ getFile($basicControl->admin_logo_driver, $basicControl->admin_logo, true) }}"
-                 alt="Logo"
+                 alt="@lang('Logo')"
                  data-hs-theme-appearance="dark">
         </a>
 
@@ -25,10 +25,10 @@
             <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
                 <i class="bi-arrow-bar-left navbar-toggler-short-align"
                    data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
-                   data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
+                   data-bs-toggle="tooltip" data-bs-placement="right" title="@lang('Collapse')"></i>
                 <i class="bi-arrow-bar-right navbar-toggler-full-align"
                    data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
-                   data-bs-toggle="tooltip" data-bs-placement="right" title="Expand"></i>
+                   data-bs-toggle="tooltip" data-bs-placement="right" title="@lang('Expand')"></i>
             </button>
 
 
@@ -148,7 +148,7 @@
                                                                 <div class="avatar avatar-sm avatar-circle">
                                                                     <img class="avatar-img"
                                                                          :src="item.description.image"
-                                                                         alt="Image Description">
+                                                                         alt="@lang('Image Description')">
                                                                 </div>
 
                                                             </div>
@@ -166,10 +166,10 @@
                                             <div class="text-center p-4" v-if="items.length < 1">
                                                 <img class="dataTables-image mb-3"
                                                      src="{{ asset('assets/admin/img/oc-error.svg') }}"
-                                                     alt="Image Description" data-hs-theme-appearance="default">
+                                                     alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                                 <img class="dataTables-image mb-3"
                                                      src="{{ asset('assets/admin/img/oc-error-light.svg') }}"
-                                                     alt="Image Description" data-hs-theme-appearance="dark">
+                                                     alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                                 <p class="mb-0">@lang("No Notifications Found")</p>
                                             </div>
                                         </div>
@@ -195,7 +195,7 @@
                             <div class="avatar avatar-sm avatar-circle">
                                 <img class="avatar-img"
                                      src="{{getFile(Auth::guard('admin')->user()->image_driver, Auth::guard('admin')->user()->image)}}"
-                                     alt="Image Description">
+                                     alt="@lang('Image Description')">
                                 <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                             </div>
                         </a>
@@ -208,7 +208,7 @@
                                     <div class="avatar avatar-sm avatar-circle">
                                         <img class="avatar-img"
                                              src="{{getFile(Auth::guard('admin')->user()->image_driver, Auth::guard('admin')->user()->image)}}"
-                                             alt="Image Description">
+                                             alt="@lang('Image Description')">
                                     </div>
                                     <div class="flex-grow-1 ms-3">
                                         <h5 class="mb-0">{{auth()->user()->name}}</h5>

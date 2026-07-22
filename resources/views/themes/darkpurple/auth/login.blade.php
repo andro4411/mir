@@ -39,7 +39,7 @@
 
                                                class="form-control form-control-lg @error('captcha') is-invalid @enderror"
                                                name="captcha" id="captcha" autocomplete="off"
-                                               placeholder="Enter Captcha" required>
+                                               placeholder="@lang('Enter Captcha')" required>
                                         @error('captcha')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror

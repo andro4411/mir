@@ -10,7 +10,7 @@
             data-bs-target="#navbarNav"
             aria-controls="navbarNav"
             aria-expanded="false"
-            aria-label="Toggle navigation"
+            aria-label="@lang('Toggle navigation')"
         >
             <i class="far fa-bars"></i>
         </button>

@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">
@@ -146,10 +146,10 @@
                         <div class="card-body card-body-height text-center">
                             <img class="avatar avatar-xxl mb-3"
                                  src="{{ asset('assets/admin/img/oc-error.svg') }}"
-                                 alt="Image Description" data-hs-theme-appearance="default"/>
+                                 alt="@lang('Image Description')" data-hs-theme-appearance="default"/>
                             <img class="avatar avatar-xxl mb-3"
                                  src="{{ asset('assets/admin/img/oc-error.svg') }}"
-                                 alt="Image Description" data-hs-theme-appearance="dark"/>
+                                 alt="@lang('Image Description')" data-hs-theme-appearance="dark"/>
                             <p class="card-text">@lang('No data to show')</p>
                         </div>
                     @endif
@@ -166,7 +166,7 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="statusModalLabel"><i
                                 class="bi bi-check2-square"></i> @lang("Confirmation")</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                     </div>
                     <form action="{{route('admin.kyc.action',$userKyc->id)}}" method="post">
                         @csrf

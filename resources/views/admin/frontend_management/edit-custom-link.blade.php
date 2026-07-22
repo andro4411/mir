@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a></li>
@@ -56,9 +56,9 @@
                                         <div class="mb-4">
                                             <input type="text" class="form-control" id="editLinkText"
                                                    name="link_text[{{ $language->id }}]"
-                                                   placeholder="Link Text"
+                                                   placeholder="@lang('Link Text')"
                                                    value="{{ old('link_text'.'.'.$language->id, isset($customPages[$language->id]) ? @$customPages[$language->id][0]->name : '') }}"
-                                                   aria-label="Link Text">
+                                                   aria-label="@lang('Link Text')">
                                             @error('link_text'.'.'.$language->id)
                                             <span class="invalid-feedback d-block">{{ $message }}</span>
                                             @enderror
@@ -66,9 +66,9 @@
                                         <div class="mb-2">
                                             <input type="text" class="form-control" id="editLink"
                                                    name="link[{{ $language->id }}]"
-                                                   placeholder="https://"
+                                                   placeholder="@lang('https://')"
                                                    value="{{ old('link'.'.'.$language->id, isset($customPages[$language->id]) ? @$customPages[$language->id][0]->page->custom_link : '') }}"
-                                                   aria-label="https://">
+                                                   aria-label="@lang('https://')">
                                             @error('link'.'.'.$language->id)
                                             <span class="invalid-feedback d-block">{{ $message }}</span>
                                             @enderror
@@ -116,9 +116,9 @@
                 language: {
                     zeroRecords: `
                         <div class="text-center p-4">
-                          <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
-                          <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
-                            <p class="mb-0">No data to show</p>
+                          <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                          <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
+                            <p class="mb-0">@lang('No data to show')</p>
                         </div>`
                 }
             });

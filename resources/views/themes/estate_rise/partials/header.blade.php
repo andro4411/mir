@@ -1,7 +1,7 @@
 <!-- Nav section start -->
 <nav class="navbar fixed-top navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand logo" href="{{route('page')}}"><img src="{{logo()}}" alt="EstateRise" /></a>
+        <a class="navbar-brand logo" href="{{route('page')}}"><img src="{{logo()}}" alt="@lang('EstateRise')" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                 aria-controls="offcanvasNavbar">
             <i class="fa-light fa-list"></i>
@@ -9,9 +9,9 @@
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbar">
             <div class="offcanvas-header">
                 <a class="navbar-brand" href="{{route('page')}}"><img class="logo" src="{{logo()}}"
-                                                               alt="EstateRise" /></a>
+                                                               alt="@lang('EstateRise')" /></a>
 
-                <button type="button" class="cmn-btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i
+                <button type="button" class="cmn-btn-close" data-bs-dismiss="offcanvas" aria-label="@lang('Close')"><i
                         class="fa-light fa-arrow-right"></i></button>
             </div>
             <div class="offcanvas-body align-items-center justify-content-between">
@@ -29,7 +29,7 @@
                     @auth
                         <div class="profile-box">
                         <div class="profile">
-                            <img src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" class="img-fluid" alt="EstateRise" />
+                            <img src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" class="img-fluid" alt="@lang('EstateRise')" />
                         </div>
                         <ul class="user-dropdown">
                             <li>

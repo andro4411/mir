@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a>
@@ -25,7 +25,7 @@
             @if(adminAccessRoute(config('role.manage_menu.access.add')))
             <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal"
                     data-bs-target="#addCustomLinkModal">
-                Add Custom Links
+                @lang('Add Custom Links')
             </button>
             @endif
         </div>
@@ -299,31 +299,31 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="addCustomLinkModalLabel"><i class="bi bi-box-arrow-up-right"></i> Custom
                         Links</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="{{ route("admin.add.custom.link") }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-4">
                             <input type="text" class="form-control" id="linkText" name="link_text"
-                                   placeholder="Button Name" autocomplete="off"
-                                   aria-label="Button Name">
+                                   placeholder="@lang('Button Name')" autocomplete="off"
+                                   aria-label="@lang('Button Name')">
                             @error("link_text")
                             <span class="invalid-feedback d-block">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-2">
-                            <input type="text" class="form-control" id="link" name="link" placeholder="https://"
+                            <input type="text" class="form-control" id="link" name="link" placeholder="@lang('https://')"
                                    autocomplete="off"
-                                   aria-label="https://">
+                                   aria-label="@lang('https://')">
                             @error("link")
                             <span class="invalid-feedback d-block">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add Links</button>
+                        <button type="button" class="btn btn-white" data-bs-dismiss="modal">@lang('Close')</button>
+                        <button type="submit" class="btn btn-primary">@lang('Add Links')</button>
                     </div>
                 </form>
             </div>
@@ -341,7 +341,7 @@
                     <h4 class="modal-title" id="editCustomLinkModalLabel"><i class="bi bi-box-arrow-up-right"></i>
                         Custom
                         Links</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
 
 
@@ -378,9 +378,9 @@
                                             <div class="mb-4">
                                                 <input type="text" class="form-control editLinkText"
                                                        name="link_text[{{ $language->id }}]"
-                                                       placeholder="Link Text"
+                                                       placeholder="@lang('Link Text')"
                                                        value="{{ old('link_text'.'.'.$language->id) }}"
-                                                       aria-label="Link Text">
+                                                       aria-label="@lang('Link Text')">
                                                 @error('link_text'.'.'.$language->id)
                                                 <span class="invalid-feedback d-block">{{ $message }}</span>
                                                 @enderror
@@ -388,16 +388,16 @@
                                             <div class="mb-2">
                                                 <input type="text" class="form-control editLink"
                                                        name="link[{{ $language->id }}]"
-                                                       placeholder="https://"
+                                                       placeholder="@lang('https://')"
                                                        value="{{ old('link'.'.'.$language->id) }}"
-                                                       aria-label="https://">
+                                                       aria-label="@lang('https://')">
                                                 @error('link'.'.'.$language->id)
                                                 <span class="invalid-feedback d-block">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="d-flex justify-content-end align-items-center mt-3">
                                                 <button type="button" class="btn btn-white me-2"
-                                                        data-bs-dismiss="modal">Close
+                                                        data-bs-dismiss="modal">@lang('Close')
                                                 </button>
                                                 <button type="submit"
                                                         class="btn btn-primary">@lang('Edit Link')</button>
@@ -423,7 +423,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="accountAddCardModalLabel"><i
                             class="bi bi-check2-square"></i> @lang("Confirmation")</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="" method="post" class="setRoute">
                     @csrf

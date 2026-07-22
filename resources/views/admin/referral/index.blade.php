@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0);">@lang('Dashboard')</a></li>
@@ -219,7 +219,7 @@
                                 <div class="col-md-5">
                                     <div class="mb-3">
                                         <label class="mb-1">@lang('Number Of Level')</label>
-                                        <input type="text" id="NumberOfLevel" class="form-control" placeholder="e.g : 10">
+                                        <input type="text" id="NumberOfLevel" class="form-control" placeholder="@lang('e.g : 10')">
                                     </div>
                                 </div>
                                 <div class="col-md-2 mt-4">
@@ -276,13 +276,13 @@
                 markup += `<div class="row">
                                     <div class="col-md-5">
                                         <div class="input-group mb-3 ">
-                                            <span class="input-group-text" id="basic-addon1">LEVEL</span>
-                                            <input type="text" class="form-control" name="level[]" value="${i+1}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                                            <span class="input-group-text" id="basic-addon1">@lang('LEVEL')</span>
+                                            <input type="text" class="form-control" name="level[]" value="${i+1}" aria-label="@lang('Username')" aria-describedby="basic-addon1" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-group mb-3">
-                                            <input type="number" class="form-control" name="percent[]" placeholder="Level Bonus" aria-label="Recipient's username" aria-describedby="basic-addon2" step="0.01">
+                                            <input type="number" class="form-control" name="percent[]" placeholder="@lang('Level Bonus')" aria-label="@lang('Recipient's username')" aria-describedby="basic-addon2" step="0.01">
                                            <span class="input-group-text">%</span>
                                         </div>
                                     </div>
@@ -293,7 +293,7 @@
             }
 
             markup += `<div class="submit-btn">
-                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                        <button class="btn btn-primary" type="submit">@lang('Submit')</button>
                                     </div>`
             $('#elementContainer').html(markup) ;
 

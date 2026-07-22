@@ -22,7 +22,7 @@
                      data-hs-theme-appearance="default">
                 <img class="navbar-brand-logo-mini"
                      src="{{ getFile($basicControl->favicon_driver, $basicControl->favicon, true) }}"
-                     alt="Logo"
+                     alt="@lang('Logo')"
                      data-hs-theme-appearance="dark">
             </a>
             <!-- End Logo -->
@@ -33,14 +33,14 @@
                    data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
                    data-bs-toggle="tooltip"
                    data-bs-placement="right"
-                   title="Collapse">
+                   title="@lang('Collapse')">
                 </i>
                 <i
                     class="bi-arrow-bar-right navbar-toggler-full-align"
                     data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
                     data-bs-toggle="tooltip"
                     data-bs-placement="right"
-                    title="Expand"
+                    title="@lang('Expand')"
                 ></i>
             </button>
             <!-- End Navbar Vertical Toggle -->
@@ -447,7 +447,7 @@
                                             <a class="nav-link contentTitle  {{($last == $name) ? 'active' : '' }}"
                                                href="{{ route('admin.manage.content', $name) }}">@lang(\Illuminate\Support\Str::limit(stringToTitle($name),16))</a>
 
-                                            <button class="btn btn-white btn-sm sidebarContentImage contentImage" data-title="{{stringToTitle($name)}}" data-image="{{asset(config('contents.'.getTheme().'.'.$name.'.prieview'))}}" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="Section Style" data-bs-original-title="{{stringToTitle($name)}}">
+                                            <button class="btn btn-white btn-sm sidebarContentImage contentImage" data-title="{{stringToTitle($name)}}" data-image="{{asset(config('contents.'.getTheme().'.'.$name.'.prieview'))}}" data-bs-placement="top" data-bs-toggle="tooltip" aria-label="@lang('Section Style')" data-bs-original-title="{{stringToTitle($name)}}">
                                                 <i class="fa-regular fa-eye"></i>
                                             </button>
                                         </div>
@@ -515,18 +515,18 @@
                                        data-value="auto">
                                         <i class="bi-moon-stars me-2"></i>
                                         <span class="text-truncate"
-                                              title="Auto (system default)">@lang("Default")</span>
+                                              title="@lang('Auto (system default)')">@lang("Default")</span>
                                     </a>
                                     <a class="dropdown-item" href="javascript:void(0)" data-icon="bi-brightness-high"
                                        data-value="default">
                                         <i class="bi-brightness-high me-2"></i>
                                         <span class="text-truncate"
-                                              title="Default (light mode)">@lang("Light Mode")</span>
+                                              title="@lang('Default (light mode)')">@lang("Light Mode")</span>
                                     </a>
                                     <a class="dropdown-item active" href="javascript:void(0)" data-icon="bi-moon"
                                        data-value="dark">
                                         <i class="bi-moon me-2"></i>
-                                        <span class="text-truncate" title="Dark">@lang("Dark Mode")</span>
+                                        <span class="text-truncate" title="@lang('Dark')">@lang("Dark Mode")</span>
                                     </a>
                                 </div>
                             </div>

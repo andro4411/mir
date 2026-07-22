@@ -88,7 +88,7 @@
                                                                 <div class="input-group mb-3 custom">
                                                                     <input type="text" id="filter_date_range"
                                                                            class="js-flatpickr form-control"
-                                                                           placeholder="Select dates"
+                                                                           placeholder="@lang('Select dates')"
                                                                            data-hs-flatpickr-options='{
                                                                  "dateFormat": "d/m/Y",
                                                                  "mode": "range"
@@ -187,7 +187,7 @@
 
                                     <div class="col-sm-auto">
                                         <div class="d-flex  justify-content-center justify-content-sm-end">
-                                            <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+                                            <nav id="datatablePagination" aria-label="@lang('Activity pagination')"></nav>
                                         </div>
                                     </div>
                                 </div>
@@ -248,9 +248,9 @@
 
                 language: {
                     zeroRecords: `<div class="text-center p-4">
-                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
-                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
-                    <p class="mb-0">No data to show</p>
+                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
+                    <p class="mb-0">@lang('No data to show')</p>
                     </div>`,
                     processing: `<div><div></div><div></div><div></div><div></div></div>`
                 },

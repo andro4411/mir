@@ -137,7 +137,7 @@
                                                     <input type="hidden" name="country" id="countryName">
                                                     <input type="tel" id="telephone" name="phone"
                                                            value="{{old('phone',$user->phone)}}" class="form-control"
-                                                           placeholder="e.g : 1976547587" required>
+                                                           placeholder="@lang('e.g : 1976547587')" required>
                                                 </div>
                                                 @error('phone')
                                                 <div class="text-danger">{{$message}}</div>
@@ -150,7 +150,7 @@
                                                     class="form-select"
                                                     name="language"
                                                     id="language_id"
-                                                    aria-label="Default select example"
+                                                    aria-label="@lang('Default select example')"
                                                 >
                                                     <option value="" disabled>@lang('Select Language')</option>
                                                     @foreach($languages as $la)

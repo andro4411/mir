@@ -11,10 +11,10 @@
                     <div class="flex-shrink-0">
                         <img class="avatar avatar-xl"
                              src="{{ asset('assets/admin/img/oc-megaphone.svg') }}"
-                             alt="Image Description" data-hs-theme-appearance="default">
+                             alt="@lang('Image Description')" data-hs-theme-appearance="default">
                         <img class="avatar avatar-xl"
                              src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}"
-                             alt="Image Description" data-hs-theme-appearance="dark">
+                             alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                     </div>
 
                     <div class="flex-grow-1 ms-3">
@@ -28,7 +28,7 @@
                     </div>
                     <button type="button" class="btn-close"
                             @click.prevent="skipNotification" data-bs-dismiss="alert"
-                            aria-label="Close">
+                            aria-label="@lang('Close')">
                     </button>
                 </div>
             </div>
@@ -38,10 +38,10 @@
                     <div class="flex-shrink-0">
                         <img class="avatar avatar-xl"
                              src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}"
-                             alt="Image Description" data-hs-theme-appearance="default">
+                             alt="@lang('Image Description')" data-hs-theme-appearance="default">
                         <img class="avatar avatar-xl"
                              src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}"
-                             alt="Image Description" data-hs-theme-appearance="dark">
+                             alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                     </div>
 
                     <div class="flex-grow-1 ms-3">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <button type="button" class="btn-close" @click.prevent="skipNotification" data-bs-dismiss="alert"
-                            aria-label="Close"></button>
+                            aria-label="@lang('Close')"></button>
                 </div>
             </div>
         </div>
@@ -73,8 +73,8 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-megaphone.svg')}}" alt="Image Description" style="min-height: 5rem;" data-hs-theme-appearance="default">
-                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-megaphone-light.svg')}}" alt="Image Description" style="min-height: 5rem;" data-hs-theme-appearance="dark">
+                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-megaphone.svg')}}" alt="@lang('Image Description')" style="min-height: 5rem;" data-hs-theme-appearance="default">
+                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-megaphone-light.svg')}}" alt="@lang('Image Description')" style="min-height: 5rem;" data-hs-theme-appearance="dark">
                                     </div>
 
                                     <div class="flex-grow-1 ms-4">
@@ -97,8 +97,8 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-collection.svg')}}" alt="Image Description" style="min-height: 5rem;" data-hs-theme-appearance="default">
-                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-collection-light.svg')}}" alt="Image Description" style="min-height: 5rem;" data-hs-theme-appearance="dark">
+                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-collection.svg')}}" alt="@lang('Image Description')" style="min-height: 5rem;" data-hs-theme-appearance="default">
+                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-collection-light.svg')}}" alt="@lang('Image Description')" style="min-height: 5rem;" data-hs-theme-appearance="dark">
                                     </div>
 
                                     <div class="flex-grow-1 ms-4">
@@ -121,8 +121,8 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-discount.svg')}}" alt="Image Description" style="min-height: 5rem;" data-hs-theme-appearance="default">
-                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-discount-light.svg')}}" alt="Image Description" style="min-height: 5rem;" data-hs-theme-appearance="dark">
+                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-discount.svg')}}" alt="@lang('Image Description')" style="min-height: 5rem;" data-hs-theme-appearance="default">
+                                        <img class="avatar avatar-lg avatar-4x3" src="{{asset('assets/admin/img/oc-discount-light.svg')}}" alt="@lang('Image Description')" style="min-height: 5rem;" data-hs-theme-appearance="dark">
                                     </div>
 
                                     <div class="flex-grow-1 ms-4">
@@ -299,8 +299,8 @@
                     @empty
                         <tr>
                             <div class="text-center p-4">
-                                <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
-                                <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
+                                <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                                <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                 <p class="mb-0">@lang("No data to show")</p>
                             </div>
                         </tr>
@@ -325,7 +325,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel"><i class="fal fa-info-circle"></i>
                             @lang('Cron Job Set Up Instruction')</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">

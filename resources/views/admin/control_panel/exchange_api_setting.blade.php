@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="{{ route('admin.dashboard')  }}">@lang('Dashboard')</a>
@@ -47,8 +47,8 @@
                                                class="form-control  @error('currency_layer_access_key') is-invalid @enderror"
                                                name="currency_layer_access_key" id="currency_layer_access_key"
                                                autocomplete="off"
-                                               placeholder="currency_layer_access_key"
-                                               aria-label="currency_layer_access_key"
+                                               placeholder="@lang('currency_layer_access_key')"
+                                               aria-label="@lang('currency_layer_access_key')"
                                                value="{{ old('currency_layer_access_key',  $basicControl->currency_layer_access_key) }}">
                                         @error('currency_layer_access_key')
                                         <span class="invalid-feedback">{{ $message }}</span>

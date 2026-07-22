@@ -54,7 +54,7 @@
                 src="{{logo()}}" alt=""/></a>
         <button class="navbar-toggler p-0 " type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
+                aria-label="@lang('Toggle navigation')">
             <i class="fal fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">

@@ -42,7 +42,7 @@
                                 name="status"
                                 class="form-select"
                                 id="salutation"
-                                aria-label="Default select example"
+                                aria-label="@lang('Default select example')"
                             >
                                 <option value="">@lang('All Payment')</option>
                                 <option value="1"
@@ -155,7 +155,7 @@
                         type="button"
                         data-bs-dismiss="modal"
                         class="btn-close"
-                        aria-label="Close"
+                        aria-label="@lang('Close')"
                     >
                         <img src="{{asset(template(true).'img/icon/cross.png')}}" alt="@lang('cross img')" />
                     </button>
@@ -221,7 +221,7 @@
                         result += `<li class="list-group-item bg-transparent customborder lebelFont text-white">
                                             <span class="font-weight-bold "> ${information[index][1].field_name.split('_')
                             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(' ')} </span> : <img src="${information[index][1].field_value}" alt="..." class="w-100 mt-2 payoutImage" >
+                            .join(' ')} </span> : <img src="${information[index][1].field_value}" alt="@lang('...')" class="w-100 mt-2 payoutImage" >
                                         </li>`;
                     } else {
                         result += `<li class="list-group-item bg-transparent customborder lebelFont text-white">

@@ -134,7 +134,7 @@
                     <h5 class="modal-title" id="infoModalLabel">
                         @lang('Details')
                     </h5>
-                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                         <i class="fal fa-times"></i>
                     </button>
                 </div>
@@ -199,7 +199,7 @@
                         result += `<li class="list-group-item bg-transparent customborder lebelFont darkblue-text">
                                             <span class="font-weight-bold "> ${information[index][1].field_name.split('_')
                             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(' ')} </span> : <img src="${information[index][1].field_value}" alt="..." class="w-100 mt-2 payoutImage" >
+                            .join(' ')} </span> : <img src="${information[index][1].field_value}" alt="@lang('...')" class="w-100 mt-2 payoutImage" >
                                         </li>`;
                     } else {
                         result += `<li class="list-group-item bg-transparent customborder lebelFont darkblue-text">

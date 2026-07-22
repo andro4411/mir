@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a>
@@ -34,7 +34,7 @@
                                     <div class="col-md-6">
                                         <label for="nameLabel" class="form-label">@lang('Name')</label>
                                         <input type="text" class="form-control  @error('name') is-invalid @enderror"
-                                               name="name" id="nameLabel" placeholder="Name" aria-label="Name"
+                                               name="name" id="nameLabel" placeholder="@lang('Name')" aria-label="@lang('Name')"
                                                autocomplete="off"
                                                value="{{ old('name') }}">
                                         @error('name')
@@ -69,11 +69,11 @@
                                             <img id="logoImg"
                                                  class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                  src="{{ asset('assets/admin/img/oc-browse-file.svg') }}"
-                                                 alt="Image Description" data-hs-theme-appearance="default">
+                                                 alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                             <img id="logoImg"
                                                  class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                  src="{{ asset('assets/admin/img/oc-browse-file-light.svg') }}"
-                                                 alt="Image Description" data-hs-theme-appearance="dark">
+                                                 alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                             <span class="d-block">@lang("Browse your file here")</span>
                                             <input type="file" class="js-file-attach form-check-input" name="image"
                                                    id="logoUploader" data-hs-file-attach-options='{
@@ -591,7 +591,7 @@
                                 <input type="hidden" name="payout_currenciesFields[]" value="${rowCount}">
                                         <input type="text" class="form-control change_currency"
                                             name="payout_currencies[${rowCount}][currency]"
-                                               placeholder="Currency" aria-label="Currency"
+                                               placeholder="@lang('Currency')" aria-label="@lang('Currency')"
                                                autocomplete="off">
                                    </td>
                                    <td>

@@ -70,7 +70,7 @@
                                     <div class="profile-info">
                                         <div class="thumbs-area">
                                             <img src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}"
-                                                 alt="EstateRise">
+                                                 alt="@lang('EstateRise')">
                                         </div>
                                         <div class="content-area">
                                             <div class="title">{{auth()->user()->fullname}}</div>
@@ -90,7 +90,7 @@
                                             <div class="message-bubble message-bubble-left">
                                                 <div class="message-thumbs">
                                                     <img src="{{ getFile($user->image_driver, $user->image) }}"
-                                                         alt="EstateRise">
+                                                         alt="@lang('EstateRise')">
                                                 </div>
                                                <div class="d-flex flex-column">
                                                    <div class="message-text">{{$item->message}}</div>
@@ -110,7 +110,7 @@
                                             <div class="message-bubble message-bubble-right">
                                                 <div class="message-thumbs">
                                                     <img src="{{ getFile($item->image_driver, $item->image) }}"
-                                                         alt="EstateRise">
+                                                         alt="@lang('EstateRise')">
                                                 </div>
                                                 <div class="message-text"> {{$item->message}}</div>
                                             </div>
@@ -122,10 +122,10 @@
                                     @method('PUT')
                                     <div class="chat-box-bottom">
                                         <div class="cmn-btn-group2">
-                                            <div class="single-btn2 new-file-upload mr-2" title="Image Upload">
+                                            <div class="single-btn2 new-file-upload mr-2" title="@lang('Image Upload')">
                                                 <a href="#">
                                                     <i class="fa-light fa-image"></i>   </a>
-                                                <input type="file" name="attachments[]" id="upload" class="upload-box" multiple="" placeholder="Upload File">
+                                                <input type="file" name="attachments[]" id="upload" class="upload-box" multiple="" placeholder="@lang('Upload File')">
                                             </div>
 
                                         </div>
@@ -133,7 +133,7 @@
                                         <textarea class="form-control" name="message" id="exampleFormControlTextarea1"
                                                   rows="3"></textarea>
                                         <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                data-bs-title="Send" class="message-send-btn" name="reply_ticket" value="1"><i
+                                                data-bs-title="@lang('Send')" class="message-send-btn" name="reply_ticket" value="1"><i
                                                 class="fa-thin fa-paper-plane"></i></button>
                                     </div>
                                     <p class="text-danger select-files-count"></p>
@@ -148,7 +148,7 @@
                                                 <h1 class="modal-title" id="staticBackdropLabel">@lang('Confirmation')
                                                     !</h1>
                                                 <button type="button" class="cmn-btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close">
+                                                        aria-label="@lang('Close')">
                                                     <i class="fa-light fa-xmark"></i>
                                                 </button>
                                             </div>
@@ -170,7 +170,7 @@
                                 <div class="empty-message d-flex align-items-center justify-content-center">
                                     <div class="text-center p-4">
                                         <img class="dataTables-image mb-3"
-                                             src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description"
+                                             src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')"
                                              data-hs-theme-appearance="default">
                                         <p class="mb-0">@lang('Select a Ticket to start messaging')</p>
                                     </div>
@@ -189,8 +189,8 @@
     <div class="offcanvas offcanvas-end message-offcanvas" tabindex="-1" id="image-generator-offcanvas"
          aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
-            <a class="logo" href="{{route('page')}}"><img src="{{logo()}}" alt="EstateRise"></a>
-            <button type="button" class="cmn-btn-close" data-bs-dismiss="offcanvas" aria-label="Close"><i
+            <a class="logo" href="{{route('page')}}"><img src="{{logo()}}" alt="@lang('EstateRise')"></a>
+            <button type="button" class="cmn-btn-close" data-bs-dismiss="offcanvas" aria-label="@lang('Close')"><i
                     class="fa-regular fa-arrow-right"></i></button>
         </div>
         <div class="offcanvas-body">

@@ -39,7 +39,7 @@
                                 <img
                                     class="img-fluid"
                                     src="{{ getFile(optional($deposit->gateway)->driver, optional($deposit->gateway)->image) }}"
-                                    alt="..."
+                                    alt="@lang('...')"
                                 />
                             </div>
                             <div class="text-box">

@@ -81,7 +81,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title" id="staticBackdropLabel">@lang('Invest Now')</h1>
-                <button type="button" class="cmn-btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="cmn-btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')">
                     <i class="fa-light fa-xmark"></i>
                 </button>
             </div>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="row g-3 align-items-end">
                         <div class="input-box col-12">
-                            <select class="form-select" aria-label="Default select example" name="balance_type">
+                            <select class="form-select" aria-label="@lang('Default select example')" name="balance_type">
                                 @auth
                                     <option
                                         value="balance">@lang('Deposit Balance')

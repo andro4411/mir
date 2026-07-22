@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a>
@@ -140,7 +140,7 @@
                                                                        value="{{ old($key, route($param, $payoutMethod->code )) }}">
                                                                 <a class="js-clipboard input-group-append input-group-text"
                                                                    href="javascript:void(0)" data-bs-toggle="tooltip"
-                                                                   title="Copy to clipboard" data-hs-clipboard-options='{
+                                                                   title="@lang('Copy to clipboard')" data-hs-clipboard-options='{
                                                                     "type": "tooltip",
                                                                     "successText": "Copied!",
                                                                     "contentTarget": "#apiKeyCode1",
@@ -168,11 +168,11 @@
                                             <img id="logoImg"
                                                  class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                  src="{{ getFile($payoutMethod->driver, $payoutMethod->logo, true) }}"
-                                                 alt="Image Description" data-hs-theme-appearance="default">
+                                                 alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                             <img id="logoImg"
                                                  class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                  src="{{ getFile($payoutMethod->driver, $payoutMethod->logo, true) }}"
-                                                 alt="Image Description" data-hs-theme-appearance="dark">
+                                                 alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                             <span class="d-block">@lang("Browse your file here")</span>
                                             <input type="file" class="js-file-attach form-check-input" name="image"
                                                    id="logoUploader" data-hs-file-attach-options='{
@@ -386,7 +386,7 @@
                                                             <div class="input-group mb-1">
                                                                 <input type="text" class="form-control"
                                                                        name="payout_currencies[{{ $i }}][currency_symbol]"
-                                                                       placeholder="Symbol" aria-label="CurrencySymbol"
+                                                                       placeholder="@lang('Symbol')" aria-label="@lang('CurrencySymbol')"
                                                                        value="{{ old("payout_currencies.$i.currency_symbol", $payoutMethod->payout_currencies[$i]->currency_symbol ?? '') }}"
                                                                        aria-describedby="basic-addon1"
                                                                        autocomplete="off">
@@ -505,7 +505,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="autoUpdateCurrencyModalLabel">@lang('Confirmation')</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="{{ route('admin.payout.method.auto.update', $payoutMethod->id) }}" method="post">
                     @csrf

@@ -79,7 +79,7 @@
                     <div class="modal-content shadow1">
                         <div class="modal-header">
                             <h4 class="modal-title" id="exampleModalLabel">@lang('Invest Now')</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"><img
                                     src="{{ asset(template(true).'img/modal/cancel.png') }}" alt=""></button>
                         </div>
                         <form class="text-start mt-20 login-form" id="invest-form"
@@ -93,7 +93,7 @@
 
                                 <div class="mb-3">
                                     <h6 for="select" class="form-label">@lang('Select Wallet')</h6>
-                                    <select class="form-select" aria-label="Default select example"
+                                    <select class="form-select" aria-label="@lang('Default select example')"
                                             name="balance_type">
                                         @auth
                                             <option

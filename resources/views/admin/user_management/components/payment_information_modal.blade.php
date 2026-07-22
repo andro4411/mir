@@ -24,7 +24,7 @@
                         <div class="col-md-4">
                             <small class="text-cap text-secondary mb-0">@lang('Payment method:')</small>
                             <div class="d-flex align-items-center">
-                                <img class="avatar avatar-xss me-2 gateway_modal_image" src="" alt="Image Description">
+                                <img class="avatar avatar-xss me-2 gateway_modal_image" src="" alt="@lang('Image Description')">
                                 <span class="text-dark method"></span>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                     return `<li class="list-group-item text-dark">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="text-capitalize">${field_name_text}</span>
-                                        <a href="${field_value}" target="_blank"><img src="${field_value}" alt="Image Description" class="rounded-1" width="100"></a>
+                                        <a href="${field_value}" target="_blank"><img src="${field_value}" alt="@lang('Image Description')" class="rounded-1" width="100"></a>
                                     </div>
                                 </li>`;
                 } else {
@@ -104,7 +104,7 @@
                 feedbackField = `
                                 <div class="mb-3">
                                     <small class="text-cap mb-2">@lang('Send Your Feedback')</small>
-                                    <textarea name="feedback" class="form-control feedback" placeholder="Feedback" rows="3" >{{old('feedback')}}</textarea>
+                                    <textarea name="feedback" class="form-control feedback" placeholder="@lang('Feedback')" rows="3" >{{old('feedback')}}</textarea>
                                     @error('feedback')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
                                     @enderror

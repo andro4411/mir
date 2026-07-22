@@ -44,14 +44,14 @@
         <div class="row g-5 align-items-center">
             <div class="col-sm-6">
                 <div class="error-thum">
-                    <img src="{{asset('assets/themes/estate_rise/img/error/error.png')}}" alt="EstateRise">
+                    <img src="{{asset('assets/themes/estate_rise/img/error/error.png')}}" alt="@lang('EstateRise')">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="error-content">
                     <div class="error-title">500</div>
                     <div class="error-info">@lang('Internal Server Error')!</div>
-                    <p>The server encountered an internal error misconfiguration and was unable to complete your request. Please contact the server administrator.</p>
+                    <p>@lang('The server encountered an internal error misconfiguration and was unable to complete your request. Please contact the server administrator.')</p>
                     <div class="btn-area">
                         <a href="{{route('page')}}" class="cmn-btn">@lang('Back to Homepage')</a>
                     </div>

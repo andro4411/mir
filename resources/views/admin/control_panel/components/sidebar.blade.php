@@ -3,7 +3,7 @@
     <div class="d-grid">
         <button type="button" class="navbar-toggler btn btn-white mb-3"
                 data-bs-toggle="collapse" data-bs-target="#navbarVerticalNavMenu"
-                aria-label="Toggle navigation" aria-expanded="false"
+                aria-label="@lang('Toggle navigation')" aria-expanded="false"
                 aria-controls="navbarVerticalNavMenu">
                 <span class="d-flex justify-content-between align-items-center">
                     <span class="text-dark">@lang('Menu')</span>

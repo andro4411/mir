@@ -45,7 +45,7 @@
                                 </td>
                                 <td data-label="Last Reply">{{diffForHumans($ticket->last_reply) }}</td>
                                 <td data-label="Action">
-                                    <a href="{{ route('user.ticket.view', $ticket->ticket) }}" type="button" class="btn btn-sm infoButton payoutHistoryBtn" title="Show">
+                                    <a href="{{ route('user.ticket.view', $ticket->ticket) }}" type="button" class="btn btn-sm infoButton payoutHistoryBtn" title="@lang('Show')">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
                                 </td>
@@ -54,7 +54,7 @@
                             <tr class="text-center">
                                 <td colspan="100%" class="text-center">
                                     <div class="text-center p-4">
-                                        <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                                        <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                         <p class="mb-0">@lang('No data to show')</p>
                                     </div>
                                 </td>

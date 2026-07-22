@@ -52,7 +52,7 @@
                             <tr class="text-center">
                                 <td colspan="100%" class="text-center">
                                     <div class="text-center p-4">
-                                        <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                                        <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                         <p class="mb-0">@lang('No data to show')</p>
                                     </div>
                                 </td>
@@ -72,7 +72,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="investModalLabel">@lang('Invest Now')</h4>
-                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                         <i class="fal fa-times"></i>
                     </button>
                 </div>
@@ -87,7 +87,7 @@
                         @csrf
                         <div class="row g-3 align-items-end">
                             <div class="input-box col-12">
-                                <select class="form-select" aria-label="Default select example" name="balance_type">
+                                <select class="form-select" aria-label="@lang('Default select example')" name="balance_type">
                                     @auth
                                         <option
                                             value="balance">@lang('Deposit Balance') - {{currencyPosition(auth()->user()->balance)}}</option>

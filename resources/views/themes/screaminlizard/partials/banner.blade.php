@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-12">
                         <h3 class="text-stroke">{!! $pageSeo['page_title'] !!}</h3>
-                        <nav aria-label="breadcrumb">
+                        <nav aria-label="@lang('breadcrumb')">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('page') }}">@lang('home')</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{!! $pageSeo['page_title'] !!} </li>

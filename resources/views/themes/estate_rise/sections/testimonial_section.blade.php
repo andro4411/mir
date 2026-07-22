@@ -5,7 +5,7 @@
             <div class="col-lg-4 d-none d-lg-block" data-aos="fade-up" data-aos-duration="500">
                 <div class="left-side">
                     <div class="img-box">
-                        <img src="{{isset($testimonial_section['single']['media']->image)?getFile($testimonial_section['single']['media']->image->driver,$testimonial_section['single']['media']->image->path):''}}" alt="testimonial section image">
+                        <img src="{{isset($testimonial_section['single']['media']->image)?getFile($testimonial_section['single']['media']->image->driver,$testimonial_section['single']['media']->image->path):''}}" alt="@lang('testimonial section image')">
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="profile-box">
                                         <div class="profile-thumbs">
-                                            <img src="{{isset($item['media']->image)?getFile($item['media']->image->driver,$item['media']->image->path):''}}" alt="user image" />
+                                            <img src="{{isset($item['media']->image)?getFile($item['media']->image->driver,$item['media']->image->path):''}}" alt="@lang('user image')" />
                                         </div>
                                         <div class="profile-title">
                                             <h6 class="mb-0">{{$item['name']??''}}</h6>

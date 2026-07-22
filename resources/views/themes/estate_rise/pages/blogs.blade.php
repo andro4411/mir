@@ -47,7 +47,7 @@
                         </div>
                     @empty
                         <div class="text-center p-4">
-                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                             <p class="mb-0">@lang('No data to show')</p>
                         </div>
                     @endforelse

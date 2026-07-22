@@ -7,7 +7,7 @@
                     @if(isset($gateways))
                     @foreach($gateways as $gateway)
                         <div class="box">
-                            <img src="{{getFile($gateway->driver,$gateway->image)}}" alt="Gateway Image"/>
+                            <img src="{{getFile($gateway->driver,$gateway->image)}}" alt="@lang('Gateway Image')"/>
                         </div>
                     @endforeach
                     @endif

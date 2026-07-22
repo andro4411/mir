@@ -23,7 +23,7 @@
                     <div class="input-group">
                         <input id="referralURL" type="text" class="form-control"
                                value="{{route('register.sponsor',[Auth::user()->username])}}"
-                               aria-label="Recipient's username" aria-describedby="basic-addon2"
+                               aria-label="@lang('Recipient's username')" aria-describedby="basic-addon2"
                                readonly>
                         <div class="input-group-text" id="copyBtn"><i
                                     class="fa-regular fa-copy"></i>@lang('copy')

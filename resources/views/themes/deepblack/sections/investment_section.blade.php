@@ -71,7 +71,7 @@
                     type="button"
                     data-bs-dismiss="modal"
                     class="btn-close btn-close-investment"
-                    aria-label="Close"
+                    aria-label="@lang('Close')"
                 >
                     <img src="{{asset(template(true).'img/icon/cross.png')}}" alt="@lang('cross img')" />
                 </button>

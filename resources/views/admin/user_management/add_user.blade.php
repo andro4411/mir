@@ -46,7 +46,7 @@
                                                    for="avatarUploader">
                                                 <img id="avatarImg" class="avatar-img"
                                                      src="{{ asset('assets/admin/img/img-profile-avatar.jpg') }}"
-                                                     alt="Image Description">
+                                                     alt="@lang('Image Description')">
                                                 <input type="file" class="js-file-attach avatar-uploader-input"
                                                        name="image"
                                                        id="avatarUploader" data-hs-file-attach-options='{
@@ -71,7 +71,7 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control input-field" name="firstName"
                                                id="firstNameLabel"
-                                               placeholder="First name" aria-label="First name"
+                                               placeholder="@lang('First name')" aria-label="@lang('First name')"
                                                data-target=".full_name"
                                                value="{{ old('firstName') }}" autocomplete="off">
                                         @error('firstName')
@@ -87,7 +87,7 @@
                                         <div class="input-group input-group-sm-vertical">
                                             <input type="text" class="form-control input-field" name="lastName"
                                                    id="lastNameLabel"
-                                                   placeholder="Last name" aria-label="Last name"
+                                                   placeholder="@lang('Last name')" aria-label="@lang('Last name')"
                                                    data-target=".full_name"
                                                    value="{{ old('lastName') }}" autocomplete="off">
                                         </div>
@@ -131,7 +131,7 @@
                                             <span class="input-group-text" id="spanPhoneCode"></span>
 
                                             <input type="text" class="js-input-mask form-control" name="phone"
-                                                   id="phoneLabel" placeholder="Phone"
+                                                   id="phoneLabel" placeholder="@lang('Phone')"
                                                    value="{{ old('phone') }}"
                                                    autocomplete="off">
                                         </div>
@@ -150,7 +150,7 @@
                                                     <option value="{{ $country['name'] }}"
                                                             data-country-code="{{ $country['code'] }}"
                                                             data-phone-code="{{ $country['phone_code'] }}"
-                                                            data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="{{ asset($country['flag']) }}" alt="Afghanistan Flag" /><span class="text-truncate">{{ $country['name'] }}</span></span>'>
+                                                            data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="{{ asset($country['flag']) }}" alt="@lang('Afghanistan Flag')" /><span class="text-truncate">{{ $country['name'] }}</span></span>'>
                                                         @lang($country['name'])
                                                     </option>
                                                 @empty
@@ -167,13 +167,13 @@
                                         <div class="mb-3">
                                             <div class="input-group input-group-sm-vertical">
                                                 <input type="text" class="form-control" name="city" id="cityLabel"
-                                                       placeholder="City" aria-label="City"
+                                                       placeholder="@lang('City')" aria-label="@lang('City')"
                                                        value="{{ old('city') }}" autocomplete="off">
                                                 <input type="text" class="form-control" name="state" id="stateLabel"
                                                        placeholder="@lang("State")" aria-label="@lang("State")"
                                                        value="{{ old('state') }}" autocomplete="off">
                                                 <input type="text" class="js-input-mask form-control" name="zipCode"
-                                                       id="zipCodeLabel" placeholder="Zip code" aria-label="Zip code"
+                                                       id="zipCodeLabel" placeholder="@lang('Zip code')" aria-label="@lang('Zip code')"
                                                        value="{{ old('zipCode') }}" autocomplete="off">
                                             </div>
                                             @error('city')
@@ -210,7 +210,7 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="addressTwo"
                                                id="addressLine2Label" placeholder="@lang('Address line 2 (optional)')"
-                                               aria-label="Address Two"
+                                               aria-label="@lang('Address Two')"
                                                value="{{ old('addressTwo') }}" autocomplete="off">
                                         @error('addressTwo')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
@@ -247,13 +247,13 @@
                             <div class="profile-cover">
                                 <div class="profile-cover-img-wrapper">
                                     <img class="profile-cover-img" src="{{ asset('assets/admin/img/img1.jpg') }}"
-                                         alt="Image Description">
+                                         alt="@lang('Image Description')">
                                 </div>
                             </div>
 
                             <div class="avatar avatar-xxl avatar-circle avatar-border-lg profile-cover-avatar">
                                 <img class="avatar-img" src="{{ asset('assets/admin/img/img-profile-avatar.jpg') }}"
-                                     alt="Image Description">
+                                     alt="@lang('Image Description')">
                             </div>
 
                             <div class="card-body">

@@ -69,7 +69,7 @@
                                         <div class="text-center p-4">
                                             <img class="dataTables-image mb-3"
                                                  src="{{ asset('assets/admin/img/oc-error.svg') }}"
-                                                 alt="Image Description" data-hs-theme-appearance="default">
+                                                 alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                             <p class="mb-0">@lang('No data to show')</p>
                                         </div>
                                     </td>
@@ -94,7 +94,7 @@
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">@lang('Fund History Filter')</h5>
-            <button type="button" class="cmn-btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+            <button type="button" class="cmn-btn-close" data-bs-dismiss="offcanvas" aria-label="@lang('Close')">
                 <i class="fa-light fa-arrow-right"></i>
             </button>
         </div>

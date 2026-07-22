@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h3 class="modal-title" id="userDeleteMultipleModalLabel"><i
                         class="fa-light fa-square-check"></i> @lang('Confirmation')</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
             </div>
             <form action="" method="post">
                 @csrf

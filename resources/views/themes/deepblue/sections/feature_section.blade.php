@@ -8,7 +8,7 @@
                     <div class="col-md-4">
                         <div class="card-type-1 card wow fadeInUp" data-wow-duration="1s" data-wow-dealy="0.1s">
                             <div class="card-icon">
-                                <img class="card-img-top" src="{{$feature['media']->icon? getFile($feature['media']->icon->driver,$feature['media']->icon->path):''}}" alt="....">
+                                <img class="card-img-top" src="{{$feature['media']->icon? getFile($feature['media']->icon->driver,$feature['media']->icon->path):''}}" alt="@lang('....')">
                             </div>
                             <div class="card-body">
                                 <h3 class="card-title">{{$feature['information']??''}}</h3>

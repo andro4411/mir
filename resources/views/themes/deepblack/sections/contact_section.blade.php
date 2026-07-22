@@ -9,7 +9,7 @@
                 </div>
                 <div class="box mb-5">
                     <div class="img">
-                        <img src="{{asset(template(true).'img/icon/location2.png')}}" alt="location image" />
+                        <img src="{{asset(template(true).'img/icon/location2.png')}}" alt="@lang('location image')" />
                     </div>
                     <div class="text">
                         <h4 class="golden-text">@lang('Our Location')</h4>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="box mb-5">
                     <div class="img">
-                        <img src="{{asset(template(true).'img/icon/email2.png')}}" alt="email image" />
+                        <img src="{{asset(template(true).'img/icon/email2.png')}}" alt="@lang('email image')" />
                     </div>
                     <div class="text">
                         <h4 class="golden-text">@lang('email address')</h4>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="box">
                     <div class="img">
-                        <img src="{{asset(template(true).'img/icon/phone2.png')}}" alt="phone image" />
+                        <img src="{{asset(template(true).'img/icon/phone2.png')}}" alt="@lang('phone image')" />
                     </div>
                     <div class="text">
                         <h4 class="golden-text">{!! $contact_section['single']['telephone']??'' !!}</h4>

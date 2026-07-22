@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">@lang('Dashboard')
@@ -27,10 +27,10 @@
                         <div class="flex-shrink-0">
                             <img class="avatar avatar-xl"
                                  src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}"
-                                 alt="Image Description" data-hs-theme-appearance="default">
+                                 alt="@lang('Image Description')" data-hs-theme-appearance="default">
                             <img class="avatar avatar-xl"
                                  src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}"
-                                 alt="Image Description" data-hs-theme-appearance="dark">
+                                 alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                         </div>
 
                         <div class="flex-grow-1 ms-3">
@@ -136,7 +136,7 @@
                                         <label for="paginateLabel" class="form-label">@lang('Paginate')</label>
                                         <input type="text" class="form-control @error('paginate') is-invalid @enderror"
                                                name="paginate" id="paginateLabel"
-                                               placeholder="Paginate" aria-label="Paginate" autocomplete="off"
+                                               placeholder="@lang('Paginate')" aria-label="@lang('Paginate')" autocomplete="off"
                                                value="{{ old('paginate',$basicControl->paginate) }}">
                                         @error('paginate')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -163,7 +163,7 @@
                                         <label for="max_transferLabel" class="form-label">@lang('Maximum Transfer')</label>
                                         <input type="number" class="form-control @error('max_transfer') is-invalid @enderror"
                                                name="max_transfer" id="max_transferLabel"
-                                               placeholder="Maximum Transfer" aria-label="Maximum Transfer" autocomplete="off"
+                                               placeholder="@lang('Maximum Transfer')" aria-label="@lang('Maximum Transfer')" autocomplete="off"
                                                value="{{ old('max_transfer',$basicControl->max_transfer) }}" step="0.001">
                                         @error('max_transfer')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -190,7 +190,7 @@
                                         <label for="bonus_amountLabel" class="form-label">@lang('Bonus Amount')</label>
                                         <input type="number" class="form-control @error('bonus_amount') is-invalid @enderror"
                                                name="bonus_amount" id="bonus_amountLabel"
-                                               placeholder="Bonus Amount" aria-label="Bonus Amount" autocomplete="off"
+                                               placeholder="@lang('Bonus Amount')" aria-label="@lang('Bonus Amount')" autocomplete="off"
                                                value="{{ old('bonus_amount',$basicControl->bonus_amount) }}" step="0.001">
                                         @error('bonus_amount')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -204,7 +204,7 @@
                                        <div class="input-group">
                                            <input type="number" class="form-control @error('terminate_charge') is-invalid @enderror"
                                                   name="terminate_charge" id="terminate_chargeLabel"
-                                                  placeholder="Investment Terminate Charge" aria-label="Bonus Amount" autocomplete="off"
+                                                  placeholder="@lang('Investment Terminate Charge')" aria-label="@lang('Bonus Amount')" autocomplete="off"
                                                   value="{{ old('terminate_charge',$basicControl->terminate_charge) }}" step="0.001">
                                            <span class="input-group-text" id="basic-addon2">%</span>
                                        </div>
@@ -262,7 +262,7 @@
                                                            class="form-control color-form-input @error('primary_color') is-invalid @enderror"
                                                            name="primary_color"
                                                            id="primaryColorLabel"
-                                                           placeholder="Primary Color" aria-label="Primary Color"
+                                                           placeholder="@lang('Primary Color')" aria-label="@lang('Primary Color')"
                                                            value="{{ old('primary_color',primaryColor()) }}">
                                                     @error('primary_color')
                                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -276,8 +276,8 @@
                                                            class="form-control color-form-input @error('secondary_color') is-invalid @enderror"
                                                            name="secondary_color"
                                                            id="secondaryColorLabel"
-                                                           placeholder="Secondary Color"
-                                                           aria-label="Secondary Color"
+                                                           placeholder="@lang('Secondary Color')"
+                                                           aria-label="@lang('Secondary Color')"
                                                            value="{{ old('secondary_color',secondaryColor()) }}">
                                                     @error('secondary_color')
                                                     <span class="invalid-feedback">{{ $message }}</span>

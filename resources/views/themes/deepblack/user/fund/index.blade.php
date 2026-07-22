@@ -42,7 +42,7 @@
                                 name="status"
                                 class="form-select"
                                 id="salutation"
-                                aria-label="Default select example"
+                                aria-label="@lang('Default select example')"
                             >
                                 <option value="">@lang('All Payment')</option>
                                 <option value="1"
@@ -111,7 +111,7 @@
                                 <tr class="text-center">
                                     <td colspan="100%" class="text-center">
                                         <div class="text-center p-4">
-                                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                             <p class="mb-0">@lang('No data to show')</p>
                                         </div>
                                     </td>

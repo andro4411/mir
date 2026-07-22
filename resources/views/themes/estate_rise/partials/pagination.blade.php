@@ -1,4 +1,4 @@
-<nav aria-label="...">
+<nav aria-label="@lang('...')">
     @if ($paginator->hasPages())
         <ul class="pagination">
             {{-- Previous Page Link --}}
@@ -30,7 +30,7 @@
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
                             <li class="page-item active">
-                                <a href="javascript:void(0)" class="page-link">{{ $page }}<span class="sr-only">(current)</span></a>
+                                <a href="javascript:void(0)" class="page-link">{{ $page }}<span class="sr-only">@lang('(current)')</span></a>
                             </li>
                         @else
                             <li class="page-item">

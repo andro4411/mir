@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="editKeywordModalLabel"><i class="fa fa-edit"></i> @lang("Edit Keyword")
                 </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
             </div>
             <form action="" method="post" class="edit-keyword-form">
                 @csrf
@@ -16,7 +16,7 @@
                         <label class="edit-key form-label" for="nameLabel"></label>
                         <div class="input-group">
                             <input type="text" class="form-control edit-value input-field" name="value"
-                                   placeholder="Value" aria-label="Value"
+                                   placeholder="@lang('Value')" aria-label="@lang('Value')"
                                    aria-describedby="basic-addon2">
                             <button type="button" class="input-group-text translate_btn"
                                     data-route="{{ route('admin.single.keyword.translate') }}"

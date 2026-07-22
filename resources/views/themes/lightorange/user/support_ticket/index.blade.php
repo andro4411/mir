@@ -6,7 +6,7 @@
         <!-- PAGE-NAVIGATOR -->
         <section id="page-navigator">
             <div class="container-fluid">
-                <div aria-label="breadcrumb">
+                <div aria-label="@lang('breadcrumb')">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('user.dashboard')}}">@lang('Home')</a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)"
@@ -69,7 +69,7 @@
                                             <td data-label="@lang('Action')">
                                                 <a href="{{ route('user.ticket.view', $ticket->ticket) }}"
                                                    class="btn btn-sm base-btn"
-                                                   data-toggle="tooltip" title="" data-original-title="Details">
+                                                   data-toggle="tooltip" title="" data-original-title="@lang('Details')">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             </td>

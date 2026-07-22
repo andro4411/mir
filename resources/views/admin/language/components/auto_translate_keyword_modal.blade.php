@@ -7,7 +7,7 @@
                 <h4 class="modal-title" id="TranslateModalLabel">
                     <i class="bi bi-check2-square"></i> @lang("Confirmation")
                 </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
             </div>
             <form action="{{ route('admin.all.keyword.translate', $language->short_name) }}" method="post">
                 @csrf
@@ -15,7 +15,7 @@
                     <span>@lang('Would you like to automatically translate all the keywords?')</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-white" data-bs-dismiss="modal">@lang('Close')</button>
                     <button type="submit" class="btn btn-sm btn-primary ">@lang('Confirm')</button>
                 </div>
             </form>

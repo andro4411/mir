@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">@lang('Dashboard')</a>
@@ -48,7 +48,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="avatar avatar-sm avatar-circle">
-                                                        <img class="avatar-img" src="{{ getFile($item->driver,$item->logo) }}" alt="Image Description">
+                                                        <img class="avatar-img" src="{{ getFile($item->driver,$item->logo) }}" alt="@lang('Image Description')">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
@@ -105,10 +105,10 @@
                                             <div class="text-center p-4">
                                                 <img class="mb-3 dataTables-image"
                                                      src="{{ asset('assets/admin/img/oc-error.svg') }}"
-                                                     alt="Image Description" data-hs-theme-appearance="default">
+                                                     alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                                 <img class="mb-3 dataTables-image"
                                                      src="{{ asset('assets/admin/img/oc-error-light.svg') }}"
-                                                     alt="Image Description" data-hs-theme-appearance="dark">
+                                                     alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                                 <p class="mb-0">@lang("No data to show")</p>
                                             </div>
                                         </td>
@@ -130,7 +130,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="setAsDefaultModalLabel"><i class="bi bi-check2-square"></i> @lang("Confirmation")</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="" method="post" class="setRoute">
                     @csrf

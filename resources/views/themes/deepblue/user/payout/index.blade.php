@@ -4,7 +4,7 @@
     @push('navigator')
         <section id="page-navigator">
             <div class="container-fluid">
-                <div aria-label="breadcrumb">
+                <div aria-label="@lang('breadcrumb')">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('user.dashboard')}}"> @lang('Home') </a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)"
@@ -133,7 +133,7 @@
                                         <tr class="text-center">
                                             <td colspan="100%" class="text-center">
                                                 <div class="text-center p-4">
-                                                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                                                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                                     <p class="mb-0">@lang('No data to show')</p>
                                                 </div>
                                             </td>
@@ -158,8 +158,8 @@
 
                 <div class="modal-header">
                     <h5 class="modal-title">@lang('Details')</h5>
-                    <button type="button" class="close closeModal" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="close closeModal" data-dismiss="modal" aria-label="@lang('Close')">
+                        <span aria-hidden="true">@lang('&times;')</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -205,7 +205,7 @@
                         result += `<li class="list-group-item bg-transparent">
                                             <span class="font-weight-bold "> ${information[index][1].field_name.split('_')
                             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(' ')} </span> : <img src="${information[index][1].field_value}" alt="..." class="w-100 mt-2 payoutImage" >
+                            .join(' ')} </span> : <img src="${information[index][1].field_value}" alt="@lang('...')" class="w-100 mt-2 payoutImage" >
                                         </li>`;
                     } else {
                         result += `<li class="list-group-item bg-transparent">

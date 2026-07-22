@@ -60,7 +60,7 @@
                                         <div class="image-area">
                                             <img id="profile-img"
                                                  src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}"
-                                                 alt="EstateRise">
+                                                 alt="@lang('EstateRise')">
                                         </div>
                                         <div class="btn-area">
                                             <div class="btn-area-inner d-flex">

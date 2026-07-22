@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="{{ route('admin.dashboard') }}">@lang("Dashboard")</a>
@@ -127,7 +127,7 @@
                                         <input type="text"
                                                class="form-control  @error('project_id') is-invalid @enderror"
                                                name="project_id" id="projectIdLabel"
-                                               placeholder="Project Id" aria-label="Project Id"
+                                               placeholder="@lang('Project Id')" aria-label="@lang('Project Id')"
                                                value="{{ old('project_id', $firebaseNotify['projectId']) }}">
                                         @error('project_id')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -142,7 +142,7 @@
                                         <input type="text"
                                                class="form-control  @error('storage_bucket') is-invalid @enderror"
                                                name="storage_bucket" id="storageBucketLabel"
-                                               placeholder="Storage Bucket" aria-label="Storage Bucket"
+                                               placeholder="@lang('Storage Bucket')" aria-label="@lang('Storage Bucket')"
                                                value="{{ old('storage_bucket', $firebaseNotify['storageBucket']) }}">
                                         @error('storage_bucket')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -155,7 +155,7 @@
                                         <input type="text"
                                                class="form-control  @error('messaging_sender_id') is-invalid @enderror"
                                                name="messaging_sender_id" id="messagingSenderIdLabel"
-                                               placeholder="Messaging Sender Id" aria-label="Messaging Sender Id"
+                                               placeholder="@lang('Messaging Sender Id')" aria-label="@lang('Messaging Sender Id')"
                                                value="{{ old('messaging_sender_id', $firebaseNotify['messagingSenderId']) }}">
                                         @error('messaging_sender_id')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -170,7 +170,7 @@
                                         <input type="text"
                                                class="form-control  @error('app_id') is-invalid @enderror"
                                                name="app_id" id="appIdLabel"
-                                               placeholder="App Id" aria-label="App Id"
+                                               placeholder="@lang('App Id')" aria-label="@lang('App Id')"
                                                value="{{ old('app_id', $firebaseNotify['appId']) }}">
                                         @error('app_id')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -183,7 +183,7 @@
                                         <input type="text"
                                                class="form-control  @error('measurement_id') is-invalid @enderror"
                                                name="measurement_id" id="MeasurementId"
-                                               placeholder="Measurement Id" aria-label="Measurement Id"
+                                               placeholder="@lang('Measurement Id')" aria-label="@lang('Measurement Id')"
                                                value="{{ old('measurement_id', $firebaseNotify['measurementId']) }}">
                                         @error('measurement_id')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -360,7 +360,7 @@
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h2 class="card-title h4 mt-2">@lang("Service File") <i
                                 class="bi-question-circle text-body ms-1" data-bs-toggle="tooltip"
-                                data-bs-placement="top" aria-label="You can find your code in a postal address."
+                                data-bs-placement="top" aria-label="@lang('You can find your code in a postal address.')"
                                 data-bs-original-title="@lang('Upload Firebase Service Configuration Json File')"></i>
                         </h2>
                         <a class="text-body" href="{{route('admin.firebase.config.file.download')}}">

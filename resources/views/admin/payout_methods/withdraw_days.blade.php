@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link"
@@ -37,7 +37,7 @@
                                             <div class="flex-shrink-0">
                                                 <img class="avatar avatar-xs"
                                                      src="{{ asset("assets/admin/img/day-off1.png") }}"
-                                                     alt="Image Description">
+                                                     alt="@lang('Image Description')">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
                                                 <div class="row align-items-center">
@@ -66,7 +66,7 @@
                                             <div class="flex-shrink-0">
                                                 <img class="avatar avatar-xs"
                                                      src="{{ asset("assets/admin/img/day-off1.png") }}"
-                                                     alt="Image Description">
+                                                     alt="@lang('Image Description')">
                                             </div>
 
                                             <div class="flex-grow-1 ms-3">
@@ -103,7 +103,7 @@
                                             <div class="flex-shrink-0">
                                                 <img class="avatar avatar-xs"
                                                      src="{{ asset("assets/admin/img/day-off1.png") }}"
-                                                     alt="Image Description">
+                                                     alt="@lang('Image Description')">
                                             </div>
 
                                             <div class="flex-grow-1 ms-3">
@@ -140,7 +140,7 @@
                                             <div class="flex-shrink-0">
                                                 <img class="avatar avatar-xs"
                                                      src="{{ asset("assets/admin/img/day-off1.png") }}"
-                                                     alt="Image Description">
+                                                     alt="@lang('Image Description')">
                                             </div>
 
                                             <div class="flex-grow-1 ms-3">
@@ -177,7 +177,7 @@
                                             <div class="flex-shrink-0">
                                                 <img class="avatar avatar-xs"
                                                      src="{{ asset("assets/admin/img/day-off1.png") }}"
-                                                     alt="Image Description">
+                                                     alt="@lang('Image Description')">
                                             </div>
 
                                             <div class="flex-grow-1 ms-3">
@@ -211,7 +211,7 @@
                                             <div class="flex-shrink-0">
                                                 <img class="avatar avatar-xs"
                                                      src="{{ asset("assets/admin/img/day-off1.png") }}"
-                                                     alt="Image Description">
+                                                     alt="@lang('Image Description')">
                                             </div>
 
                                             <div class="flex-grow-1 ms-3">
@@ -245,7 +245,7 @@
                                             <div class="flex-shrink-0">
                                                 <img class="avatar avatar-xs"
                                                      src="{{ asset("assets/admin/img/day-off1.png") }}"
-                                                     alt="Image Description">
+                                                     alt="@lang('Image Description')">
                                             </div>
 
                                             <div class="flex-grow-1 ms-3">

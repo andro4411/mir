@@ -60,7 +60,7 @@
                 </a>
                 <button class="navbar-toggler p-0 " type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                        aria-label="Toggle navigation">
+                        aria-label="@lang('Toggle navigation')">
                     <img src="{{asset(template(true).'img/icon/hamburger.png')}}" alt="@lang('hamburger image')" />
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">

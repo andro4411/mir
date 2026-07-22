@@ -9,7 +9,7 @@
                 <div class="col-lg-7 order-2 order-lg-1">
                     <div class="blog-box-large">
                         <div class="thumbs-area">
-                            <img src="{{getFile($blog->blog_image_driver,$blog->blog_image)}}" alt="EstateRise">
+                            <img src="{{getFile($blog->blog_image_driver,$blog->blog_image)}}" alt="@lang('EstateRise')">
                         </div>
                         <div class="content-area mt-20">
                             <ul class="meta mb-15">
@@ -65,7 +65,7 @@
                             @foreach($recentBlogs as $data)
                                 <a href="{{route('blog.details',optional($data->details)->slug??'blog-details')}}" class="sidebar-widget-item">
                                     <div class="image-area">
-                                        <img src="{{getFile($data->blog_image_driver,$data->blog_image)}}" alt="EstateRise">
+                                        <img src="{{getFile($data->blog_image_driver,$data->blog_image)}}" alt="@lang('EstateRise')">
                                     </div>
                                     <div class="content-area">
                                         <div class="title">{{\Str::limit(optional($data->details)->title,40)}}</div>

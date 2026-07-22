@@ -166,7 +166,7 @@
             <div class="modal-content">
                 <div class="modal-header modal-header-custom">
                     <h4 class="modal-title text-white" id="editModalLabel">@lang('Confirmation')</h4>
-                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                         <i class="fal fa-times text-white" aria-hidden="true"></i>
                     </button>
                 </div>

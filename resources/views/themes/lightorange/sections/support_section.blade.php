@@ -5,7 +5,7 @@
                 <div class="col-lg-6 col-md-8 wow fadeInLeftBig">
                     <div class="left-area d-flex">
                         <div class="icon-area">
-                            <img src="{{asset(template(true).'images/icon/contact_icon_3.png')}}" alt="image">
+                            <img src="{{asset(template(true).'images/icon/contact_icon_3.png')}}" alt="@lang('image')">
                         </div>
                         <span class="border"></span>
                         <div class="text-area">

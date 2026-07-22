@@ -8,7 +8,7 @@
                 @if(auth()->guard('admin')->check() == false)
                     <div class="col-sm-6">
                         <div class="error-thum">
-                            <img src="{{ asset('assets/admin/img/error2.png')}}"  class="w-100" alt="...">
+                            <img src="{{ asset('assets/admin/img/error2.png')}}"  class="w-100" alt="@lang('...')">
                         </div>
                     </div>
                 @endif
@@ -37,7 +37,7 @@
                 @if(auth()->guard('admin')->check())
                     <div class="col-sm-12">
                         <div class="instruction-thumbs">
-                            <img src="{{ asset('assets/admin/img/content-add-instruction.png')}}" class="w-100" alt="...">
+                            <img src="{{ asset('assets/admin/img/content-add-instruction.png')}}" class="w-100" alt="@lang('...')">
                         </div>
                     </div>
                 @endif

@@ -20,7 +20,7 @@
                             <div class="fig-container">
                                 <img
                                     src="{{getFile($data->blog_image_driver ,$data->blog_image)}}"
-                                    alt="Image Missing">
+                                    alt="@lang('Image Missing')">
                             </div>
                             <h5 class="h5 mt-5 mb-5">{{\Illuminate\Support\Str::limit(optional($data->details)->title,40)}}</h5>
                             <p class="text">

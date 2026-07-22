@@ -6,7 +6,7 @@
         <!-- PAGE-NAVIGATOR -->
         <section id="page-navigator">
             <div class="container-fluid">
-                <div aria-label="breadcrumb">
+                <div aria-label="@lang('breadcrumb')">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('user.dashboard')}}">@lang('Home')</a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)"
@@ -58,7 +58,7 @@
                                 <div class="content-main-block d-flex h-fill">
                                     <div class="content-icon flex-fill">
                                         <img src="{{asset(template(true).'images/icon/dashboard_1.png')}}"
-                                             alt="Icon Missing">
+                                             alt="@lang('Icon Missing')">
                                     </div>
                                     <div class="content-block flex-fill d-flex flex-column justify-content-center">
                                         <h6 class="h6 font-weight-medium">@lang('Main Balance')</h6>
@@ -76,7 +76,7 @@
                                 <div class="content-main-block d-flex h-fill">
                                     <div class="content-icon flex-fill">
                                         <img src="{{asset(template(true).'images/icon/dashboard_2.png')}}"
-                                             alt="Icon Missing">
+                                             alt="@lang('Icon Missing')">
                                     </div>
                                     <div class="content-block flex-fill d-flex flex-column justify-content-center">
                                         <h6 class="h6 font-weight-medium">@lang('Interest Balance')</h6>
@@ -95,7 +95,7 @@
                                 <div class="content-main-block d-flex h-fill">
                                     <div class="content-icon flex-fill">
                                         <img src="{{asset(template(true).'images/icon/dashboard_3.png')}}"
-                                             alt="Icon Missing">
+                                             alt="@lang('Icon Missing')">
                                     </div>
                                     <div class="content-block flex-fill d-flex flex-column justify-content-center">
                                         <h6 class="h6 font-weight-medium">@lang('Total Deposit')</h6>
@@ -114,7 +114,7 @@
                                 <div class="content-main-block d-flex h-fill">
                                     <div class="content-icon flex-fill">
                                         <img src="{{asset(template(true).'images/icon/dashboard_4.png')}}"
-                                             alt="Icon Missing">
+                                             alt="@lang('Icon Missing')">
                                     </div>
                                     <div class="content-block flex-fill d-flex flex-column justify-content-center">
                                         <h6 class="h6 font-weight-medium">@lang('Total Earn')</h6>
@@ -202,7 +202,7 @@
                                 <div class="d-flex flex-column align-items-center h-fill">
                                     <div class="content-icon flex-fill">
                                         <img src="{{asset(template(true).'images/icon/dashboard_acc_1.png')}}"
-                                             alt="Icon Missing">
+                                             alt="@lang('Icon Missing')">
                                     </div>
                                     <div
                                         class="content-block flex-fill d-flex flex-column justify-content-center text-center">
@@ -221,7 +221,7 @@
                                 <div class="d-flex flex-column align-items-center h-fill">
                                     <div class="content-icon flex-fill">
                                         <img src="{{asset(template(true).'images/icon/dashboard_acc_2.png')}}"
-                                             alt="Icon Missing">
+                                             alt="@lang('Icon Missing')">
                                     </div>
                                     <div
                                         class="content-block flex-fill d-flex flex-column justify-content-center text-center">
@@ -240,7 +240,7 @@
                                 <div class="d-flex flex-column align-items-center h-fill">
                                     <div class="content-icon flex-fill">
                                         <img src="{{asset(template(true).'images/icon/dashboard_acc_1.png')}}"
-                                             alt="Icon Missing">
+                                             alt="@lang('Icon Missing')">
                                     </div>
                                     <div
                                         class="content-block flex-fill d-flex flex-column justify-content-center text-center">
@@ -257,7 +257,7 @@
                                 <div class="d-flex flex-column align-items-center h-fill">
                                     <div class="content-icon flex-fill">
                                         <img src="{{asset(template(true).'images/icon/dashboard_acc_4.png')}}"
-                                             alt="Icon Missing">
+                                             alt="@lang('Icon Missing')">
                                     </div>
                                     <div
                                         class="content-block flex-fill d-flex flex-column justify-content-center text-center">
@@ -299,13 +299,13 @@
                             <div class="content-wrapper bg-5">
                                 <div class="img-container d-none d-sm-block">
                                     <img class="img-fill" src="{{asset(template(true).'images/shapes/shape-img-3.png')}}"
-                                         alt="Shape Image">
+                                         alt="@lang('Shape Image')">
                                 </div>
                                 <div class="content-container d-flex">
                                     <div class="media align-items-center">
                                         <div class="content-icon">
                                             <img src="{{asset(template(true).'images/icon/dashboard_ref_1.png')}}"
-                                                 alt="Icon Missing">
+                                                 alt="@lang('Icon Missing')">
                                         </div>
                                         <div class="media-body ml-20">
                                             <h5 class="mb-15">@lang('Latest Registered Partner')</h5>
@@ -322,13 +322,13 @@
                         <div class="content-wrapper bg-5">
                             <div class="img-container d-none d-sm-block">
                                 <img class="img-fill" src="{{asset(template(true).'images/shapes/shape-img-3.png')}}"
-                                     alt="Shape Image">
+                                     alt="@lang('Shape Image')">
                             </div>
                             <div class="content-container d-flex">
                                 <div class="media align-items-center">
                                     <div class="content-icon">
                                         <img src="{{asset(template(true).'images/icon/dashboard_ref_2.png')}}"
-                                             alt="Icon Missing">
+                                             alt="@lang('Icon Missing')">
                                     </div>
                                     <div class="media-body ml-20">
                                         <h5 class="mb-15">@lang('The last Referral Bonus')</h5>

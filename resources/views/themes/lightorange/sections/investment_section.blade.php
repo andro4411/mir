@@ -184,8 +184,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">@lang('Invest Now')</h5>
-                    <button type="button" class="close btn-close-investment" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="text-dark">&times;</span>
+                    <button type="button" class="close btn-close-investment" data-dismiss="modal" aria-label="@lang('Close')">
+                        <span aria-hidden="true" class="text-dark">@lang('&times;')</span>
                     </button>
                 </div>
                 <div class="modal-body">

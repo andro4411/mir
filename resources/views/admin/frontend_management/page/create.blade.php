@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a></li>
@@ -24,10 +24,10 @@
                 <div class="flex-shrink-0">
                     <img class="avatar avatar-xl alert_image"
                          src="{{ asset('assets/admin/img/oc-megaphone.svg') }}"
-                         alt="Image Description" data-hs-theme-appearance="default">
+                         alt="@lang('Image Description')" data-hs-theme-appearance="default">
                     <img class="avatar avatar-xl alert_image"
                          src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}"
-                         alt="Image Description" data-hs-theme-appearance="dark">
+                         alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                 </div>
 
                 <div class="flex-grow-1 ms-3">
@@ -179,7 +179,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="blockModalLabel">@lang("Select a Section")</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <div class="modal-body">
                     <select id="customBlockSelect" class="js-select form-select">

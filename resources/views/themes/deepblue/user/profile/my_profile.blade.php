@@ -6,7 +6,7 @@
         <!-- PAGE-NAVIGATOR -->
         <section id="page-navigator">
             <div class="container-fluid">
-                <div aria-label="breadcrumb">
+                <div aria-label="@lang('breadcrumb')">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('user.dashboard')}}">@lang('Home')</a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)"
@@ -31,11 +31,11 @@
                                     <div class="image-input ">
                                         <label for="image-upload" id="image-label"><i
                                                 class="fas fa-upload"></i></label>
-                                        <input type="file" name="image" placeholder="Choose image" id="image">
+                                        <input type="file" name="image" placeholder="@lang('Choose image')" id="image">
                                         <img id="image_preview_container" class="preview-image"
                                              style="max-width: 200px"
                                              src="{{getFile(Auth::user()->image_driver, Auth::user()->image)}}"
-                                             alt="preview image">
+                                             alt="@lang('preview image')">
                                     </div>
                                     @error('image')
                                     <span class="text-danger">{{$message}}</span>

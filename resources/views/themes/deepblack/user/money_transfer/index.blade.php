@@ -51,7 +51,7 @@
                             <select
                                 class="form-select"
                                 name="wallet_type" id="wallet_type"
-                                aria-label="Default select example"
+                                aria-label="@lang('Default select example')"
                             >
                                 <option value="" selected disabled class="text-white bg-dark">{{trans('Select Wallet')}}</option>
                                 <option value="balance" class="text-white bg-dark">{{trans('Main balance')}}</option>

@@ -5,9 +5,9 @@
 
     <div class="search-bar">
         <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" class="form-control" name="query" placeholder="Search"
-                   title="Enter search keyword">
-            <span class="search-icon" title="Search"><i class="fa-regular fa-magnifying-glass"></i></span>
+            <input type="text" class="form-control" name="query" placeholder="@lang('Search')"
+                   title="@lang('Enter search keyword')">
+            <span class="search-icon" title="@lang('Search')"><i class="fa-regular fa-magnifying-glass"></i></span>
         </form>
     </div><!-- End Search Bar -->
 
@@ -53,14 +53,14 @@
             <li class="nav-item dropdown">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                    data-bs-toggle="dropdown">
-                    <img src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" alt="Profile" class="rounded-circle">
+                    <img src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" alt="@lang('Profile')" class="rounded-circle">
                     <span class="d-none d-xl-block dropdown-toggle ps-2">{{auth()->user()->fullname}}</span>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header d-flex justify-content-center align-items-center text-start">
                         <div class="profile-thum">
-                            <img src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" alt="user image">
+                            <img src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" alt="@lang('user image')">
                         </div>
                         <div class="profile-content">
                             <h6>{{auth()->user()->fullname}}</h6>

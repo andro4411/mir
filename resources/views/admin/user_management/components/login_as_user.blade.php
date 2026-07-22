@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="loginAsUserModalLabel"><i
                         class="bi bi-box-arrow-in-right"></i> @lang('Login As User')</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
             </div>
             <form method="get" action="" class="loginAccountAction" enctype="multipart/form-data">
                 <div class="modal-body">

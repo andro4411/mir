@@ -6,7 +6,7 @@
     <!-- PAGE-NAVIGATOR -->
     <section id="page-navigator">
         <div class="container-fluid">
-            <div aria-label="breadcrumb">
+            <div aria-label="@lang('breadcrumb')">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('user.dashboard')}}">@lang('Home')</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">@lang('Add Fund')</a></li>

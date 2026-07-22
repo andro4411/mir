@@ -129,7 +129,7 @@
                     <h5 class="modal-title" id="infoModalLabel">
                         @lang('Verify Your OTP')
                     </h5>
-                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                         <i class="fal fa-times"></i>
                     </button>
                 </div>
@@ -162,7 +162,7 @@
                     <h5 class="modal-title" id="infoModalLabel">
                         @lang('Verify Your OTP to Disable')
                     </h5>
-                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                         <i class="fal fa-times"></i>
                     </button>
                 </div>
@@ -191,7 +191,7 @@
                     <h5 class="modal-title" id="infoModalLabel">
                         @lang('Re-generate Confirmation')
                     </h5>
-                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                         <i class="fal fa-times"></i>
                     </button>
                 </div>
