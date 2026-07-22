@@ -159,14 +159,14 @@ class PayoutLogController extends Controller
                         if ($v->type == "file") {
                             $details[kebab2Title($k)] = [
                                 'type' => $v->type,
-                                'field_name' => $v->field_name,
+                                'field_name' => $v->field_label ?? kebab2Title($k),
                                 'field_value' => getFile(config('filesystems.default'), @$v->field_value ?? $v->field_name),
                             ];
                         } else {
                             $details[kebab2Title($k)] = [
                                 'type' => $v->type,
-                                'field_name' => $v->field_name,
-                                'field_value' => @$v->field_value ?? $v->field_name
+                                'field_name' => $v->field_label ?? kebab2Title($k),
+                                'field_value' => @$v->field_value ?? 'N/A'
                             ];
                         }
                     }
