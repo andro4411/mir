@@ -6,7 +6,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a></li>
@@ -31,7 +31,7 @@
                 <div class="navbar-expand-lg navbar-vertical mb-3 mb-lg-5">
                     <div class="d-grid">
                         <button type="button" class="navbar-toggler btn btn-white mb-3" data-bs-toggle="collapse"
-                                data-bs-target="#navbarVerticalNavMenu" aria-label="Toggle navigation"
+                                data-bs-target="#navbarVerticalNavMenu" aria-label="@lang('Toggle navigation')"
                                 aria-expanded="false" aria-controls="navbarVerticalNavMenu">
                                 <span class="d-flex justify-content-between align-items-center">
                                   <span class="text-dark">@lang('Menu')</span>
@@ -113,7 +113,7 @@
                             <div class="profile-cover-img-wrapper">
                                 <img id="profileCoverImg" class="profile-cover-img"
                                      src="{{ asset('assets/admin/img/img1.jpg') }}"
-                                     alt="Image Description">
+                                     alt="@lang('Image Description')">
                             </div>
                         </div>
 
@@ -121,7 +121,7 @@
                                for="editAvatarUploaderModal">
                             <img id="editAvatarImgModal" class="avatar-img"
                                  src="{{ getFile($user->image_driver, $user->image) }}"
-                                 alt="Image Description">
+                                 alt="@lang('Image Description')">
                             <input type="file" class="js-file-attach avatar-uploader-input" id="editAvatarUploaderModal"
                                    name="image"
                                    data-hs-file-attach-options='{
@@ -146,10 +146,10 @@
                                     <div class="col-sm-9">
                                         <div class="input-group input-group-sm-vertical">
                                             <input type="text" class="form-control" name="firstName" id="firstNameLabel"
-                                                   placeholder="First name" aria-label="First name"
+                                                   placeholder="@lang('First name')" aria-label="@lang('First name')"
                                                    value="{{ old('firstName', $user->firstname) }}" autocomplete="off">
                                             <input type="text" class="form-control" name="lastName" id="lastNameLabel"
-                                                   placeholder="Last name" aria-label="Last name"
+                                                   placeholder="@lang('Last name')" aria-label="@lang('Last name')"
                                                    value="{{ old('lastName', $user->lastname) }}" autocomplete="off">
                                         </div>
                                         @error('firstName')
@@ -167,8 +167,8 @@
                                            class="col-sm-3 col-form-label form-label">@lang('Phone')</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="js-input-mask form-control" name="phone"
-                                               id="phoneLabel" placeholder="Phone"
-                                               aria-label="Phone" value="{{ old('phone', $user->phone) }}"
+                                               id="phoneLabel" placeholder="@lang('Phone')"
+                                               aria-label="@lang('Phone')" value="{{ old('phone', $user->phone) }}"
                                                autocomplete="off">
                                         @error('phone')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
@@ -185,7 +185,7 @@
                                                 @forelse($allCountry as $country)
                                                     <option value="{{ $country['name'] }}"
                                                             {{ $country['name'] == $user->country ? 'selected' : '' }}
-                                                            data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="{{ asset($country['flag']) }}" alt="Afghanistan Flag" /><span class="text-truncate">{{ $country['name'] }}</span></span>'>
+                                                            data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="{{ asset($country['flag']) }}" alt="@lang('Afghanistan Flag')" /><span class="text-truncate">{{ $country['name'] }}</span></span>'>
                                                         @lang($country['name'])
                                                     </option>
                                                 @empty
@@ -199,14 +199,14 @@
                                         <div class="mb-3">
                                             <div class="input-group input-group-sm-vertical">
                                                 <input type="text" class="form-control" name="city" id="cityLabel"
-                                                       placeholder="City" aria-label="City"
+                                                       placeholder="@lang('City')" aria-label="@lang('City')"
                                                        value="{{ old('city', $user->city) }}" autocomplete="off">
                                                 <input type="text" class="form-control" name="state" id="stateLabel"
-                                                       placeholder="State" aria-label="State"
+                                                       placeholder="@lang('State')" aria-label="@lang('State')"
                                                        value="{{ old('state', $user->state) }}">
 
                                                 <input type="text" class="js-input-mask form-control" name="zipCode"
-                                                       id="zipCodeLabel" placeholder="Zip code" aria-label="Zip code"
+                                                       id="zipCodeLabel" placeholder="@lang('Zip code')" aria-label="@lang('Zip code')"
                                                        value="{{ old('zipCode', $user->zip_code) }}" autocomplete="off">
                                             </div>
                                             @error('city')
@@ -228,8 +228,8 @@
                                         @lang('Address line 1')</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="addressOne"
-                                               id="addressLine1Label" placeholder="Address One"
-                                               aria-label="Your address"
+                                               id="addressLine1Label" placeholder="@lang('Address One')"
+                                               aria-label="@lang('Your address')"
                                                value="{{ old('addressOne', $user->address_one) }}" autocomplete="off">
                                         @error('addressOne')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
@@ -245,8 +245,8 @@
                                         <span class="form-label-secondary">(@lang("Optional"))</span></label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="addressTwo"
-                                               id="addressLine2Label" placeholder="Address Two"
-                                               aria-label="Address Two"
+                                               id="addressLine2Label" placeholder="@lang('Address Two')"
+                                               aria-label="@lang('Address Two')"
                                                value="{{ old('addressTwo', $user->address_two) }}" autocomplete="off">
                                         @error('addressTwo')
                                         <span class="invalid-feedback d-block">{{ $message }}</span>

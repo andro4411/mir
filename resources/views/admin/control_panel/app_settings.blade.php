@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">@lang('Dashboard')
@@ -27,10 +27,10 @@
                         <div class="flex-shrink-0">
                             <img class="avatar avatar-xl"
                                  src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}"
-                                 alt="Image Description" data-hs-theme-appearance="default">
+                                 alt="@lang('Image Description')" data-hs-theme-appearance="default">
                             <img class="avatar avatar-xl"
                                  src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}"
-                                 alt="Image Description" data-hs-theme-appearance="dark">
+                                 alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                         </div>
 
                         <div class="flex-grow-1 ms-3">
@@ -62,7 +62,7 @@
                                                class="form-control color-form-input @error('app_color') is-invalid @enderror"
                                                name="app_color"
                                                id="primaryColorLabel"
-                                               placeholder="Primary Color" aria-label="Primary Color"
+                                               placeholder="@lang('Primary Color')" aria-label="@lang('Primary Color')"
                                                value="{{ old('app_color',basicControl()->app_color) }}">
                                         @error('app_color')
                                         <span class="invalid-feedback">{{ $message }}</span>

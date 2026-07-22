@@ -6,7 +6,7 @@
     <!-- PAGE-NAVIGATOR -->
     <section id="page-navigator">
         <div class="container-fluid">
-            <div aria-label="breadcrumb">
+            <div aria-label="@lang('breadcrumb')">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('user.dashboard')}}">@lang('Home')</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">@lang('Payout Confirm')</a></li>
@@ -33,7 +33,7 @@
                                                <label for="from_wallet" class="mb-2">@lang('Select Bank Currency')</label>
                                                <div class="input-box search-currency-dropdown">
                                                    <input type="text" name="currency_code"
-                                                          placeholder="Selected"
+                                                          placeholder="@lang('Selected')"
                                                           autocomplete="off"
                                                           value="{{ $payout->payout_currency_code }}"
                                                           class="form-control transfer-currency @error('currency_code') is-invalid @enderror">

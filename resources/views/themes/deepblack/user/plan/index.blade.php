@@ -58,7 +58,7 @@
                                 <tr class="text-center">
                                     <td colspan="100%" class="text-center">
                                         <div class="text-center p-4">
-                                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                             <p class="mb-0">@lang('No data to show')</p>
                                         </div>
                                     </td>
@@ -85,7 +85,7 @@
                         type="button"
                         data-bs-dismiss="modal"
                         class="btn-close"
-                        aria-label="Close"
+                        aria-label="@lang('Close')"
                     >
                         <img src="{{asset(template(true).'img/icon/cross.png')}}" alt="@lang('modal dismiss')" />
                     </button>
@@ -107,7 +107,7 @@
                                     <div class="box">
                                         <h5 class="golden-text">@lang('Select Wallet')</h5>
                                         <div class="input-group">
-                                            <select class="form-select" aria-label="Default select example" name="balance_type">
+                                            <select class="form-select" aria-label="@lang('Default select example')" name="balance_type">
                                                 @auth
                                                     <option
                                                         value="balance">@lang('Deposit Balance') - {{currencyPosition(auth()->user()->balance)}}</option>

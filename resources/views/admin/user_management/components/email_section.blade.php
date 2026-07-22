@@ -14,7 +14,7 @@
                 <div class="col-sm-9">
                     <input type="email" class="form-control" name="new_email" id="newEmailLabel"
                            placeholder="@lang('Enter new email address')"
-                           aria-label="Enter new email address" autocomplete="off">
+                           aria-label="@lang('Enter new email address')" autocomplete="off">
                     @error('new_email')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror

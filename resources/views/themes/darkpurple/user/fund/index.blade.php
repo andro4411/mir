@@ -30,7 +30,7 @@
                                 />
                             </div>
                             <div class="input-box col-lg-3">
-                                <select class="form-select" name="status" aria-label="Default select example">
+                                <select class="form-select" name="status" aria-label="@lang('Default select example')">
                                     <option value="all">@lang('All Payment')</option>
                                     <option value="1"
                                             @if(@request()->status == '1') selected @endif>@lang('Complete Payment')</option>
@@ -89,7 +89,7 @@
                             <tr class="text-center">
                                 <td colspan="100%" class="text-center">
                                     <div class="text-center p-4">
-                                        <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                                        <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                         <p class="mb-0">@lang('No data to show')</p>
                                     </div>
                                 </td>

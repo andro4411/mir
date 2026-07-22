@@ -13,7 +13,7 @@
         <!-- PAGE-NAVIGATOR -->
         <section id="page-navigator">
             <div class="container-fluid">
-                <div aria-label="breadcrumb">
+                <div aria-label="@lang('breadcrumb')">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('user.dashboard')}}">@lang('Home')</a></li>
                         <li class="breadcrumb-item"><a href="{{route('user.ticket.list')}}">@lang('Support Ticket')</a></li>
@@ -117,7 +117,7 @@
 
                                                         <img
                                                             src="{{getFile(optional($ticket->user)->image_driver,optional($ticket->user)->image)}}"
-                                                            alt="user"
+                                                            alt="@lang('user')"
                                                             class="rounded-circle" width="45">
                                                     </div>
                                                     <div class="w-100">
@@ -159,7 +159,7 @@
                                                         <div class="chat-img d-inline-block">
                                                             <img
                                                                 src="{{getFile(optional($item->admin)->image_driver,optional($item->admin)->image)}}"
-                                                                alt="user"
+                                                                alt="@lang('user')"
                                                                 class="rounded-circle" width="45">
                                                         </div>
                                                         <div class="chat-content d-inline-block pl-3">

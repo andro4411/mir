@@ -44,7 +44,7 @@
         <div class="row g-5 align-items-center">
             <div class="col-sm-6">
                 <div class="error-thum">
-                    <img src="{{asset('assets/themes/estate_rise/img/error/error.png')}}" alt="EstateRise">
+                    <img src="{{asset('assets/themes/estate_rise/img/error/error.png')}}" alt="@lang('EstateRise')">
                 </div>
             </div>
             <div class="col-sm-6">

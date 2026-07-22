@@ -7,7 +7,7 @@
             <div class="modal-header">
                 <h3 class="modal-title" id="addBalanceModalLabel"><i
                         class="fa-light fa-square-check"></i> @lang('Manage Balance')</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
             </div>
             <form action="" method="post" class="setBalanceRoute">
                 @csrf

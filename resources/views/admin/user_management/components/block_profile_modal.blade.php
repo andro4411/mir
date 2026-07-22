@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="blockProfileModalLabel">
                     <i class="bi bi-check2-square"></i> @lang('Confirmation')</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
             </div>
             <form method="post" action="" class="blockProfileAction" enctype="multipart/form-data">
                 @csrf

@@ -8,7 +8,7 @@
 			<div class="row g-5 align-items-center">
 				<div class="col-sm-6">
 					<div class="error-thum">
-						<img src="{{ asset(template(true) . 'img/error/error2.png')}}" alt="...">
+						<img src="{{ asset(template(true) . 'img/error/error2.png')}}" alt="@lang('...')">
 					</div>
 				</div>
 				<div class="col-sm-6">

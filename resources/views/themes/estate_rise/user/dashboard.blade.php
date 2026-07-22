@@ -42,7 +42,7 @@
                             <div class="item">
                                 <div class="deposit-invest-box">
                                     <div class="img-box">
-                                        <img src="{{asset(template(true).'img/box-card/market-analysis-31.png')}}" alt="icon">
+                                        <img src="{{asset(template(true).'img/box-card/market-analysis-31.png')}}" alt="@lang('icon')">
                                     </div>
                                     <div class="text-box">
                                         <a href="{{route('user.plan')}}" class="cmn-btn"><i class="fa-regular fa-usd-circle"></i>
@@ -55,7 +55,7 @@
                             <div class="item">
                                 <div class="box-card2">
                                     <div class="img-box">
-                                        <img src="{{asset(template(true).'img/box-card/bitcoin-46.png')}}" alt="icon">
+                                        <img src="{{asset(template(true).'img/box-card/bitcoin-46.png')}}" alt="@lang('icon')">
                                     </div>
                                     <div class="text-box">
                                         <h4 class="title mb-0">{{currencyPosition(auth()->user()->balance+0)}}</h4>
@@ -66,7 +66,7 @@
                             <div class="item">
                                 <div class="box-card2">
                                     <div class="img-box">
-                                        <img src="{{asset(template(true).'img/box-card/money-50.png')}}" alt="icon">
+                                        <img src="{{asset(template(true).'img/box-card/money-50.png')}}" alt="@lang('icon')">
                                     </div>
                                     <div class="text-box">
                                         <h5 class="mb-0">{{currencyPosition(auth()->user()->interest_balance+0)}}</h5>
@@ -77,7 +77,7 @@
                             <div class="item">
                                 <div class="box-card2">
                                     <div class="img-box">
-                                        <img src="{{asset(template(true).'img/box-card/money-jar-54.png')}}" alt="icon">
+                                        <img src="{{asset(template(true).'img/box-card/money-jar-54.png')}}" alt="@lang('icon')">
                                     </div>
                                     <div class="text-box">
                                         <h5 class="title mb-0">{{currencyPosition($totalDeposit+0)}} </h5>
@@ -88,7 +88,7 @@
                             <div class="item">
                                 <div class="box-card2">
                                     <div class="img-box">
-                                        <img src="{{asset(template(true).'img/box-card/money-motivation-90.png')}}" alt="icon">
+                                        <img src="{{asset(template(true).'img/box-card/money-motivation-90.png')}}" alt="@lang('icon')">
                                     </div>
                                     <div class="text-box">
                                         <h5 class="title mb-0">{{currencyPosition($totalInterestProfit+0)}} </h5>
@@ -107,7 +107,7 @@
                                     <div class="item">
                                         <div class="deposit-invest-box">
                                             <div class="img-box">
-                                                <img src="{{asset(template(true).'img/box-card/market-analysis-31.png')}}" alt="icon">
+                                                <img src="{{asset(template(true).'img/box-card/market-analysis-31.png')}}" alt="@lang('icon')">
                                             </div>
                                             <div class="text-box">
                                                 <a href="{{route('user.plan')}}" class="cmn-btn"><i
@@ -121,7 +121,7 @@
                                     <div class="item">
                                         <div class="box-card2">
                                             <div class="img-box">
-                                                <img src="{{asset(template(true).'img/box-card/bitcoin-46.png')}}" alt="icon">
+                                                <img src="{{asset(template(true).'img/box-card/bitcoin-46.png')}}" alt="@lang('icon')">
                                             </div>
                                             <div class="text-box">
                                                 <h4 class="title mb-0">{{currencyPosition(auth()->user()->balance+0)}}</h4>
@@ -132,7 +132,7 @@
                                     <div class="item">
                                         <div class="box-card2">
                                             <div class="img-box">
-                                                <img src="{{asset(template(true).'img/box-card/money-50.png')}}" alt="interest balance icon image">
+                                                <img src="{{asset(template(true).'img/box-card/money-50.png')}}" alt="@lang('interest balance icon image')">
                                             </div>
                                             <div class="text-box">
                                                 <h5 class="title mb-0">{{currencyPosition(auth()->user()->interest_balance+0)}}</h5>
@@ -143,7 +143,7 @@
                                     <div class="item">
                                         <div class="box-card2">
                                             <div class="img-box">
-                                                <img src="{{asset(template(true).'img/box-card/savings-76.png')}}" alt="icon">
+                                                <img src="{{asset(template(true).'img/box-card/savings-76.png')}}" alt="@lang('icon')">
                                             </div>
                                             <div class="text-box">
                                                 <h5 class="title mb-0">{{currencyPosition($totalDeposit+0)}} </h5>
@@ -366,11 +366,11 @@
                         <div class="col-lg-12 col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <!-- <h4 class="mb-20">Referral Link</h4> -->
+                                    <!-- <h4 class="mb-20">@lang('Referral Link')</h4> -->
                                     <div class="input-group">
                                         <input id="referralURL" type="text" class="form-control"
                                                value="{{route('register.sponsor',[Auth::user()->username])}}"
-                                               aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                               aria-label="@lang('Recipient's username')" aria-describedby="basic-addon2"
                                                readonly>
                                         <div class="input-group-text" id="copyBtn"><i
                                                 class="fa-regular fa-copy"></i>@lang('copy')

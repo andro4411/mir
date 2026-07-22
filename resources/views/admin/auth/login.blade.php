@@ -6,7 +6,7 @@
             @if(Session::has('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <span class="fw-semibold">{{ Session::get('error') }}</span>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@lang('Close')"></button>
                 </div>
             @endif
             <form method="post" action="{{ route('admin.login.submit') }}" class="js-validate needs-validation"
@@ -23,7 +23,7 @@
                     <input type="text"
                            class="form-control form-control-lg @error('username') is-invalid @enderror @error('email') is-invalid @enderror"
                            name="username" value="{{old('username','admin')}}" id="signinSrEmail" autocomplete="off"
-                           tabindex="0" placeholder="Enter Email or Username" required>
+                           tabindex="0" placeholder="@lang('Enter Email or Username')" required>
                     @error('username')
                     <span class="invalid-feedback">{{ $message }}</span>
                     @enderror
@@ -43,7 +43,7 @@
                                tabindex="1"
                                class="js-toggle-password form-control form-control-lg @error('password') is-invalid @enderror"
                                name="password" value="{{old('password','admin')}}" id="signupSrPassword"
-                               placeholder="Enter Password"
+                               placeholder="@lang('Enter Password')"
                                data-hs-toggle-password-options='
                                {
                                 "target": "#changePassTarget",
@@ -80,7 +80,7 @@
                         <input type="text" tabindex="2"
                                class="form-control form-control-lg @error('captcha') is-invalid @enderror"
                                name="captcha" id="captcha" autocomplete="off"
-                               placeholder="Enter Captcha" required>
+                               placeholder="@lang('Enter Captcha')" required>
                         @error('captcha')
                         <span class="invalid-feedback">{{ $message }}</span>
                         @enderror

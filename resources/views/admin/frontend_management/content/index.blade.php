@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a></li>
@@ -24,16 +24,16 @@
                 <div class="shadow p-3 mb-5 alert-soft-blue mb-4 mb-lg-7" role="alert">
                     <div class="alert-box d-flex flex-wrap align-items-center">
                         <div class="flex-shrink-0">
-                            <img class="avatar avatar-xl" src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
-                            <img class="avatar avatar-xl" src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
+                            <img class="avatar avatar-xl" src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                            <img class="avatar avatar-xl" src="{{ asset('assets/admin/img/oc-megaphone-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                         </div>
 
                         <div class="flex-grow-1 ms-3">
-                            <h3 class="alert-heading text-info mb-1">Attention!</h3>
+                            <h3 class="alert-heading text-info mb-1">@lang('Attention!')</h3>
                             <div class="d-flex align-items-center">
                                 <p class="mb-0 text-info"> This content will serve for `{{ ucfirst(getTheme()) }}` Template.</p>
                             </div>
-                            <button type="button" data-bs-dismiss="alert" aria-label="Close" class="btn-close close_btn"></button>
+                            <button type="button" data-bs-dismiss="alert" aria-label="@lang('Close')" class="btn-close close_btn"></button>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                                                                    class="js-flatpickr form-control flatpickr-custom @error($name.'.'.$language->id) is-invalid @enderror"
                                                                    name="{{ $name }}[{{ $language->id }}]"
                                                                    value="{{ old($name.'.'.$language->id, isset($singleContentData[$language->id]) ? $singleContentData[$language->id][0]->content->media->{$name} : '') }}"
-                                                                   placeholder="Select dates"
+                                                                   placeholder="@lang('Select dates')"
                                                                    data-hs-flatpickr-options='{
                                                                      "dateFormat": "d/m/Y",
                                                                      "enableTime": false
@@ -166,12 +166,12 @@
                                                                 <img id="contentImg{{$name}}"
                                                                      class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                                      src="{{ getFile((!$singleContentData->isEmpty())?  @$singleContentData[$language->id][0]->content->media->{$name}->driver : '', (!$singleContentData->isEmpty())? @$singleContentData[$language->id][0]->content->media->{$name}->path:'', true) }}"
-                                                                     alt="Image Description"
+                                                                     alt="@lang('Image Description')"
                                                                      data-hs-theme-appearance="default">
                                                                 <img id="contentImg{{$name}}"
                                                                      class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                                      src="{{ getFile(!$singleContentData->isEmpty()  ? @$singleContentData[$language->id][0]->content->media->{$name}->driver: '', (!$singleContentData->isEmpty())? @$singleContentData[$language->id][0]->content->media->{$name}->path:'', true) }}"
-                                                                     alt="Image Description"
+                                                                     alt="@lang('Image Description')"
                                                                      data-hs-theme-appearance="dark">
                                                                 <span
                                                                     class="d-block">@lang("Browse your file here")</span>
@@ -200,12 +200,12 @@
                                                                     <img id="contentImg"
                                                                          class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                                          src="{{ getFile((!$singleContentData->isEmpty())?  @$singleContentData[$language->id][0]->content->media->{$name}->driver : '', (!$singleContentData->isEmpty())? @$singleContentData[$language->id][0]->content->media->{$name}->path:'', true) }}"
-                                                                         alt="Image Description"
+                                                                         alt="@lang('Image Description')"
                                                                          data-hs-theme-appearance="default">
                                                                     <img id="contentImg"
                                                                          class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                                          src="{{ getFile(!$singleContentData->isEmpty()  ? @$singleContentData[$language->id][0]->content->media->{$name}->driver: '', (!$singleContentData->isEmpty())? @$singleContentData[$language->id][0]->content->media->{$name}->path:'', true) }}"
-                                                                         alt="Image Description"
+                                                                         alt="@lang('Image Description')"
                                                                          data-hs-theme-appearance="dark">
                                                                     <span
                                                                         class="d-block">@lang("Browse your file here")</span>
@@ -373,7 +373,7 @@
                             </div>
                             <div class="col-sm-auto">
                                 <div class="d-flex justify-content-center justify-content-sm-end">
-                                    <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+                                    <nav id="datatablePagination" aria-label="@lang('Activity pagination')"></nav>
                                 </div>
                             </div>
                         </div>
@@ -390,7 +390,7 @@
                 <div class="modal-header">
                     <h3 class="modal-title" id="contentDeleteModalLabel"><i
                             class="fa-sharp fa-light fa-square-check"></i> @lang('Confirmation')</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="" method="post" class="setRoute">
                     @csrf
@@ -440,9 +440,9 @@
                 language: {
                     zeroRecords: `
                         <div class="text-center p-4">
-                          <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
-                          <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
-                            <p class="mb-0">No data to show</p>
+                          <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                          <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
+                            <p class="mb-0">@lang('No data to show')</p>
                         </div>`
                 }
             });

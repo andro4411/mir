@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a>

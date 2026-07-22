@@ -27,7 +27,7 @@
                                                id="{{ $method->name }}">
                                         <label class="form-check-label" for="{{ $method->name }}">
                                             <div class="image-area">
-                                                <img src="{{ getFile($method->driver,$method->image ) }}" alt="gateway image">
+                                                <img src="{{ getFile($method->driver,$method->image ) }}" alt="@lang('gateway image')">
                                             </div>
                                             <div class="content-area">
                                                 <h5>{{$method->name}}</h5>
@@ -83,7 +83,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title" id="staticBackdropLabel">@lang('Payment')</h1>
-                            <button type="button" class="cmn-btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" class="cmn-btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')">
                                 <i class="fa-light fa-xmark"></i>
                             </button>
                         </div>

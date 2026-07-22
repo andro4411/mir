@@ -2,7 +2,7 @@
     @if(basicControl()->in_app_notification == 1)
         <div class="notification-panel push-notification">
             <button class="dropdown-toggle">
-                <img src="{{asset(template(true).'img/icon/notification.png')}}" alt="notification">
+                <img src="{{asset(template(true).'img/icon/notification.png')}}" alt="@lang('notification')">
                 <span class="badge" v-cloak>@{{items.length}}</span>
             </button>
             <ul class="notification-dropdown">

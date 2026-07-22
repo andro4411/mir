@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang("Dashboard")</a>
@@ -36,7 +36,7 @@
                                         <label for="nameLabel" class="form-label">@lang('Name')</label>
                                         <input type="text" class="form-control  @error('name') is-invalid @enderror"
                                                name="name" id="nameLabel"
-                                               placeholder="Name" aria-label="Name" autocomplete="off"
+                                               placeholder="@lang('Name')" aria-label="@lang('Name')" autocomplete="off"
                                                value="{{ old('name', $method->name ?? '') }}">
                                         @error('name')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -69,7 +69,7 @@
                                     <div class="col-md-12 mb-5">
                                         <label class="form-label"
                                                for="descriptionArea">@lang("Gateway Description")</label>
-                                        <textarea id="descriptionArea" class="form-control" name="description" placeholder="Description">{{ old('description', $method->description) }}</textarea>
+                                        <textarea id="descriptionArea" class="form-control" name="description" placeholder="@lang('Description')">{{ old('description', $method->description) }}</textarea>
                                         <span class="invalid-feedback d-block">
                                             @error('description') @lang($message) @enderror
                                         </span>
@@ -82,11 +82,11 @@
                                             <img id="logoImg"
                                                  class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                  src="{{ getFile($method->driver, $method->image, true) }}"
-                                                 alt="Image Description" data-hs-theme-appearance="default">
+                                                 alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                             <img id="logoImg"
                                                  class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                  src="{{ getFile($method->driver, $method->image, true) }}"
-                                                 alt="Image Description" data-hs-theme-appearance="dark">
+                                                 alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                             <span class="d-block">@lang("Browse your file here")</span>
                                             <input type="file" class="js-file-attach form-check-input" name="image"
                                                    id="logoUploader" data-hs-file-attach-options='{
@@ -283,7 +283,7 @@
                                                                 <input type="text"
                                                                        class="form-control @error('min_limit') is-invalid @enderror"
                                                                        name="receivable_currencies[{{ $i }}][min_limit]"
-                                                                       aria-label="Amount (to the nearest dollar)"
+                                                                       aria-label="@lang('Amount (to the nearest dollar)')"
                                                                        value="{{ old("receivable_currencies.$i.min_limit", $method->receivable_currencies[$i]->min_limit ?? '')  }}"
                                                                        autocomplete="off">
                                                                 <span
@@ -299,7 +299,7 @@
                                                                 <input type="text"
                                                                        class="form-control @error('max_limit') is-invalid @enderror"
                                                                        name="receivable_currencies[{{$i}}][max_limit]"
-                                                                       aria-label="Amount (to the nearest dollar)"
+                                                                       aria-label="@lang('Amount (to the nearest dollar)')"
                                                                        value="{{ old("receivable_currencies.$i.max_limit", $method->receivable_currencies[$i]->max_limit ?? '') }}"
                                                                        autocomplete="off">
                                                                 <span
@@ -315,7 +315,7 @@
                                                                 <input type="text"
                                                                        class="form-control @error('percentage_charge') is-invalid @enderror"
                                                                        name="receivable_currencies[{{ $i }}][percentage_charge]"
-                                                                       aria-label="Amount (to the nearest dollar)"
+                                                                       aria-label="@lang('Amount (to the nearest dollar)')"
                                                                        value="{{ old("receivable_currencies.$i.percentage_charge", $method->receivable_currencies[$i]->percentage_charge ?? '') }}"
                                                                        autocomplete="off">
                                                                 <span
@@ -331,7 +331,7 @@
                                                                 <input type="text"
                                                                        class="form-control @error('fixed_charge') is-invalid @enderror"
                                                                        name="receivable_currencies[{{ $i }}][fixed_charge]"
-                                                                       aria-label="Amount (to the nearest dollar)"
+                                                                       aria-label="@lang('Amount (to the nearest dollar)')"
                                                                        value="{{ old("receivable_currencies.$i.fixed_charge", $method->receivable_currencies[$i]->fixed_charge ?? '') }}"
                                                                        autocomplete="off">
                                                                 <span
@@ -456,7 +456,7 @@
                                    <td>
                                         <input type="text" class="form-control change_currency"
                                                name="receivable_currencies[${rowCount - 1}][currency]"
-                                               placeholder="Symbol" aria-label="Symbol"
+                                               placeholder="@lang('Symbol')" aria-label="@lang('Symbol')"
                                                aria-describedby="basic-addon1"
                                                autocomplete="off">
                                    </td>

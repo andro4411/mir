@@ -12,7 +12,7 @@
                  aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title site_logo" id="offcanvasNavbarLabel"></h5>
-                    <button type="button" class="btn_close" data-bs-dismiss="offcanvas" aria-label="Close"><i class="far fa-times"></i></button>
+                    <button type="button" class="btn_close" data-bs-dismiss="offcanvas" aria-label="@lang('Close')"><i class="far fa-times"></i></button>
                 </div>
                 <div class="offcanvas-body fs-6">
                     <ul class="navbar-nav ms-auto pe-3 align-items-center">

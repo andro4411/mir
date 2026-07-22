@@ -84,7 +84,7 @@
                                 <tr class="text-center">
                                     <td colspan="100%" class="text-center">
                                         <div class="text-center p-4">
-                                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                             <p class="mb-0">@lang('No data to show')</p>
                                         </div>
                                     </td>
@@ -114,7 +114,7 @@
                     <h5 class="modal-title" id="infoModalLabel">
                         @lang('Details')
                     </h5>
-                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                         <i class="fal fa-times"></i>
                     </button>
                 </div>
@@ -147,7 +147,7 @@
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">@lang('Payout history filter')</h5>
-            <button type="button" class="cmn-btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+            <button type="button" class="cmn-btn-close" data-bs-dismiss="offcanvas" aria-label="@lang('Close')">
                 <i class="fa-light fa-arrow-right"></i>
             </button>
         </div>
@@ -221,7 +221,7 @@
                         result += `<li class="item">
                                             <span class="font-weight-bold "> ${information[index][1].field_name.split('_')
                             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(' ')} </span>  <span><img src="${information[index][1].field_value}" alt="..." class="w-100 mt-2 payoutImage" ></span>
+                            .join(' ')} </span>  <span><img src="${information[index][1].field_value}" alt="@lang('...')" class="w-100 mt-2 payoutImage" ></span>
                                         </li>`;
                     } else {
                         result += `<li class="item">

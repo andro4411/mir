@@ -1,7 +1,7 @@
 <li class="ml-20">
     <div class="dropdown account-dropdown">
         <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-            <img src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" alt="Profile Icon">
+            <img src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" alt="@lang('Profile Icon')">
         </a>
         <div class="xs-dropdown-menu xs-dropdown-menu3 dropdown-menu dropdown-right">
             <div class="dropdown-content">

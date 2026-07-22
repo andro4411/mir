@@ -7,7 +7,7 @@
             </div>
             <div class="d-flex align-items-center justify-content-center">
                 <div class="col-lg-8 no-gutters">
-                    <div class="page-breadcrumb" aria-label="breadcrumb">
+                    <div class="page-breadcrumb" aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb justify-content-center">
                             <li class="breadcrumb-item wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s"><a href="{{route('page')}}">{{trans('Home')}}</a></li>
                             <li class="breadcrumb-item wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.7s"><a href="javascript:void(0)">{!! $pageSeo['page_title'] !!}</a></li>

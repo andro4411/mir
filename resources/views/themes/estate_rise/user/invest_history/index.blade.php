@@ -26,7 +26,7 @@
                                 <th scope="col">@lang('SL')</th>
                                 <th scope="col">@lang('Plan')</th>
                                 <th scope="col">@lang('Return Interest')</th>
-                                <th scope="col">@lang('Received Amount')<i class="fa-sharp fa-thin fa-circle-info ms-1" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Total Return" data-bs-original-title="Per Return"></i></th>
+                                <th scope="col">@lang('Received Amount')<i class="fa-sharp fa-thin fa-circle-info ms-1" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="@lang('Total Return')" data-bs-original-title="@lang('Per Return')"></i></th>
                                 <th scope="col">@lang('Upcoming Payment')</th>
                                 @if(basicControl()->user_termination)
                                     <th scope="col">@lang('Action')</th>
@@ -74,7 +74,7 @@
                                 <tr class="text-center">
                                     <td colspan="100%" class="text-center">
                                         <div class="text-center p-4">
-                                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                                            <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                             <p class="mb-0">@lang('No data to show')</p>
                                         </div>
                                     </td>
@@ -103,7 +103,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title" id="staticBackdropLabel">@lang('Confirmation')?</h1>
-                    <button type="button" class="cmn-btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="cmn-btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')">
                         <i class="fa-light fa-xmark"></i>
                     </button>
                 </div>

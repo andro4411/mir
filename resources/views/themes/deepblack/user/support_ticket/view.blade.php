@@ -45,7 +45,7 @@
                         @method('PUT')
 
                         <div class="pb-3">
-                            <h4 class="golden-text">Type here</h4>
+                            <h4 class="golden-text">@lang('Type here')</h4>
                             <div class="input-group2">
                             <textarea
                                 name="message"
@@ -168,7 +168,7 @@
                             type="button"
                             data-bs-dismiss="modal"
                             class="btn-close"
-                            aria-label="Close"
+                            aria-label="@lang('Close')"
                         >
                             <img src="{{asset(template(true).'img/icon/cross.png')}}" alt="@lang('cross img')" />
                         </button>

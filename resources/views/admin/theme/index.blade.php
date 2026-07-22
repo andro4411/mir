@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a></li>
@@ -27,7 +27,7 @@
                       <span class="form-check">
                         <input type="radio" class="form-check-input" name="theme" value="{{$key}}" id="formControlRadioReverseEg{{$key}}" @checked(basicControl()->theme == $key)>
                          <img class="img-fluid w-100" src="{{asset($theme['preview'])}}"
-                              alt="Image Description">
+                              alt="@lang('Image Description')">
                       </span>
                                 </label>
                             </div>

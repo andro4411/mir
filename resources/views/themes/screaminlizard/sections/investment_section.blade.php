@@ -61,7 +61,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="investModalLabel">@lang('Invest Now')</h5>
-                <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                     <i class="fal fa-times"></i>
                 </button>
             </div>
@@ -76,7 +76,7 @@
                     @csrf
                     <div class="row g-3 align-items-end">
                         <div class="input-box col-12">
-                            <select class="form-select" name="balance_type" aria-label="Default select example">
+                            <select class="form-select" name="balance_type" aria-label="@lang('Default select example')">
                                 @auth
                                     <option
                                         value="balance">@lang('Deposit Balance - '.currencyPosition(auth()->user()->balance))</option>

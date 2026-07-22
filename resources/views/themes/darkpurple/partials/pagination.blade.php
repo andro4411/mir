@@ -4,8 +4,8 @@
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="disabled page-item">
-                    <a href="#" class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
+                    <a href="#" class="page-link" aria-label="@lang('Previous')">
+                        <span aria-hidden="true">@lang('&laquo;')</span>
                         <span class="sr-only">@lang('Previous')</span>
                     </a>
                 </li>
@@ -29,7 +29,7 @@
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
                             <li class="page-item active">
-                                <a href="#" class="page-link">{{ $page }}<span class="sr-only">(current)</span></a>
+                                <a href="#" class="page-link">{{ $page }}<span class="sr-only">@lang('(current)')</span></a>
                             </li>
                         @else
                             <li class="page-item">
@@ -47,8 +47,8 @@
                 </li>
             @else
                 <li class="disabled page-item">
-                    <a href="#" class="disabled page-link" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
+                    <a href="#" class="disabled page-link" aria-label="@lang('Next')">
+                        <span aria-hidden="true">@lang('&raquo;')</span>
                         <span class="sr-only">@lang('Next')</span>
                     </a>
                 </li>

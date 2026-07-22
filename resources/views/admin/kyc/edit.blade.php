@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a>
@@ -34,7 +34,7 @@
                                     <div class="col-md-6">
                                         <label for="nameLabel" class="form-label">@lang('Name')</label>
                                         <input type="text" class="form-control  @error('name') is-invalid @enderror"
-                                               name="name" id="nameLabel" placeholder="Name" aria-label="Name"
+                                               name="name" id="nameLabel" placeholder="@lang('Name')" aria-label="@lang('Name')"
                                                autocomplete="off"
                                                value="{{ old('name', $kyc->name) }}">
                                         @error('name')

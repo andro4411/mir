@@ -33,7 +33,7 @@
                             <div class="col-lg-6">
                                 <div class="media align-items-center">
                                     <div class="media-icon">
-                                        <img src="{{asset(template(true).'images/icon/dashboard_3.png')}}" alt="Icon Missing">
+                                        <img src="{{asset(template(true).'images/icon/dashboard_3.png')}}" alt="@lang('Icon Missing')">
                                     </div>
                                     <div class="media-body ml-20">
                                         <p class="text">{{trans('Level')}} {{$data->level}} {{trans('Instant')}} <strong class="themecolor">{{$data->percent}}%</strong></p>

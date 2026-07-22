@@ -14,7 +14,7 @@
                                         <div class="alert alert-warning alert-dismissible fade show w-100" role="alert">
                                             {{ trans(session('status')) }}
                                             <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                    aria-label="Close"></button>
+                                                    aria-label="@lang('Close')"></button>
                                         </div>
                                     @endif
                                     <form action="{{route('user.sms.verify')}}" method="post">
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-lg-6 d-none d-lg-block">
                                 <div class="img-box">
-                                    <img src="{{ isset($login_registration['single']['media']->image)?getFile($login_registration['single']['media']->image->driver,$login_registration['single']['media']->image->path):'' }}" alt="login page image">
+                                    <img src="{{ isset($login_registration['single']['media']->image)?getFile($login_registration['single']['media']->image->driver,$login_registration['single']['media']->image->path):'' }}" alt="@lang('login page image')">
                                 </div>
                             </div>
                         </div>

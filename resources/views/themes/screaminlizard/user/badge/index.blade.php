@@ -35,7 +35,7 @@
                     @endforeach
                     @else
                         <div class="text-center p-4">
-                            <img class=" mb-3 w-25" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                            <img class=" mb-3 w-25" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                             <p class="mb-0">@lang('No data to show')</p>
                         </div>
                     @endif

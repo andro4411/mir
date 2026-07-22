@@ -18,7 +18,7 @@
             <div class="row g-4">
                 <div class="col-12" data-aos="fade-up" data-aos-duration="900">
                     <div class="large-img-box">
-                        <img src="{{isset($how_works_section['single']['media']->image)?getFile($how_works_section['single']['media']->image->driver,$how_works_section['single']['media']->image->path):''}}" alt="how work section image" />
+                        <img src="{{isset($how_works_section['single']['media']->image)?getFile($how_works_section['single']['media']->image->driver,$how_works_section['single']['media']->image->path):''}}" alt="@lang('how work section image')" />
                     </div>
                 </div>
                 <div class="col-12 mt-50">

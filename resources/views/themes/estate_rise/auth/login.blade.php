@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-lg-6 d-none d-lg-block">
                                 <div class="img-box">
-                                    <img src="{{ isset($login_registration['single']['media']->image)?getFile($login_registration['single']['media']->image->driver,$login_registration['single']['media']->image->path):'' }}" alt="login page image">
+                                    <img src="{{ isset($login_registration['single']['media']->image)?getFile($login_registration['single']['media']->image->driver,$login_registration['single']['media']->image->path):'' }}" alt="@lang('login page image')">
                                 </div>
                             </div>
                         </div>

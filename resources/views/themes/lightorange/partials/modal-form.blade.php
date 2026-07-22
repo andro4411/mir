@@ -25,7 +25,7 @@
                                 <input type="text" tabindex="2"
                                        class="form-control form-control-lg @error('captcha') is-invalid @enderror"
                                        name="captcha" id="captcha1" autocomplete="off"
-                                       placeholder="Enter Captcha" required>
+                                       placeholder="@lang('Enter Captcha')" required>
                                 <span class="text-danger captchaError1"></span>
                             </div>
 
@@ -171,7 +171,7 @@
                                 <input type="text" tabindex="2"
                                        class="form-control form-control-lg @error('captcha') is-invalid @enderror"
                                        name="captcha" id="captcha" autocomplete="off"
-                                       placeholder="Enter Captcha" required>
+                                       placeholder="@lang('Enter Captcha')" required>
 
                                 <span class="text-danger captchaError"></span>
                             </div>

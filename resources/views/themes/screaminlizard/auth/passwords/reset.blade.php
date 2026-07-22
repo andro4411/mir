@@ -13,7 +13,7 @@
                             @if (session('status'))
                                 <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
                                     {{ trans(session('status')) }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@lang('Close')"></button>
                                 </div>
                             @endif
                             <form action="{{route('password.update')}}" method="post">
@@ -21,7 +21,7 @@
                                 @error('token')
                                 <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
                                     {{ trans($message) }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@lang('Close')"></button>
                                 </div>
                                 @enderror
                                 <div class="row g-4">

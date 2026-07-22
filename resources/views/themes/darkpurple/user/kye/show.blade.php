@@ -5,7 +5,7 @@
         <div class="main row">
             <div class="col-12">
                 <div class="dashboard-heading">
-                    <h4 class="mb-0">KYC Verification</h4>
+                    <h4 class="mb-0">@lang('KYC Verification')</h4>
                 </div>
 
                 <div class="table-parent table-responsive mt-4">
@@ -60,7 +60,7 @@
                         </tbody>
                     </table>
 
-                    <nav aria-label="Page navigation example">
+                    <nav aria-label="@lang('Page navigation example')">
                         <ul class="pagination justify-content-end mt-4">
                             {{ $tickets->appends($_GET)->links(template().'partials.pagination') }}
                         </ul>

@@ -118,7 +118,7 @@
                                                 <div class="form-group mb-30">
                                                     <input type="text" tabindex="2"
                                                            name="captcha" id="captcha" autocomplete="off"
-                                                           placeholder="Enter Captcha" required>
+                                                           placeholder="@lang('Enter Captcha')" required>
                                                     @error('captcha')
                                                     <span class="invalid-feedback">{{ $message }}</span>
                                                     @enderror

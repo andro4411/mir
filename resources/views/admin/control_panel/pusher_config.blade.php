@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link" href="{{ route('admin.dashboard')  }}">@lang("Dashboard")</a></li>
                             <li class="breadcrumb-item active" aria-current="page">@lang("Settings")</li>
@@ -40,8 +40,8 @@
                                             name="pusher_app_id"
                                             id="pusherAppIdLabel"
                                             autocomplete="off"
-                                            placeholder="Pusher App Id"
-                                            aria-label="Pusher App Id"
+                                            placeholder="@lang('Pusher App Id')"
+                                            aria-label="@lang('Pusher App Id')"
                                             value="{{ old('pusher_app_id', $pusherAppId) }}"
                                         />
                                         @error('pusher_app_id')
@@ -58,8 +58,8 @@
                                                 name="pusher_app_key"
                                                 id="pusherAppKeyLabel"
                                                 autocomplete="off"
-                                                placeholder="Pusher App Key"
-                                                aria-label="Pusher App Key"
+                                                placeholder="@lang('Pusher App Key')"
+                                                aria-label="@lang('Pusher App Key')"
                                                 value="{{ old('pusher_app_key', $pusherAppKey) }}"
                                                 data-hs-toggle-password-options='{
                                                     "target": "#pusherAppKey",
@@ -87,8 +87,8 @@
                                                 name="pusher_app_secret"
                                                 id="pusherAppSecretLabel"
                                                 autocomplete="off"
-                                                placeholder="Pusher App Secret"
-                                                aria-label="Pusher App Secret"
+                                                placeholder="@lang('Pusher App Secret')"
+                                                aria-label="@lang('Pusher App Secret')"
                                                 value="{{ old('pusher_app_secret', $pusherAppSecret) }}"
                                                 data-hs-toggle-password-options='{
                                                     "target": "#pusherAppSecret",

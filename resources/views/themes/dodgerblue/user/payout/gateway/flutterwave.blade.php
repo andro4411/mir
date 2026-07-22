@@ -23,7 +23,7 @@
                                                 <div class="input-box search-currency-dropdown">
                                                     <label for="from_wallet">@lang('Select Bank Currency')</label>
                                                     <input type="text" name="currency_code"
-                                                           placeholder="Selected"
+                                                           placeholder="@lang('Selected')"
                                                            autocomplete="off"
                                                            value="{{ $payout->payout_currency_code }}"
                                                            class="form-control transfer-currency @error('currency_code') is-invalid @enderror">
@@ -78,7 +78,7 @@
                                         @endif
 
                                         <div class="input-box col-12">
-                                            <button type="submit" class="btn-custom">submit</button>
+                                            <button type="submit" class="btn-custom">@lang('submit')</button>
                                         </div>
                                     </div>
                                 </form>
@@ -189,7 +189,7 @@
             for (let field in form_fields) {
                 let newKey = field.replace('_', ' ');
                 output += `<div class="col-md-6 mt-3">
-                         <label>${newKey}</label>
+                         <label>@lang('${newKey}')</label>
 				         <input type="text" name="${field}" value="" class="form-control" required>
 			          </div>`
             }

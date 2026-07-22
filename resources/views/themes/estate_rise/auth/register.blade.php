@@ -127,7 +127,7 @@
                             </div>
                             <div class="col-xl-6 col-lg-5 d-none d-lg-block">
                                 <div class="img-box">
-                                    <img src="{{ isset($login_registration['single']['media']->image)?getFile($login_registration['single']['media']->image->driver,$login_registration['single']['media']->image->path):'' }}" alt="registration image">
+                                    <img src="{{ isset($login_registration['single']['media']->image)?getFile($login_registration['single']['media']->image->driver,$login_registration['single']['media']->image->path):'' }}" alt="@lang('registration image')">
                                 </div>
                             </div>
                         </div>

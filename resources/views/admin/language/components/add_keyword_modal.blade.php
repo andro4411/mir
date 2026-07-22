@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="addLabel"><i class="fa-light fa-square-plus"></i> @lang("Add Keyword")
                 </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
             </div>
             <form action="{{ route('admin.add.language.keyword', $language->short_name) }}" method="post"
                   class="add-keyword-form">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-white" data-bs-dismiss="modal">@lang('Close')</button>
                     <button type="submit" class="btn btn-primary"> @lang('Save Changes')</button>
                 </div>
             </form>

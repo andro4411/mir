@@ -10,7 +10,7 @@
                                 <img
                                     class="img-fluid"
                                     src="{{getFile(optional($deposit->gateway)->driver,optional($deposit->gateway)->image)}}"
-                                    alt="..."
+                                    alt="@lang('...')"
                                 />
                             </div>
                             <div class="text-box">
@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <p>@lang('TO:') <span id="myParagraph">{{ $data->sendto }}</span></p>
-                        <img class="w-100" style="width: 235px" src="{{$data->img}}" alt="..">
+                        <img class="w-100" style="width: 235px" src="{{$data->img}}" alt="@lang('..')">
                         <button class="btn-custom mt-2 w-100" onclick="copyText()"
                                 id="btn-confirm">@lang('Copy')</button>
                     </div>

@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="deleteModalLabel">
                     <i class="bi bi-check2-square"></i> @lang("Confirmation")</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
             </div>
             <div class="modal-body">
                 <p>@lang('Do you want to delete this') <span class="keyword"></span> @lang("keyword?")</p>

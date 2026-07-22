@@ -6,7 +6,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="{{ route('admin.dashboard') }}">@lang("Dashboard")</a>
@@ -41,7 +41,7 @@
                                         <input type="email"
                                                class="form-control  @error('sender_email') is-invalid @enderror"
                                                name="sender_email" id="mailFromLabel" autocomplete="off"
-                                               placeholder="Sender Email" aria-label="Sender Email"
+                                               placeholder="@lang('Sender Email')" aria-label="@lang('Sender Email')"
                                                value="{{ old('sender_email', env('MAIL_FROM_ADDRESS')) }}">
                                         @error('sender_email')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -53,7 +53,7 @@
                                         <input type="text"
                                                class="form-control  @error('email_method') is-invalid @enderror"
                                                name="email_method" id="mailFromLabel" autocomplete="off"
-                                               placeholder="Email Method" aria-label="Email Method"
+                                               placeholder="@lang('Email Method')" aria-label="@lang('Email Method')"
                                                value="{{ old('email_method', $method) }}" readonly>
                                         @error('email_method')
                                         <span class="invalid-feedback">{{ $message }}</span>

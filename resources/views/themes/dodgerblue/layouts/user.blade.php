@@ -33,7 +33,7 @@
     <div class="link-item">
         <button onclick="toggleSideMenu()">
             <span class="icon"><i class="fal fa-ellipsis-v-alt"></i></span>
-            <span class="text">Menus</span>
+            <span class="text">@lang('Menus')</span>
         </button>
     </div>
     <div class="link-item">
@@ -45,7 +45,7 @@
     <div class="link-item {{menuActive(['user.dashboard'])}}">
         <a href="{{ route('user.dashboard') }}">
             <span class="icon"><i class="fal fa-house"></i></span>
-            <span class="text">Home</span>
+            <span class="text">@lang('Home')</span>
         </a>
     </div>
     <div class="link-item {{menuActive(['user.addFund'])}}">

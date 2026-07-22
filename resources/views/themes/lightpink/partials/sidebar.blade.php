@@ -8,7 +8,7 @@
         <a class="navbar-brand d-none d-lg-block" href="{{route('page')}}"> <img src="{{logo()}}" alt="@lang('brand logo')" /></a>
         <div class="mobile-user-area d-lg-none">
             <div class="thumb">
-                <img class="img-fluid user-img" src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" alt="user image">
+                <img class="img-fluid user-img" src="{{getFile(auth()->user()->image_driver,auth()->user()->image)}}" alt="@lang('user image')">
             </div>
             <div class="content">
                 <h5 class="mt-1 mb-1">{{ __(auth()->user()->fullname) }}</h5>
@@ -24,7 +24,7 @@
         <div class="level-box">
             <h4>@lang(@$user->rank->rank_lavel)</h4>
             <p>@lang(@$user->rank->rank_name)</p>
-            <img src="{{ getFile($user->rank->driver,$user->rank->rank_icon) }}" alt="rank icon" class="level-badge"/>
+            <img src="{{ getFile($user->rank->driver,$user->rank->rank_icon) }}" alt="@lang('rank icon')" class="level-badge"/>
         </div>
     @endif
 

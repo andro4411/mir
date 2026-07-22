@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a>
@@ -69,7 +69,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="setAsDefaultModalLabel"><i class="bi bi-check2-square"></i> @lang("Confirmation")</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <div class="modal-body">
                     <p>@lang('Do you want to activate this theme?')</p>
@@ -78,7 +78,7 @@
                     @csrf
                     @method('put')
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-white" data-bs-dismiss="modal">@lang('Close')</button>
                     <button type="submit" class="btn btn-primary">@lang("Confirm")</button>
                 </div>
                 </form>

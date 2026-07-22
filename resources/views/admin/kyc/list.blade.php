@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">
@@ -67,8 +67,8 @@
                         </tr>
                     @empty
                         <tr class="odd"><td valign="top" colspan="8" class="dataTables_empty"><div class="text-center p-4">
-                                    <img class="mb-3 dataTables-image" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
-                                    <img class="mb-3 dataTables-image" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
+                                    <img class="mb-3 dataTables-image" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                                    <img class="mb-3 dataTables-image" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                     <p class="mb-0">@lang("No data to show")</p>
                                 </div></td>
                         </tr>

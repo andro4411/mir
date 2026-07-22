@@ -28,7 +28,7 @@
                                                         <label for="from_wallet" class="mb-2">@lang('Select Bank Currency')</label>
                                                         <div class="input-box search-currency-dropdown">
                                                             <input type="text" name="currency_code"
-                                                                   placeholder="Selected"
+                                                                   placeholder="@lang('Selected')"
                                                                    autocomplete="off"
                                                                    value="{{ $payout->payout_currency_code }}"
                                                                    class="form-control transfer-currency @error('currency_code') is-invalid @enderror">

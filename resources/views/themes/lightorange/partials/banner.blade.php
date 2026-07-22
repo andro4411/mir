@@ -11,7 +11,7 @@
                                 <h2 class="title">{!! $pageSeo['page_title']??'' !!}</h2>
                             </div>
                             <div class="breadcrumb-area">
-                                <nav aria-label="breadcrumb">
+                                <nav aria-label="@lang('breadcrumb')">
                                     <ol class="breadcrumb d-flex justify-content-center">
                                         <li class="breadcrumb-item"><a href="{{route('page')}}">{{trans('Home')}}</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">{!! $pageSeo['page_title']??'' !!}</li>

@@ -95,7 +95,7 @@
                                             @endif
                                         @endforeach
                                         <div class="input-box col-12">
-                                            <button type="submit" class="btn-custom">submit</button>
+                                            <button type="submit" class="btn-custom">@lang('submit')</button>
                                         </div>
                                     </div>
                                 </form>

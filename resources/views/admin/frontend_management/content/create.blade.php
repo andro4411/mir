@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a></li>
@@ -78,7 +78,7 @@
                                                                    class="js-flatpickr form-control flatpickr-custom @error($name.'.'.$language->id) is-invalid @enderror"
                                                                    name="{{ $name }}[{{ $language->id }}]"
                                                                    value="{{ old($name.'.'.$language->id) }}"
-                                                                   placeholder="Select dates"
+                                                                   placeholder="@lang('Select dates')"
                                                                    data-hs-flatpickr-options='{
                                                                      "dateFormat": "d/m/Y",
                                                                      "enableTime": false
@@ -139,11 +139,11 @@
                                                                 <img id="contentImg"
                                                                      class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                                      src="{{ asset("assets/admin/img/oc-browse-file.svg") }}"
-                                                                     alt="Image Description" data-hs-theme-appearance="default">
+                                                                     alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                                                 <img id="contentImg"
                                                                      class="avatar avatar-xl avatar-4x3 avatar-centered h-100 mb-2"
                                                                      src="{{ asset("assets/admin/img/oc-browse-file-light.svg") }}"
-                                                                     alt="Image Description" data-hs-theme-appearance="dark">
+                                                                     alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                                                 <span class="d-block">@lang("Browse your file here")</span>
                                                                 <input type="file" class="js-file-attach form-check-input" name="{{ $name }}"
                                                                        id="logoUploader" data-hs-file-attach-options='{

@@ -18,7 +18,7 @@
                     <div class="item">
                         <div class="payment-box" data-aos="fade-up" data-aos-duration="{{$gateway_duration}}">
                             <div class="img-box">
-                                <img src="{{getFile($gateway->driver,$gateway->image)}}" alt="Gateway Image">
+                                <img src="{{getFile($gateway->driver,$gateway->image)}}" alt="@lang('Gateway Image')">
                             </div>
                         </div>
                     </div>

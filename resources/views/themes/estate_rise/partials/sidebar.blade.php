@@ -2,7 +2,7 @@
 <aside id="sidebar" class="sidebar">
     <div class="logo-container">
         <a href="{{route('page')}}" class="logo d-flex align-items-center">
-            <img src="{{logo()}}" alt="Site logo">
+            <img src="{{logo()}}" alt="@lang('Site logo')">
         </a>
     </div>
 

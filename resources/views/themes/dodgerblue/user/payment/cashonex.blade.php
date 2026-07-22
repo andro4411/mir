@@ -55,7 +55,7 @@
                                                 <label><strong>@lang("CARD NAME")</strong></label>
                                                 <div class="input-group input-box">
                                                     <input type="text" class="form-control white" name="name"
-                                                           placeholder="Card Name" autocomplete="off" required>
+                                                           placeholder="@lang('Card Name')" autocomplete="off" required>
                                                     <span class="input-group-addon modal-input-addon"></span>
 
                                                     <div class="input-group-append">
@@ -72,7 +72,7 @@
                                                 <label><strong>@lang("CARD NUMBER")</strong></label>
                                                 <div class="input-group input-box">
                                                     <input type="tel" class="form-control white" name="cardNumber"
-                                                           placeholder="Valid Card Number" autocomplete="off" autofocus
+                                                           placeholder="@lang('Valid Card Number')" autocomplete="off" autofocus
                                                            required>
                                                     <div class="input-group-append">
                                                         <span class="input-group-text py-2">
@@ -95,7 +95,7 @@
                                                         type="tel"
                                                         class="form-control"
                                                         name="cardExpiry"
-                                                        placeholder="MM / YYYY"
+                                                        placeholder="@lang('MM / YYYY')"
                                                         autocomplete="off"
                                                         required/>
                                                 </div>
@@ -111,7 +111,7 @@
                                                         type="tel"
                                                         class="form-control"
                                                         name="cardCVC"
-                                                        placeholder="CVC"
+                                                        placeholder="@lang('CVC')"
                                                         autocomplete="off"
                                                         required/>
                                                 </div>

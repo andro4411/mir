@@ -7,7 +7,7 @@
             @if(Session::has('status'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <span class="fw-semibold">@lang("We will send a link to reset your password.")</span>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@lang('Close')"></button>
                 </div>
             @endif
 

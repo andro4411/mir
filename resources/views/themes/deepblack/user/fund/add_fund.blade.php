@@ -99,7 +99,7 @@
                                         type="button"
                                         data-bs-dismiss="modal"
                                         class="btn-close"
-                                        aria-label="Close"
+                                        aria-label="@lang('Close')"
                                     >
                                         <img src="{{asset(template(true).'img/icon/cross.png')}}" alt="@lang('modal dismiss')" />
                                     </button>

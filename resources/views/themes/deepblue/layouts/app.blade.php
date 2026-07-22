@@ -314,7 +314,7 @@
                 <div class="d-flex">
 
                     <a class="navbar-brand" href="{{route('page')}}">
-                        <img src="{{logo()}}" alt="homepage">
+                        <img src="{{logo()}}" alt="@lang('homepage')">
                     </a>
                 </div>
 

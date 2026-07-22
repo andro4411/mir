@@ -7,7 +7,7 @@
         <!-- PAGE-NAVIGATOR -->
         <section id="page-navigator">
             <div class="container-fluid">
-                <div aria-label="breadcrumb">
+                <div aria-label="@lang('breadcrumb')">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('user.dashboard')}}">@lang('Home')</a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)"
@@ -78,7 +78,7 @@
                                         <tr class="text-center">
                                             <td colspan="100%" class="text-center">
                                                 <div class="text-center p-4">
-                                                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
+                                                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                                     <p class="mb-0">@lang('No data to show')</p>
                                                 </div>
                                             </td>

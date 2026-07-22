@@ -81,7 +81,7 @@
                 <div class="modal-content shadow1">
                     <div class="modal-header">
                         <h4 class="modal-title" id="exampleModalLabel">@lang('Invest Now')</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"><img
                                 src="{{ asset(template(true).'img/modal/cancel.png') }}" alt="@lang('not found')"></button>
                     </div>
                     <div class="modal-body">
@@ -94,7 +94,7 @@
                             @csrf
                             <div class="mb-3">
                                 <h6 for="select" class="form-label">@lang('Select wallet')</h6>
-                                <select class="form-select" aria-label="Default select example" name="balance_type">
+                                <select class="form-select" aria-label="@lang('Default select example')" name="balance_type">
                                     @auth
                                         <option
                                             value="balance">@lang('Deposit Balance - '.currencyPosition(auth()->user()->balance))</option>

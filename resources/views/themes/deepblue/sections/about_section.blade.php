@@ -12,10 +12,10 @@
                      data-wow-duration="1s" data-wow-delay="0.35s">
                     <div class="d-flex position-relative">
                         <div class="about-fig">
-                            <img src="{{isset($about_section['single']['media']->image)? getFile($about_section['single']['media']->image->driver,$about_section['single']['media']->image->path):''}}" alt="Image Missing">
+                            <img src="{{isset($about_section['single']['media']->image)? getFile($about_section['single']['media']->image->driver,$about_section['single']['media']->image->path):''}}" alt="@lang('Image Missing')">
                         </div>
                         <div class="about-overlay-fig">
-                            <img class="img-fill" src="{{isset($about_section['single']['media']->image)? getFile($about_section['single']['media']->image->driver,$about_section['single']['media']->image->path):''}}" alt="Image Missing">
+                            <img class="img-fill" src="{{isset($about_section['single']['media']->image)? getFile($about_section['single']['media']->image->driver,$about_section['single']['media']->image->path):''}}" alt="@lang('Image Missing')">
                         </div>
                     </div>
                 </div>

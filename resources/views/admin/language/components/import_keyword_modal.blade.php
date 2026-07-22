@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="TranslateModalLabel"><i
                         class="fa-light fa-file-import"></i> @lang("Import Keywords")</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
             </div>
             <form action="{{ route('admin.language.import.json') }}" method="post">
                 @csrf

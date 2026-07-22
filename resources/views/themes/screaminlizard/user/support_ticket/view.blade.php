@@ -40,7 +40,7 @@
                                         @method('PUT')
 
                                         <div class="pb-3">
-                                            <h4 class="golden-text">Type here</h4>
+                                            <h4 class="golden-text">@lang('Type here')</h4>
                                             <div class="input-group2">
                             <textarea
                                 name="message"
@@ -161,7 +161,7 @@
 
                     <div class="modal-header">
                         <h4 class="modal-title golden-text"> @lang('Confirmation')</h4>
-                        <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="@lang('Close')">
                             <i class="fal fa-times"></i>
                         </button>
                     </div>

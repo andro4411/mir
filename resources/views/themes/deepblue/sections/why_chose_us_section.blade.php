@@ -22,7 +22,7 @@
                                 <div class="card-icon">
                                     <img
                                         src="{{isset($item['media']->icon)?getFile($item['media']->icon->driver,$item['media']->icon->path):''}}"
-                                        alt="...">
+                                        alt="@lang('...')">
                                 </div>
                                 <div class="media-body ml-20">
                                     <h5 class="mb-15">{!! $item['title'] !!}</h5>

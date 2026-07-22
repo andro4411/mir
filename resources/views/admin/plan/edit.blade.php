@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0);">@lang('Dashboard')</a></li>
@@ -33,7 +33,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label for="planName" class="form-label">@lang('Name')</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{old('name',$data->name)}}" name="name" id="planName" placeholder="e.g : basic plan">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{old('name',$data->name)}}" name="name" id="planName" placeholder="@lang('e.g : basic plan')">
                                         @error("name")
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
                                         @enderror
@@ -44,11 +44,11 @@
                                     <i class="bi bi-info-circle text-body ms-1"
                                        data-bs-toggle="tooltip"
                                        data-bs-placement="top"
-                                       aria-label="The Badge Name is an optional label that can be associated with this plan. It can be a short description or identifier, such as 'Gold Member' or 'Premium'."
-                                       data-bs-original-title="The Badge Name is an optional label that can be associated with this plan. It can be a short description or identifier, such as 'Gold Member' or 'Premium'."
+                                       aria-label="@lang('The Badge Name is an optional label that can be associated with this plan. It can be a short description or identifier, such as 'Gold Member' or 'Premium'.')"
+                                       data-bs-original-title="@lang('The Badge Name is an optional label that can be associated with this plan. It can be a short description or identifier, such as 'Gold Member' or 'Premium'.')"
                                     ></i>
                                     <div class=" mb-4">
-                                        <input type="text" name="badge" value="{{old('badge',$data->badge)}}" id="badge" class="form-control @error('badge') is-invalid @enderror" placeholder="e.g : premium , popular">
+                                        <input type="text" name="badge" value="{{old('badge',$data->badge)}}" id="badge" class="form-control @error('badge') is-invalid @enderror" placeholder="@lang('e.g : premium , popular')">
                                         @error("badge")
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
                                         @enderror
@@ -58,7 +58,7 @@
                                 <div class="col-md-6" id="minimum_invest_field">
                                     <label for="minimum_invest" class="form-label">@lang('Minimum Amount')</label>
                                     <div class="input-group mb-4">
-                                        <input type="number" class="form-control @error('minimum_amount') is-invalid @enderror" value="{{old('minimum_amount',$data->minimum_amount)}}" id="minimum_invest" name="minimum_amount" placeholder="e.g : 2000" step="0.01">
+                                        <input type="number" class="form-control @error('minimum_amount') is-invalid @enderror" value="{{old('minimum_amount',$data->minimum_amount)}}" id="minimum_invest" name="minimum_amount" placeholder="@lang('e.g : 2000')" step="0.01">
                                         <span class="input-group-text" id="priceCurrency">{{basicControl()->currency_symbol}}</span>
                                         @error("minimum_amount")
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
@@ -69,7 +69,7 @@
                                 <div class="col-md-6" id="maximum_invest_field">
                                     <label for="maximum_invest" class="form-label">@lang('Maximum Amount')</label>
                                     <div class="input-group mb-4">
-                                        <input type="text" class="form-control @error('maximum_amount') is-invalid @enderror" value="{{old('maximum_amount',$data->maximum_amount)}}" id="minimum_invest" name="maximum_amount" placeholder="e.g : 5000">
+                                        <input type="text" class="form-control @error('maximum_amount') is-invalid @enderror" value="{{old('maximum_amount',$data->maximum_amount)}}" id="minimum_invest" name="maximum_amount" placeholder="@lang('e.g : 5000')">
                                         <span class="input-group-text" id="priceCurrency">{{basicControl()->currency_symbol}}</span>
                                         @error("maximum_amount")
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
@@ -80,7 +80,7 @@
                                 <div class="col-md-6" id="fixed_invest_amount">
                                     <label for="plan_price" class="form-label">@lang('Fixed Amount')</label>
                                     <div class="input-group mb-4">
-                                        <input type="number" class="form-control @error('fixed_amount') is-invalid @enderror" value="{{old('fixed_amount',$data->fixed_amount)}}" id="plan_price" name="fixed_amount" placeholder="e.g : 8000" step="0.01">
+                                        <input type="number" class="form-control @error('fixed_amount') is-invalid @enderror" value="{{old('fixed_amount',$data->fixed_amount)}}" id="plan_price" name="fixed_amount" placeholder="@lang('e.g : 8000')" step="0.01">
                                         <span class="input-group-text" id="priceCurrency">{{basicControl()->currency_symbol}}</span>
                                         @error("fixed_amount")
                                         <span class="invalid-feedback d-block">{{ $message }}</span>
@@ -93,11 +93,11 @@
                                     <i class="bi bi-info-circle text-body ms-1"
                                        data-bs-toggle="tooltip"
                                        data-bs-placement="top"
-                                       aria-label="The Yield represents the percentage return on investment over the specified period."
-                                       data-bs-original-title="The Yield represents the percentage return on investment over the specified period."
+                                       aria-label="@lang('The Yield represents the percentage return on investment over the specified period.')"
+                                       data-bs-original-title="@lang('The Yield represents the percentage return on investment over the specified period.')"
                                     ></i>
                                     <div class="input-group mb-4">
-                                        <input type="number" class="form-control @error('profit') is-invalid @enderror" id="return_period" value="{{old('profit',$data->profit)}}" name="profit" placeholder="e.g : 5.00" step="0.001">
+                                        <input type="number" class="form-control @error('profit') is-invalid @enderror" id="return_period" value="{{old('profit',$data->profit)}}" name="profit" placeholder="@lang('e.g : 5.00')" step="0.001">
 
                                         <!-- Select -->
                                         <div class="tom-select-custom">
@@ -144,11 +144,11 @@
                                     <i class="bi bi-info-circle text-body ms-1"
                                        data-bs-toggle="tooltip"
                                        data-bs-placement="top"
-                                       aria-label="how many times?"
-                                       data-bs-original-title="how many times?"
+                                       aria-label="@lang('how many times?')"
+                                       data-bs-original-title="@lang('how many times?')"
                                     ></i>
                                     <div class="input-group mb-4">
-                                        <input type="number" name="repeatable"   value="{{old('repeatable',$data->repeatable)}}"  class="form-control @error('repeatable') is-invalid @enderror" placeholder="e.g : 50">
+                                        <input type="number" name="repeatable"   value="{{old('repeatable',$data->repeatable)}}"  class="form-control @error('repeatable') is-invalid @enderror" placeholder="@lang('e.g : 50')">
                                         <!-- Select -->
                                         <span class="input-group-text">@lang('Days')</span>
                                         @error("repeatable")

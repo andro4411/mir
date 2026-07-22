@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang("Dashboard")</a>
@@ -103,7 +103,7 @@
 
                     <div class="col-sm-auto">
                         <div class="d-flex  justify-content-center justify-content-sm-end">
-                            <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+                            <nav id="datatablePagination" aria-label="@lang('Activity pagination')"></nav>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="deleteModalLabel"><i
                             class="bi bi-check2-square"></i> @lang("Confirmation")</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="" method="post" id="setRoute">
                     @csrf
@@ -143,7 +143,7 @@
 
                 <div class="modal-header">
                     <h5 class="modal-title h4" id="myExtraLargeModalLabel">@lang('Add Roles')</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="{{route('admin.role.create')}}" method="post">
                     @csrf
@@ -263,7 +263,7 @@
 
                 <div class="modal-header">
                     <h5 class="modal-title h4" id="myExtraLargeModalLabel">@lang('Add Roles')</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="{{route('admin.role.update')}}" method="post">
                     @csrf
@@ -391,9 +391,9 @@
 
                 language: {
                     zeroRecords: `<div class="text-center p-4">
-                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
-                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
-                    <p class="mb-0">No data to show</p>
+                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
+                    <p class="mb-0">@lang('No data to show')</p>
                     </div>`,
                     processing: `<div><div></div><div></div><div></div><div></div></div>`
                 },

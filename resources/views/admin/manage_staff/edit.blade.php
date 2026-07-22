@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang("Dashboard")</a>
@@ -39,7 +39,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="staffName">@lang('Name')</label>
                                         <input type="text" id="staffName" value="{{old('name',$staff->name)}}"
-                                               name="name" class="form-control"  placeholder="Enter staff name">
+                                               name="name" class="form-control"  placeholder="@lang('Enter staff name')">
                                     </div>
                                     @error("name")
                                     <span class="invalid-feedback d-block" role="alert">
@@ -68,7 +68,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="staffEmail">@lang('Email')</label>
                                         <input type="email" id="staffEmail" value="{{old('email',$staff->email)}}"
-                                               name="email" class="form-control"  placeholder="Enter staff email">
+                                               name="email" class="form-control"  placeholder="@lang('Enter staff email')">
                                     </div>
                                     @error("email")
                                     <span class="invalid-feedback d-block" role="alert">
@@ -80,7 +80,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="staffUsername">@lang('Username')</label>
                                         <input type="text" id="staffUsername" value="{{old('username',$staff->username)}}"
-                                               name="username" class="form-control"  placeholder="Enter staff email">
+                                               name="username" class="form-control"  placeholder="@lang('Enter staff email')">
                                     </div>
                                     @error("username")
                                     <span class="invalid-feedback d-block" role="alert">
@@ -92,7 +92,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="staffPassword">@lang('Password')</label>
                                         <input type="password" id="staffPassword"
-                                               name="password" class="form-control"  placeholder="Enter staff password" autocomplete="off">
+                                               name="password" class="form-control"  placeholder="@lang('Enter staff password')" autocomplete="off">
                                     </div>
                                     @error("password")
                                     <span class="invalid-feedback d-block" role="alert">
@@ -106,7 +106,7 @@
                                   <span class="text-dark">@lang('Status') <i
                                           class="bi-question-circle text-body ms-1"
                                           data-bs-toggle="tooltip" data-bs-placement="top"
-                                          title="Enable Staff Status"></i></span>
+                                          title="@lang('Enable Staff Status')"></i></span>
                                 </span>
                                         <span class="col-4 col-sm-3 text-end">
                                   <input type="checkbox" class="form-check-input" name="status" id="staffStatus" @checked(old('status') == 'on'|| $staff->status == 1)>

@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">@lang('Dashboard')</a></li>
@@ -205,10 +205,10 @@
                                                 <div class="tom-select-custom">
                                                     <select class="js-select form-select" id="filter_method">
                                                         <option value="all"
-                                                                data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="{{ asset("assets/upload/gateway/all_gateway.png")  }}" alt="..." /><span class="text-truncate">@lang("All Gateway")</span></span>'
+                                                                data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="{{ asset("assets/upload/gateway/all_gateway.png")  }}" alt="@lang('...')" /><span class="text-truncate">@lang("All Gateway")</span></span>'
                                                         @forelse($methods as $method)
                                                             <option value="@lang($method->id)"
-                                                                    data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="{{getFile($method->driver, $method->image)}}" alt="Flag" /><span class="text-truncate">{{ $method->name }}</span></span>'>
+                                                                    data-option-template='<span class="d-flex align-items-center"><img class="avatar avatar-xss avatar-circle me-2" src="{{getFile($method->driver, $method->image)}}" alt="@lang('Flag')" /><span class="text-truncate">{{ $method->name }}</span></span>'>
                                                                 @lang($method->name)
                                                             </option>
                                                         @empty
@@ -224,7 +224,7 @@
                                                 <div class="input-group mb-3 custom">
                                                     <input type="text" id="filter_date_range"
                                                            class="js-flatpickr form-control"
-                                                           placeholder="Select dates"
+                                                           placeholder="@lang('Select dates')"
                                                            data-hs-flatpickr-options='{
                                                                  "dateFormat": "d/m/Y",
                                                                  "mode": "range"
@@ -333,7 +333,7 @@
 
                     <div class="col-sm-auto">
                         <div class="d-flex  justify-content-center justify-content-sm-end">
-                            <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+                            <nav id="datatablePagination" aria-label="@lang('Activity pagination')"></nav>
                         </div>
                     </div>
                 </div>
@@ -351,7 +351,7 @@
                 <div class="modal-header">
                     <h3 class="modal-title" id="downloadDepositDetailsModalLabel"><i
                             class="fa-light fa-square-check"></i> @lang('Confirmation')</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <form action="{{route('admin.export.payment.details')}}" method="get">
                     <div class="modal-body">
@@ -429,9 +429,9 @@
 
                 language: {
                     zeroRecords: `<div class="text-center p-4">
-                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="Image Description" data-hs-theme-appearance="default">
-                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="Image Description" data-hs-theme-appearance="dark">
-                    <p class="mb-0">No data to show</p>
+                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                    <img class="dataTables-image mb-3" src="{{ asset('assets/admin/img/oc-error-light.svg') }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
+                    <p class="mb-0">@lang('No data to show')</p>
                     </div>`,
                     processing: `<div><div></div><div></div><div></div><div></div></div>`
                 },

@@ -22,7 +22,7 @@
                                         <div class="client-fig">
                                             <img
                                                 src="{{isset($data['media']->image)?getFile($data['media']->image->driver,$data['media']->image->path):''}}"
-                                                alt="...">
+                                                alt="@lang('...')">
                                         </div>
                                         <div class="media-body ml-20">
                                             <h6 class="h6 mb-5"> {!! $data['name'] !!}</h6>
@@ -47,7 +47,7 @@
                                     <div class="slider-nav-center">
                                         <img
                                             src="{{isset($data['media']->image)?getFile($data['media']->image->driver,$data['media']->image->path):''}}"
-                                            alt="...">
+                                            alt="@lang('...')">
                                     </div>
                                 </div>
                             </div>

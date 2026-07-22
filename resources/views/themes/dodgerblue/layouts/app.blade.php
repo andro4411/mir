@@ -76,7 +76,7 @@
     <div class="container">
         <a class="navbar-brand" href="{{ route('page') }}"> <img
                 src="{{logo()}}" alt=""></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="@lang('Toggle navigation')">
             <i class="fa-light fa-bars-staggered"></i>
         </button>
          <div class="collapse nav-dropdown navbar-collapse" id="navbarNav">

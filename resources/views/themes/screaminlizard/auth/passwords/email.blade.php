@@ -11,7 +11,7 @@
                             @if (session('status'))
                                 <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
                                     {{ trans(session('status')) }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@lang('Close')"></button>
                                 </div>
                             @endif
                             <form action="{{ route('password.email') }}" method="post">

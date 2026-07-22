@@ -10,31 +10,31 @@
                 @csrf
                 <div class="text-center">
                     <div class="mb-5">
-                        <h1 class="display-5">Reset password</h1>
-                        <p>Enter the email address you used when you joined and we'll send you instructions to reset
-                            your password.</p>
+                        <h1 class="display-5">@lang('Reset password')</h1>
+                        <p>@lang('Enter the email address you used when you joined and we'll send you instructions to reset
+                            your password.')</p>
                     </div>
                 </div>
 
                 <input type="hidden" name="token" value="{{$token}}">
 
                 <div class="mb-4">
-                    <label class="form-label" for="resetPasswordSrEmail" tabindex="0">Your email</label>
+                    <label class="form-label" for="resetPasswordSrEmail" tabindex="0">@lang('Your email')</label>
                     <input type="email" class="form-control form-control-lg" value="{{$email}}" name="email" id="resetPasswordSrEmail"
-                           tabindex="1" placeholder="Enter your email address" aria-label="Enter your email address"
+                           tabindex="1" placeholder="@lang('Enter your email address')" aria-label="@lang('Enter your email address')"
                            required>
-                    <span class="invalid-feedback">Please enter a valid email address.</span>
+                    <span class="invalid-feedback">@lang('Please enter a valid email address.')</span>
                     @error('email')
                     <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 
                <div class="mb-4">
-                   <label class="form-label" for="resetPasswordSrEmail" tabindex="0">Password</label>
+                   <label class="form-label" for="resetPasswordSrEmail" tabindex="0">@lang('Password')</label>
                    <div class="input-group input-group-merge" data-hs-validation-validate-class>
                        <input type="password"
                               class="js-toggle-password form-control form-control-lg @error('password') is-invalid @enderror"
-                              name="password" id="signupSrPassword" placeholder="Enter Password"
+                              name="password" id="signupSrPassword" placeholder="@lang('Enter Password')"
                               data-hs-toggle-password-options='
                                {
                                 "target": "#changePassTarget",
@@ -55,11 +55,11 @@
 
 
                 <div class="mb-4">
-                    <label class="form-label" for="resetPasswordSrEmail" tabindex="0">Confirm Password</label>
+                    <label class="form-label" for="resetPasswordSrEmail" tabindex="0">@lang('Confirm Password')</label>
                     <div class="input-group input-group-merge" data-hs-validation-validate-class>
                         <input type="password"
                                class="js-toggle-password form-control form-control-lg @error('password') is-invalid @enderror"
-                               name="password_confirmation" id="ConfirmPass" placeholder="Enter Confirm Password"
+                               name="password_confirmation" id="ConfirmPass" placeholder="@lang('Enter Confirm Password')"
                                data-hs-toggle-password-options='
                                {
                                 "target": "#changeConfirmPassTarget",
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-lg">@lang('Submit')</button>
                     <div class="text-center">
                         <a class="btn btn-link" href="{{ route('admin.login') }}">
                             <i class="bi-chevron-left"></i> Back to Sign in

@@ -60,7 +60,7 @@
                                                          alt="{{basicControl()->site_title??"HYIP PRO"}}"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="@lang('Toggle navigation')">
                     <span class="bars"><i class="fa-solid fa-bars-staggered"></i></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">

@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">@lang("Dashboard")</a>
@@ -91,7 +91,7 @@
                                             <div class="img">
                                                 <img class="img-fluid"
                                                      src="{{ auth()->user()->profilePicture() }}"
-                                                     alt="Admin Image"/>
+                                                     alt="@lang('Admin Image')"/>
                                             </div>
                                             <div class="text-wrapper">
                                                 <div class="text">
@@ -128,7 +128,7 @@
                                              data-fileSize="5000000"
                                              data-oldFiles=""
 
-                                             data-label-idle="Drop files here or <span class='filepond--label-action'>Browse</span>">
+                                             data-label-idle="Drop files here or <span class='filepond--label-action'>@lang('Browse')</span>">
                                         </div>
                                         <input name="attachments[]" class="filepond-files" type="file" hidden>
                                     </div>
@@ -165,7 +165,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="accountAddCardModalLabel"><i
                             class="bi bi-check2-square"></i> @lang("Confirmation")</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
                 <div class="modal-body">
                     <span>@lang("Do you want to closed this ticket?")</span>

@@ -6,7 +6,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item">
                                 <a class="breadcrumb-link" href="javascript:void(0)">@lang('Dashboard')</a>
@@ -36,10 +36,10 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="nameLabel" class="form-label">Name</label>
+                                        <label for="nameLabel" class="form-label">@lang('Name')</label>
                                         <input type="text" class="form-control  @error('name') is-invalid @enderror"
                                                name="name" id="nameLabel"
-                                               placeholder="Name" aria-label="Name"
+                                               placeholder="@lang('Name')" aria-label="@lang('Name')"
                                                value="{{ old('name', $fileStorageMethod->name) }}">
                                         @error('name')
                                         <span class="invalid-feedback">{{ $message }}</span>

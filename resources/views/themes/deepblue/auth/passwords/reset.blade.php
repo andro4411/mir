@@ -12,8 +12,8 @@
                         @if (session('status'))
                             <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
                                 {{ trans(session('status')) }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="@lang('Close')">
+                                    <span aria-hidden="true">@lang('&times;')</span>
                                 </button>
                             </div>
                         @endif
@@ -24,8 +24,8 @@
                             @error('token')
                             <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
                                 {{ trans($message) }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="@lang('Close')">
+                                    <span aria-hidden="true">@lang('&times;')</span>
                                 </button>
                             </div>
                             @enderror

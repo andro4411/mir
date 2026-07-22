@@ -14,7 +14,7 @@
 
                             <div class="row g-4">
                                 <div class="col-12">
-                                    <h4>Create An Account</h4>
+                                    <h4>@lang('Create An Account')</h4>
                                 </div>
                                 @if(session()->get('sponsor') != null)
                                     <div class="input-box col-lg-12">

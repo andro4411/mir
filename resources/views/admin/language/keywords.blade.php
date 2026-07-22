@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang('Dashboard')</a>
@@ -57,7 +57,7 @@
                                 <div class="input-group-prepend input-group-text">
                                 </div>
                                 <input id="datatableSearch" type="search" class="form-control"
-                                       placeholder="Search Keywords" aria-label="Search Keywords" autocomplete="off">
+                                       placeholder="@lang('Search Keywords')" aria-label="@lang('Search Keywords')" autocomplete="off">
                             </div>
                         </div>
 
@@ -124,10 +124,10 @@
                                         <div class="text-center p-4">
                                             <img class="dataTables-image mb-3"
                                                  src="{{ asset('assets/admin/img/oc-error.svg') }}"
-                                                 alt="Image Description" data-hs-theme-appearance="default">
+                                                 alt="@lang('Image Description')" data-hs-theme-appearance="default">
                                             <img class="dataTables-image mb-3"
                                                  src="{{ asset('assets/admin/img/oc-error-light.svg') }}"
-                                                 alt="Image Description" data-hs-theme-appearance="dark">
+                                                 alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                                             <p class="mb-0">@lang("No data to show")</p>
                                         </div>
                                     </tr>
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="col-sm-auto">
                                     <div class="d-flex justify-content-center justify-content-sm-end">
-                                        <nav id="datatableEntriesPagination" aria-label="Activity pagination"></nav>
+                                        <nav id="datatableEntriesPagination" aria-label="@lang('Activity pagination')"></nav>
                                     </div>
                                 </div>
                             </div>
@@ -298,8 +298,8 @@
             HSCore.components.HSDatatables.init($('.js-datatable'), {
                 language: {
                     zeroRecords: `<div class="text-center p-4">
-                          <img class="dataTables-image mb-3" src="{{ asset("assets/admin/img/oc-error.svg") }}" alt="Image Description" data-hs-theme-appearance="default">
-                          <img class="dataTables-image mb-3" src="{{ asset("assets/admin/img/oc-error-light.svg") }}" alt="Image Description" data-hs-theme-appearance="dark">
+                          <img class="dataTables-image mb-3" src="{{ asset("assets/admin/img/oc-error.svg") }}" alt="@lang('Image Description')" data-hs-theme-appearance="default">
+                          <img class="dataTables-image mb-3" src="{{ asset("assets/admin/img/oc-error-light.svg") }}" alt="@lang('Image Description')" data-hs-theme-appearance="dark">
                         <p class="mb-0">{{ trans("No data to show") }}</p>
                         </div>`
                 }

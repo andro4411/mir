@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="row align-items-end">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="@lang('breadcrumb')">
                         <ol class="breadcrumb breadcrumb-no-gutter">
                             <li class="breadcrumb-item"><a class="breadcrumb-link"
                                                            href="javascript:void(0)">@lang("Dashboard")</a>
@@ -53,7 +53,7 @@
                                                         <div class="avatar avatar-circle">
                                                             <img class="avatar-img"
                                                                  src="{{ getFile($method->driver, $method->image) }}"
-                                                                 alt="Image Description">
+                                                                 alt="@lang('Image Description')">
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
@@ -129,7 +129,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="paymentMethodModalLabel">@lang('Confirmation')</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@lang('Close')"></button>
                 </div>
 
                 <form action="{{ route('admin.payment.methods.deactivate') }}" method="POST">
