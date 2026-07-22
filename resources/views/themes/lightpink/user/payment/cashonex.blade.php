@@ -123,7 +123,7 @@
                                         </div>
                                         <br>
                                         <div class="btn-wrapper">
-                                            <input class="btn-custom w-100 " type="submit" value="PAY NOW">
+                                            <input class="btn-custom w-100 " type="submit" value="{{ trans('PAY NOW') }}">
                                         </div>
                                     </form>
                                 </div>

@@ -251,7 +251,7 @@
                             $('#supported_currency').append(markup);
                         }
 
-                        let markup = '<option value="">Selected Currency</option>';
+                        let markup = '<option value="">{{ trans('Selected Currency') }}</option>';
                         $('#supported_currency').append(markup);
 
                         $(data).each(function (index, value) {

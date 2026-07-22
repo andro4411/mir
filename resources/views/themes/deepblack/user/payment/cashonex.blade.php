@@ -113,7 +113,7 @@
                                         </div>
                                         <br>
                                         <div class="btn-wrapper">
-                                            <input class="gold-btn w-100 " type="submit" value="PAY NOW">
+                                            <input class="gold-btn w-100 " type="submit" value="{{ trans('PAY NOW') }}">
                                         </div>
                                     </form>
                                 </div>

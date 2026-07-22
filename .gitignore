@@ -12,6 +12,7 @@ target/
 node_modules/
 vendor/
 composer.lock
+*.lock
 
 # Logs and temp files
 *.log
@@ -22,7 +23,7 @@ composer.lock
 # Environment
 .env
 .env.local
-.env.*
+*.env.*
 
 # Editors
 .vscode/
@@ -30,11 +31,11 @@ composer.lock
 *.swp
 *.swo
 
-# OS
+# OS generated files
 .DS_Store
 Thumbs.db
 
-# Coverage
+# Coverage reports
 coverage/
 htmlcov/
 .coverage
@@ -42,7 +43,7 @@ htmlcov/
 # Laravel specific
 storage/
 bootstrap/cache/
-public/hot
-public/ mix-manifest.json
-
+public/storage
+.npm
+.yarn
 ```
