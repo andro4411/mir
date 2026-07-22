@@ -69,10 +69,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
             Route::get('payout-method/{id?}', [PayoutController::class, 'payoutMethod']);
             Route::post('payout', [PayoutController::class,'payout']);
-            Route::post('payout/get-bank/list', [PayoutController::class,'payoutGetBankList']);
-            Route::post('payout/get-bank/from', [PayoutController::class,'payoutGetBankFrom']);
-            Route::post('payout/paystack/submit/{trx_id}', [PayoutController::class,'payoutPaystackSubmit']);
-            Route::post('payout/flutterwave/submit/{trx_id}', [PayoutController::class,'payoutFlutterwaveSubmit']);
             Route::post('payout/submit/confirm/{trx_id}', [PayoutController::class,'payoutSubmit']);
 
             Route::get('payment', [PaymentController::class,'paymentGateways']);
