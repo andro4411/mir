@@ -1,0 +1,191 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+$version = '2.2.0';
+$options = getopt('i:e:p:dvh', ['include:', 'exclude:', 'path:', 'dry', 'verbose', 'help']);
+
+foreach ($options as $key => $value) {
+    // Repeated options come as array, take the last one
+    $options[$key[0]] = is_array($value) ? end($value) : $value;
+}
+
+echo 'Cleanup v' . $version . PHP_EOL . PHP_EOL;
+
+if (isset($options['h'])) {
+    echo "\e[0;33mUsage:\e[0m" . PHP_EOL;
+    echo '  command [options] [arguments]' . PHP_EOL . PHP_EOL;
+
+    echo "\e[0;33mOptions:\e[0m" . PHP_EOL;
+    echo "  \e[0;32m-h, --help    \e[0m  Display this help message" . PHP_EOL;
+    echo "  \e[0;32m-i, --include \e[0m  Add patterns for common files, comma separated" . PHP_EOL;
+    echo "  \e[0;32m-e, --exclude \e[0m  Remove patterns for common files, comma separated" . PHP_EOL;
+    echo "  \e[0;32m-v, --verbose \e[0m  Increase the verbosity of messages" . PHP_EOL;
+    echo "  \e[0;32m-p, --path    \e[0m  Find on specific path" . PHP_EOL;
+    echo "  \e[0;32m-d, --dry     \e[0m  Run without actual remove" . PHP_EOL . PHP_EOL;
+
+    echo "\e[0;33mExample:\e[0m" . PHP_EOL;
+    echo '  ./vendor/bin/cleanup -v --path symfony --include \'*.zip,*.rar\' --exclude doc,docs,test' . PHP_EOL;
+    return;
+}
+
+// Default patterns for common files
+$patterns = [
+    '.git',
+    '.github',
+    '.circleci',
+    '.idea',
+    '.vscode',
+    '.psalm',
+    '.temp',
+    'test',
+    'tests',
+    'demo',
+    'example',
+    'examples',
+    'doc',
+    'docs',
+    'benchmark',
+    'benchmarks',
+    'license',
+    'authors*',
+    'changelog*',
+    'changes*',
+    'faq*',
+    'contributing*',
+    'history*',
+    'upgrading*',
+    'upgrade*',
+    'readme*',
+    'makefile',
+    '*.yml',
+    '.*.yml',
+    '*.yaml',
+    '.*.yaml',
+    '*.md',
+    '*.rst',
+    '*.txt',
+    '*.dist',
+    '*.neon',
+    '*.cache',
+    'phpunit.xml',
+    'phpcs.xml',
+    'psalm.xml',
+    '.php_cs*',
+    '.php-cs-fixer*',
+    '.gitignore',
+    '.gitattributes',
+    '.gitmodules',
+    '.editorconfig',
+    '.dockerignore',
+    '.mailmap',
+    '.ds_store',
+    '.phpstorm.meta.php',
+    'dockerfile*',
+    'docker-compose*',
+    'composer.lock',
+];
+
+$dirname = dirname(__DIR__, 2);
+
+if (! is_file($dirname . '/autoload.php')) {
+    echo 'Vendor directory not found! The script must be installed in vendor via composer' . PHP_EOL;
+    exit(1);
+}
+
+if (isset($options['p'])) {
+    $dirname .= '/' . $options['p'];
+
+    if (! file_exists($dirname)) {
+        echo 'Directory not found!' . PHP_EOL;
+        exit(1);
+    }
+}
+
+if (isset($options['i'])) {
+    $patterns = array_merge($patterns, explode(',', $options['i']));
+}
+
+if (isset($options['e'])) {
+    $patterns = array_diff($patterns, explode(',', $options['e']));
+}
+
+/**
+ * Recursively traverses the directory tree
+ */
+function expandTree(string $dirname): array
+{
+    $directories = [];
+    $files = array_diff(scandir($dirname), ['.', '..']);
+    foreach($files as $file) {
+        $directory = $dirname . '/' . $file;
+        if(is_dir($directory) && ! is_link($directory)) {
+            $directories[] = $directory;
+            $directories = array_merge($directories, expandTree($directory));
+        }
+    }
+
+    return $directories;
+}
+
+/**
+ * Recursively deletes the directory
+ */
+function delTree(string $dirname): bool
+{
+    $files = array_diff(scandir($dirname), ['.', '..']);
+    foreach ($files as $file) {
+        $path = $dirname . '/' . $file;
+        is_dir($path) && ! is_link($path) ? delTree($path) : unlink($path);
+    }
+
+    return rmdir($dirname);
+}
+
+$objects = 0;
+$directories = expandTree($dirname);
+
+// Include the root path so patterns match in a flat directory without subdirs
+array_unshift($directories, $dirname);
+
+foreach ($directories as $directory) {
+    foreach ($patterns as $pattern) {
+
+        $casePattern = preg_replace_callback(
+            '/([a-z])/i',
+            static fn (array $matches): string => '[' . strtolower($matches[1]) . strtoupper($matches[1]) . ']',
+            $pattern
+        );
+
+        foreach (glob($directory . '/' . $casePattern) ?: [] as $file) {
+
+            if (isset($options['v']) || isset($options['d'])) {
+                echo $file . PHP_EOL;
+            } else {
+                echo '.';
+            }
+
+            if (! isset($options['d'])) {
+                if (is_dir($file) && ! is_link($file)) {
+                    delTree($file);
+                } else {
+                    unlink($file);
+                }
+            }
+
+            $objects++;
+        }
+    }
+}
+
+if ($objects) {
+    if (isset($options['d'])) {
+        echo PHP_EOL . $objects . ' object(s) will be deleted!' . PHP_EOL;
+    } else {
+        echo PHP_EOL . $objects . ' object(s) successfully deleted!' . PHP_EOL;
+    }
+} else {
+    echo 'No objects found for deletion!' . PHP_EOL;
+}
+

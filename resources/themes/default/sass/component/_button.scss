@@ -1,0 +1,38 @@
+// Component: Dropdown
+// Updated styles for bootstrap dropdown
+
+.btn {
+  cursor: pointer;
+  &:not([disabled]):not(.disabled):not(.btn-link):hover,
+  &:not([disabled]):not(.disabled):not(.btn-link):focus {
+    text-decoration: none;
+    transform: translate3d(0, -1px, 0);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  }
+  &[disabled] { cursor: not-allowed; }
+  .fas,
+  .far,
+  .icon {
+    font-size: 14px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+}
+
+// Adaptive Button
+.btn-adaptive {
+    --bs-btn-color: var(--bs-body-color);
+    --bs-btn-bg: var(--bs-tertiary-bg);
+    --bs-btn-border-color: var(--bs-border-color);
+    --bs-btn-hover-color: var(--bs-body-color);
+    --bs-btn-hover-bg: var(--bs-secondary-bg);
+    --bs-btn-hover-border-color: var(--bs-border-color-translucent);
+    --bs-btn-focus-shadow-rgb: var(--bs-body-color-rgb, 33, 37, 41);
+    --bs-btn-active-color: var(--bs-body-color);
+    --bs-btn-active-bg: var(--bs-secondary-bg);
+    --bs-btn-active-border-color: var(--bs-border-color-translucent);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(var(--bs-body-color-rgb), 0.125);
+    --bs-btn-disabled-color: var(--bs-secondary-color);
+    --bs-btn-disabled-bg: var(--bs-tertiary-bg);
+    --bs-btn-disabled-border-color: var(--bs-border-color);
+}

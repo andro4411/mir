@@ -1,0 +1,1095 @@
+<?php
+
+use App\Classes\CloudFlare;
+use App\Classes\HtmlRenderer;
+use App\Models\Antimat;
+use App\Models\Ban;
+use App\Models\Banhist;
+use App\Models\BlackList;
+use App\Models\Counter;
+use App\Models\Counter31;
+use App\Models\Error;
+use App\Models\Notice;
+use App\Models\Online;
+use App\Models\Setting;
+use App\Models\Spam;
+use App\Models\Sticker;
+use App\Models\User;
+use cbschuld\Browser;
+use Illuminate\Mail\Message;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Vite;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
+use Illuminate\Support\ViewErrorBag;
+use ReCaptcha\ReCaptcha;
+
+const ROTOR_VERSION = '14.1.1';
+
+/**
+ * @deprecated Мост совместимости для модулей, не обновлённых на datetime. Будет удалён в 15.0
+ */
+define('SITETIME', time());
+
+/**
+ * Форматирует время с учетом часовых поясов
+ *
+ * int|string в $timestamp — мост совместимости для модулей с timestamp-полями, будет удалён в 15.0
+ */
+function dateFixed(
+    DateTimeInterface|int|string|null $timestamp,
+    string $format = 'd.m.Y / H:i',
+    bool $original = false,
+): string {
+    if (is_numeric($timestamp)) {
+        $timestamp = (int) $timestamp;
+    }
+
+    $date = Date::parse($timestamp)->setTimezone(config('app.timezone'));
+    $shift = (int) getUser('timezone');
+    $dateStamp = $date->addHours($shift)->format($format);
+
+    if ($original) {
+        return $dateStamp;
+    }
+
+    $today = Date::now()->addHours($shift)->format('d.m.Y');
+    $yesterday = Date::now()->addHours($shift)->subDay()->format('d.m.Y');
+
+    $replaces = [
+        $today      => __('main.today'),
+        $yesterday  => __('main.yesterday'),
+        'January'   => __('main.january'),
+        'February'  => __('main.february'),
+        'March'     => __('main.march'),
+        'April'     => __('main.april'),
+        'May'       => __('main.may'),
+        'June'      => __('main.june'),
+        'July'      => __('main.july'),
+        'August'    => __('main.august'),
+        'September' => __('main.september'),
+        'October'   => __('main.october'),
+        'November'  => __('main.november'),
+        'December'  => __('main.december'),
+    ];
+
+    return strtr($dateStamp, $replaces);
+}
+
+/**
+ * Преобразует специальные символы в HTML-сущности
+ */
+function check(array|string|null $string, bool $doubleEncode = true): array|string
+{
+    if (is_array($string)) {
+        foreach ($string as $key => $val) {
+            $string[$key] = check($val, $doubleEncode);
+        }
+    } else {
+        $string = htmlspecialchars($string, ENT_QUOTES, 'UTF-8', $doubleEncode);
+        $search = [chr(0), "\x00", "\x1A", chr(226) . chr(128) . chr(174)];
+        $string = str_replace($search, [], $string);
+    }
+
+    return $string;
+}
+
+/**
+ * Преобразует в положительное число
+ */
+function int(array|int|string|null $num): int
+{
+    return abs((int) $num);
+}
+
+/**
+ * Преобразует все элементы массива в int
+ */
+function intar(array|int|string|null $numbers): ?array
+{
+    if (! $numbers) {
+        return null;
+    }
+
+    if (is_array($numbers)) {
+        $numbers = array_map('intval', $numbers);
+    } else {
+        $numbers = [(int) $numbers];
+    }
+
+    return $numbers;
+}
+
+/**
+ * Возвращает размер в человеко читаемом формате
+ */
+function formatSize(int $bytes, int $precision = 2): string
+{
+    $units = ['B', 'Kb', 'Mb', 'Gb', 'Tb'];
+    $pow = floor(($bytes ? log($bytes) : 0) / log(1000));
+    $pow = min($pow, count($units) - 1);
+
+    $bytes /= (1 << (10 * $pow));
+
+    return round($bytes, $precision) . $units[$pow];
+}
+
+/**
+ * Возвращает размер файла человеко-читаемом формате
+ */
+function formatFileSize(string $file): string
+{
+    if (file_exists($file) && is_file($file)) {
+        return formatSize(filesize($file));
+    }
+
+    return formatSize(0);
+}
+
+/**
+ * Возвращает время в человеко-читаемом формате
+ */
+function formatTime(int $time, int $crumbs = 2): string
+{
+    if ($time < 1) {
+        return '0';
+    }
+
+    $units = [
+        __('main.plural_years')   => 31536000,
+        __('main.plural_months')  => 2592000,
+        __('main.plural_days')    => 86400,
+        __('main.plural_hours')   => 3600,
+        __('main.plural_minutes') => 60,
+        __('main.plural_seconds') => 1,
+    ];
+
+    $return = [];
+
+    foreach ($units as $unit => $seconds) {
+        $format = (int) ($time / $seconds);
+        $time %= $seconds;
+
+        if ($format >= 1) {
+            $return[] = plural($format, $unit);
+        }
+    }
+
+    return implode(' ', array_slice($return, 0, $crumbs));
+}
+
+/**
+ * Очищает строку от мата по базе слов
+ */
+function antimat(?string $str): string
+{
+    return Antimat::replace((string) $str);
+}
+
+/**
+ * Возвращает количество пользователей онлайн по типам
+ */
+function statsOnline(): array
+{
+    return Cache::remember('online', 60, static function () {
+        $rows = Online::query()->select('user_id')->get();
+
+        $users = $rows->whereNotNull('user_id')->unique('user_id');
+        $usersCount = $users->count();
+        $guestsCount = $rows->whereNull('user_id')->count();
+        $total = $usersCount + $guestsCount;
+
+        return [$usersCount, $guestsCount, $total, $users];
+    });
+}
+
+/**
+ * Возвращает количество пользователей онлайн
+ */
+function showOnline(): ?HtmlString
+{
+    if (setting('onlines')) {
+        $online = statsOnline();
+
+        return new HtmlString(view('app/_online', compact('online')));
+    }
+
+    return null;
+}
+
+/**
+ * Возвращает статистику посещений
+ */
+function statsCounter(): array
+{
+    return Cache::remember('counter', 30, static function () {
+        $counter = Counter::query()->first();
+
+        return $counter ? $counter->toArray() : [];
+    });
+}
+
+/**
+ * Возвращает статистику посещений по дням за неделю
+ */
+function statsWeek(): Collection
+{
+    return Cache::remember('counter_week', 600, static function () {
+        return Counter31::query()
+            ->orderByDesc('period')
+            ->limit(7)
+            ->get(['period', 'hosts'])
+            ->keyBy('period');
+    });
+}
+
+/**
+ * Выводит счетчик посещений
+ */
+function showCounter(): ?HtmlString
+{
+    $incount = setting('incount');
+
+    if ($incount <= 0) {
+        return null;
+    }
+
+    $counter = statsCounter();
+    $online = statsOnline()[2];
+
+    $cols = [
+        1 => ['lbl1' => __('counters.hosts'), 'val1' => $counter['dayhosts'], 'lbl2' => __('counters.hosts_total'), 'val2' => $counter['allhosts']],
+        2 => ['lbl1' => __('counters.hits'), 'val1' => $counter['dayhits'], 'lbl2' => __('counters.hits_total'), 'val2' => $counter['allhits']],
+        3 => ['lbl1' => __('counters.hosts'), 'val1' => $counter['dayhosts'], 'lbl2' => __('counters.hits'), 'val2' => $counter['dayhits']],
+        4 => ['lbl1' => __('counters.hosts_total'), 'val1' => $counter['allhosts'], 'lbl2' => __('counters.hits_total'), 'val2' => $counter['allhits']],
+    ];
+
+    $col = $cols[$incount] ?? $cols[3];
+
+    $barColors = ['Mon' => '#0d6efd', 'Tue' => '#6610f2', 'Wed' => '#198754', 'Thu' => '#fd7e14', 'Fri' => '#dc3545', 'Sat' => '#0dcaf0', 'Sun' => '#ffc107'];
+
+    $week = statsWeek();
+
+    $maxHosts = $week->max('hosts') ?: 1;
+    $bars = [];
+    for ($i = 6; $i >= 0; $i--) {
+        $ts = now()->subDays($i)->timestamp;
+        $date = date('Y-m-d 00:00:00', $ts);
+        $dow = date('D', $ts);
+        $hosts = $week->get($date)?->hosts;
+        $bars[] = [
+            'h' => max(7, (int) round($hosts / $maxHosts * 20)),
+            'c' => $barColors[$dow] ?? '#0d6efd',
+            'l' => __('main.' . strtolower(substr($dow, 0, 2))),
+        ];
+    }
+
+    return new HtmlString(
+        view('app/_counter', ['online' => $online, 'bars' => $bars, ...$col])
+    );
+}
+
+/**
+ * Возвращает количество пользователей
+ */
+function statsUsers(): string
+{
+    return Cache::remember('statUsers', 1800, static function () {
+        $stat = User::query()->count();
+        $new = User::query()->where('created_at', '>', now()->subDay())->count();
+
+        if ($new) {
+            $stat .= '/+' . $new;
+        }
+
+        return $stat;
+    });
+}
+
+/**
+ * Возвращает количество администраторов
+ */
+function statsAdmins(): int
+{
+    return Cache::remember('statAdmins', 3600, static function () {
+        return User::query()->whereIn('level', User::ADMIN_GROUPS)->count();
+    });
+}
+
+/**
+ * Возвращает количество жалоб
+ */
+function statsSpam(): int
+{
+    return Spam::query()->count();
+}
+
+/**
+ * Возвращает количество забанненых пользователей
+ */
+function statsBanned(): int
+{
+    return User::query()
+        ->where('level', User::BANNED)
+        ->where('timeban', '>', now())
+        ->count();
+}
+
+/**
+ * Возвращает количество записей в истории банов
+ */
+function statsBanHist(): int
+{
+    return Banhist::query()->count();
+}
+
+/**
+ * Возвращает количество ожидающих подтверждения регистрации
+ */
+function statsRegList(): int
+{
+    return User::query()->where('level', User::PENDED)->count();
+}
+
+/**
+ * Возвращает количество забаненных по IP
+ */
+function statsIpBanned(): int
+{
+    return Ban::query()->count();
+}
+
+/**
+ * Возвращает количество записей в черном списке
+ */
+function statsBlacklist(): string
+{
+    $blacklist = BlackList::query()
+        ->selectRaw('type, count(*) as total')
+        ->groupBy('type')
+        ->pluck('total', 'type')
+        ->all();
+
+    $list = $blacklist + ['login' => 0, 'email' => 0, 'domain' => 0];
+
+    return $list['login'] . '/' . $list['email'] . '/' . $list['domain'];
+}
+
+/**
+ * Возвращает количество записей в антимате
+ */
+function statsAntimat(): int
+{
+    return Antimat::query()->count();
+}
+
+/**
+ * Возвращает количество стикеров
+ */
+function statsStickers(): int
+{
+    return Sticker::query()->count();
+}
+
+/**
+ * Частично скрывает email
+ */
+function hideMail(string $email): string
+{
+    return preg_replace('/(?<=.).(?=.*@)/u', '*', $email);
+}
+
+/**
+ * Возвращает иконку расширения
+ */
+function icons(string $ext): HtmlString
+{
+    $icons = [
+        'php'  => 'fa-regular fa-file-code',
+        'ppt'  => 'fa-regular fa-file-powerpoint',
+        'doc'  => 'fa-regular fa-file-word',
+        'docx' => 'fa-regular fa-file-word',
+        'xls'  => 'fa-regular fa-file-excel',
+        'xlsx' => 'fa-regular fa-file-excel',
+        'txt'  => 'fa-regular fa-file-alt',
+        'css'  => 'fa-regular fa-file-alt',
+        'dat'  => 'fa-regular fa-file-alt',
+        'html' => 'fa-regular fa-file-alt',
+        'htm'  => 'fa-regular fa-file-alt',
+        'wav'  => 'fa-regular fa-file-audio',
+        'amr'  => 'fa-regular fa-file-audio',
+        'mp3'  => 'fa-regular fa-file-audio',
+        'mid'  => 'fa-regular fa-file-audio',
+        'zip'  => 'fa-regular fa-file-archive',
+        'rar'  => 'fa-regular fa-file-archive',
+        '7z'   => 'fa-regular fa-file-archive',
+        'gz'   => 'fa-regular fa-file-archive',
+        '3gp'  => 'fa-regular fa-file-video',
+        'mp4'  => 'fa-regular fa-file-video',
+        'jpg'  => 'fa-regular fa-file-image',
+        'jpeg' => 'fa-regular fa-file-image',
+        'bmp'  => 'fa-regular fa-file-image',
+        'wbmp' => 'fa-regular fa-file-image',
+        'gif'  => 'fa-regular fa-file-image',
+        'png'  => 'fa-regular fa-file-image',
+        'webp' => 'fa-regular fa-file-image',
+        'ttf'  => 'fa-solid fa-font',
+        'pdf'  => 'fa-regular fa-file-pdf',
+        'csv'  => 'fa-regular fa-file-csv',
+    ];
+
+    $ico = $icons[$ext] ?? 'fa-regular fa-file';
+
+    return new HtmlString('<i class="' . $ico . '"></i>');
+}
+
+/**
+ * Возвращает обрезанную строку с удалением перевода строки
+ */
+function truncateDescription(HtmlString|string $value, int $words = 20, string $end = ''): string
+{
+    $value = preg_replace('/<[^>]+>/', ' ', (string) $value);
+    $value = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
+    $value = trim(preg_replace('/\s+/', ' ', $value));
+
+    return Str::words($value, $words, $end);
+}
+
+/**
+ * Форматирует вывод числа
+ */
+function formatNum(int|float $num): HtmlString
+{
+    if ($num > 0) {
+        $data = '<span style="color:#00aa00">+' . $num . '</span>';
+    } elseif ($num < 0) {
+        $data = '<span style="color:#ff0000">' . $num . '</span>';
+    } else {
+        $data = '<span>0</span>';
+    }
+
+    return new HtmlString($data);
+}
+
+/**
+ * Форматирует вывод числа
+ */
+function formatShortNum(int $num): int|string
+{
+    $thresholds = [
+        1_000_000_000_000 => 'T',
+        1_000_000_000     => 'B',
+        1_000_000         => 'M',
+        1_000             => 'K',
+    ];
+
+    foreach ($thresholds as $threshold => $suffix) {
+        if ($num > $threshold) {
+            return round($num / $threshold, 1) . $suffix;
+        }
+    }
+
+    return $num;
+}
+
+/**
+ * Удаляет директорию рекурсивно
+ */
+function deleteDir(string $dir): void
+{
+    if (file_exists($dir)) {
+        if ($files = glob($dir . '/*')) {
+            foreach ($files as $file) {
+                is_dir($file) ? deleteDir($file) : unlink($file);
+            }
+        }
+        rmdir($dir);
+    }
+}
+
+/**
+ * Удаляет файл
+ */
+function deleteFile(string $path): bool
+{
+    if (file_exists($path) && is_file($path)) {
+        unlink($path);
+    }
+
+    return true;
+}
+
+/**
+ * Отправляет уведомление об упоминании в приват
+ */
+function sendNotify(string $text, string $url, string $title, array $exclude = []): void
+{
+    if (! $login = getUser('login')) {
+        return;
+    }
+
+    $excludeLogins = array_merge([$login], $exclude);
+
+    preg_match_all('/<a[^>]+class="user"[^>]*href="\/users\/([\w\-]+)"/', $text, $matches);
+
+    if (! empty($matches[1])) {
+        $usersAnswer = array_unique(array_diff($matches[1], $excludeLogins));
+
+        foreach ($usersAnswer as $user) {
+            $user = getUserByLogin($user);
+
+            if ($user?->notify_mention) {
+                $notify = textNotice('notify', compact('login', 'url', 'title', 'text'));
+                $user->sendMessage(null, $notify);
+            }
+        }
+    }
+}
+
+/**
+ * Возвращает приватное сообщение
+ */
+function textNotice(string $type, array $replace = []): string
+{
+    $message = Notice::query()->where('type', $type)->first();
+
+    if (! $message) {
+        return __('main.text_missing');
+    }
+
+    if (isset($replace['url'])) {
+        $replace['page'] = '<a href="' . $replace['url'] . '">' . ($replace['title'] ?? $replace['url']) . '</a>';
+        unset($replace['url'], $replace['title']);
+    }
+
+    foreach ($replace as $key => $val) {
+        if ($key === 'login') {
+            $val = '<a class="user" href="/users/' . $val . '">@' . $val . '</a>';
+        }
+
+        if ($key === 'text') {
+            $message->text = str_replace('<p>%text%</p>', '%text%', $message->text);
+        }
+
+        $message->text = str_replace('%' . $key . '%', $val, $message->text);
+    }
+
+    return $message->text;
+}
+
+/**
+ * Возвращает блок статистики производительности
+ */
+function performance(): ?HtmlString
+{
+    if (isAdmin() && setting('performance')) {
+        $queries = getQueryLog();
+        $timeQueries = array_sum(array_column($queries, 'time'));
+
+        return new HtmlString(view('app/_performance', compact('queries', 'timeQueries')));
+    }
+
+    return null;
+}
+
+/**
+ * Очистка кеш-файлов
+ */
+function clearCache(array|string|null $keys = null): bool
+{
+    if ($keys === null) {
+        Cache::flush();
+        Setting::flush();
+
+        return true;
+    }
+
+    $keys = (array) $keys;
+    Cache::deleteMultiple($keys);
+
+    // Настройки держат процессный memo — сбрасываем отдельно
+    if (in_array('settings', $keys, true)) {
+        Setting::flush();
+    }
+
+    return true;
+}
+
+/**
+ * Saves error logs
+ */
+function saveErrorLog(int $code, ?string $message = null): void
+{
+    $errorCodes = [400, 401, 403, 404, 405, 419, 429, 500, 503, 666];
+
+    if (setting('errorlog') && in_array($code, $errorCodes, true)) {
+        Error::query()->create([
+            'code'    => $code,
+            'request' => Str::substr(request()->getRequestUri(), 0, 191),
+            'referer' => Str::substr(request()->header('referer'), 0, 191),
+            'user_id' => getUser('id'),
+            'message' => Str::substr($message, 0, 191),
+            'ip'      => getIp(),
+            'brow'    => getBrowser(),
+        ]);
+    }
+}
+
+/**
+ * Возвращает ошибку
+ */
+function showError(string|array $errors): HtmlString
+{
+    $errors = (array) $errors;
+
+    return new HtmlString(view('app/_error', compact('errors')));
+}
+
+/**
+ * Get captcha
+ */
+function getCaptcha(): HtmlString
+{
+    return new HtmlString(view('app/_captcha'));
+}
+
+/**
+ * Проверяет captcha
+ */
+function captchaVerify(): bool
+{
+    $request = request();
+
+    if (setting('captcha_type') === 'recaptcha_v2') {
+        $recaptcha = new ReCaptcha(setting('recaptcha_private'));
+
+        $response = $recaptcha->setExpectedHostname($request->getHost())
+            ->verify($request->input('g-recaptcha-response'), getIp());
+
+        return $response->isSuccess();
+    }
+
+    if (setting('captcha_type') === 'recaptcha_v3') {
+        $recaptcha = new ReCaptcha(setting('recaptcha_private'));
+
+        $response = $recaptcha->setExpectedHostname($request->getHost())
+            ->setExpectedAction('submit')
+            ->setScoreThreshold(0.5)
+            ->verify($request->input('protect'), getIp());
+
+        return $response->isSuccess();
+    }
+
+    if (in_array(setting('captcha_type'), ['graphical', 'animated'], true)) {
+        return strtolower($request->input('protect')) === strtolower($request->session()->get('protect'));
+    }
+
+    return true;
+}
+
+/**
+ * Сохраняет flash уведомления
+ *
+ * @deprecated since 10.1 - Use redirect()->with('success', 'Message') or redirect()->withErrors($validator->getErrors())
+ * $request->session()->flash('flash.{status}', $message);
+ */
+function setFlash(string $status, mixed $message): void
+{
+    session(['flash.' . $status => $message]);
+}
+
+/**
+ * Сохраняет POST данные введенных пользователем
+ *
+ * @deprecated since 10.1 - Use $request->flash() or redirect()->withInput();
+ */
+function setInput(array $data): void
+{
+    app('session')->flash('_old_input', $data);
+}
+
+/**
+ * Возвращает значение из POST данных
+ *
+ * @deprecated since 10.1 - Use old('field', 'default');
+ */
+function getInput(string $key, mixed $default = null): mixed
+{
+    if (app('session')->missing('_old_input')) {
+        return $default;
+    }
+
+    $input = session('_old_input', []);
+
+    return Arr::get($input, $key, $default);
+}
+
+/**
+ * Подсвечивает блок с полем для ввода сообщения
+ */
+function hasError(string $field): string
+{
+    // Новая валидация
+    if (session('errors')) {
+        /** @var ViewErrorBag $errors */
+        $errors = session('errors');
+
+        return $errors->has($field) ? ' is-invalid' : ' is-valid';
+    }
+
+    $isValid = session('flash.danger') ? ' is-valid' : '';
+
+    return session('flash.danger.' . $field) ? ' is-invalid' : $isValid;
+}
+
+/**
+ * Возвращает блок с текстом ошибки
+ */
+function textError(string $field): ?string
+{
+    // Новая валидация
+    if (session('errors')) {
+        /** @var ViewErrorBag $errors */
+        $errors = session('errors');
+
+        return $errors->first($field);
+    }
+
+    return session('flash.danger.' . $field);
+}
+
+/**
+ * Отправляет уведомления на email
+ */
+function sendMail(string $view, array $data): bool
+{
+    try {
+        Mail::send($view, $data, static function (Message $message) use ($data) {
+            $message->subject($data['subject'])
+                ->to($data['to'])
+                ->from(config('mail.from.address'), config('mail.from.name'));
+
+            if (isset($data['from'])) {
+                [$fromEmail, $fromName] = $data['from'];
+                $message->replyTo($fromEmail, $fromName);
+            }
+
+            if (isset($data['unsubscribe'])) {
+                $headers = $message->getHeaders();
+                $headers->addTextHeader(
+                    'List-Unsubscribe',
+                    '<' . config('app.url') . '/unsubscribe?key=' . $data['unsubscribe'] . '>'
+                );
+            }
+        });
+    } catch (Exception) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Возвращает расширение файла
+ */
+function getExtension(string $filename): string
+{
+    return pathinfo($filename, PATHINFO_EXTENSION);
+}
+
+/**
+ * Возвращает имя файла без расширения
+ */
+function getBodyName(string $filename): string
+{
+    $name = pathinfo($filename, PATHINFO_FILENAME);
+
+    return preg_replace('/\xc2\xa0/', ' ', $name);
+}
+
+/**
+ * Склоняет числа
+ */
+function plural(int $num, mixed $forms): string
+{
+    if (! is_array($forms)) {
+        $forms = explode(',', $forms);
+    }
+
+    $formatted = number_format($num, 0, ',', "\u{202F}");
+
+    $n = abs($num) % 100;
+    $index = match (true) {
+        $n % 10 === 1 && $n !== 11                         => 0,
+        $n % 10 > 1 && $n % 10 < 5 && ($n < 12 || $n > 14) => 1,
+        default                                            => 2,
+    };
+
+    return $formatted . ' ' . ($forms[$index] ?? $forms[0]);
+}
+
+/**
+ * RenderHtml
+ */
+function renderHtml(?string $text, ?string $group = null): HtmlString
+{
+    return HtmlRenderer::html($text, $group);
+}
+
+/**
+ * Render text
+ */
+function renderText(?string $text): HtmlString
+{
+    return HtmlRenderer::text($text);
+}
+
+/**
+ * Рендерит Markdown в HTML
+ */
+function renderMarkdown(?string $text): HtmlString
+{
+    return new HtmlString(Str::markdown((string) $text, [
+        'html_input'         => 'escape',
+        'allow_unsafe_links' => false,
+        'renderer'           => ['soft_break' => "<br>\n"],
+    ]));
+}
+
+/**
+ * Определяет IP пользователя
+ */
+function getIp(): string
+{
+    static $ip = null;
+
+    return $ip ??= (new CloudFlare(request()))->ip();
+}
+
+/**
+ * Определяет браузер
+ */
+function getBrowser(): string
+{
+    static $userAgent = null;
+
+    if ($userAgent !== null) {
+        return $userAgent;
+    }
+
+    $browser = new Browser();
+    $name = $browser->getBrowser();
+    $parts = explode('.', $browser->getVersion(), 3);
+    $version = implode('.', array_slice($parts, 0, 2));
+
+    $result = $version === Browser::VERSION_UNKNOWN ? $name : $name . ' ' . $version;
+
+    return $userAgent = mb_substr($result, 0, 25, 'utf-8');
+}
+
+/**
+ * Является ли пользователь администратором
+ */
+function isAdmin(?string $level = null): bool
+{
+    $user = auth()->user();
+    if (! $user) {
+        return false;
+    }
+
+    $levels = array_flip(User::ADMIN_GROUPS);
+    $level = $level ?? User::EDITOR;
+
+    return isset($levels[$user->level], $levels[$level])
+        && $levels[$user->level] >= $levels[$level];
+}
+
+/**
+ * Возвращает объект пользователя по логину
+ */
+function getUserByLogin(?string $login): ?User
+{
+    return User::query()->where('login', $login)->first();
+}
+
+/**
+ * Возвращает объект пользователя по логину или email
+ */
+function getUserByLoginOrEmail(?string $login): ?User
+{
+    $field = strpos($login, '@') ? 'email' : 'login';
+
+    return User::query()->where($field, $login)->first();
+}
+
+/**
+ * Возвращает данные пользователя по ключу
+ */
+function getUser(?string $key = null): mixed
+{
+    static $user;
+
+    if (! $user) {
+        $user = auth()->user();
+    }
+
+    return $key ? ($user->$key ?? null) : $user;
+}
+
+/**
+ * Разбивает данные по страницам
+ */
+function paginate(array|Collection $items, int $perPage, array $appends = []): LengthAwarePaginator
+{
+    $data = $items instanceof Collection ? $items : Collection::make($items);
+
+    $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+    $collection = new LengthAwarePaginator(
+        $data->forPage($currentPage, $perPage),
+        $data->count(),
+        $perPage,
+        $currentPage
+    );
+
+    $collection->setPath(request()->url());
+    $collection->appends($appends);
+
+    return $collection;
+}
+
+/**
+ * Возвращает сформированный код base64 картинки
+ */
+function imageBase64(string $path, array $params = []): HtmlString
+{
+    $type = getExtension($path);
+    $data = file_get_contents($path);
+
+    if (! isset($params['class'])) {
+        $params['class'] = 'img-fluid';
+    }
+
+    if (empty($params['alt'])) {
+        $params['alt'] = basename($path);
+    }
+
+    $strParams = [];
+    foreach ($params as $key => $param) {
+        $strParams[] = $key . '="' . $param . '"';
+    }
+
+    $strParams = implode(' ', $strParams);
+
+    return new HtmlString('<img src="data:image/' . $type . ';base64,' . base64_encode($data) . '" ' . $strParams . '>');
+}
+
+/**
+ * Возвращает форматированный список запросов
+ */
+function getQueryLog(): array
+{
+    $queries = DB::getQueryLog();
+
+    $formattedQueries = [];
+
+    foreach ($queries as $query) {
+        foreach ($query['bindings'] as $key => $binding) {
+            if (is_string($binding)) {
+                $query['bindings'][$key] = ctype_print($binding) ? "'$binding'" : '[binary]';
+            } else {
+                $query['bindings'][$key] = $binding ?? 'null';
+            }
+        }
+
+        $sql = str_replace(['%', '?'], ['%%', '%s'], $query['query']);
+        $sql = vsprintf($sql, $query['bindings']);
+
+        $formattedQueries[] = ['query' => $sql, 'time' => $query['time']];
+    }
+
+    return $formattedQueries;
+}
+
+/**
+ * Возвращает настройки сайта по ключу
+ */
+function setting(?string $key = null, mixed $default = null): mixed
+{
+    $settings = Setting::getSettings();
+
+    return $key ? ($settings[$key] ?? $default) : $settings;
+}
+
+/**
+ * Получает версию
+ */
+function parseVersion(string $version): string
+{
+    $ver = explode('.', (string) strtok($version, '-'));
+
+    return ($ver[0] ?: '0') . '.' . ($ver[1] ?? '0') . '.' . ($ver[2] ?? '0');
+}
+
+/**
+ * Возвращает уникальное имя
+ */
+function uniqueName(?string $extension = null): string
+{
+    if ($extension) {
+        $extension = '.' . $extension;
+    }
+
+    return str_replace('.', '', uniqid('', true)) . $extension;
+}
+
+/**
+ * Возвращает список доступных тем оформления
+ */
+function getAvailableThemes(): array
+{
+    return array_map('basename', glob(resource_path('views/themes/*'), GLOB_ONLYDIR) ?: []);
+}
+
+/**
+ * Возвращает список доступных языков
+ */
+function getAvailableLanguages(): array
+{
+    static $languages;
+
+    return $languages ??= array_map('basename', glob(resource_path('lang/*'), GLOB_ONLYDIR) ?: []);
+}
+
+/**
+ * Возвращает скрипт для js-переводов
+ */
+function translationScript(): string
+{
+    $locale = app()->getLocale();
+
+    if ($src = rescue(static fn () => Vite::asset("lang/{$locale}.js"), null, false)) {
+        return '<script src="' . $src . '"></script>';
+    }
+
+    $path = resource_path("lang/{$locale}/main.json");
+    $json = is_file($path) ? trim((string) file_get_contents($path)) : '{}';
+
+    return '<script>window.translations = ' . $json . '</script>';
+}
+
+/**
+ * Заменяет относительные URL на абсолютные
+ */
+function absolutizeUrls(string $text): string
+{
+    $base = config('app.url');
+
+    return preg_replace('/(href|src)="(\/[^"]*)"/', '$1="' . $base . '$2"', $text);
+}

@@ -1,0 +1,604 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use App\Casts\HtmlCast;
+use App\Classes\Registry;
+use App\Traits\SearchableTrait;
+use App\Traits\SortableTrait;
+use App\Traits\UploadTrait;
+use Carbon\CarbonImmutable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
+
+/**
+ * Class User
+ *
+ * @property int                  $id
+ * @property string               $login
+ * @property string               $password
+ * @property string               $email
+ * @property string               $level
+ * @property string               $name
+ * @property string               $country
+ * @property string               $city
+ * @property string               $language
+ * @property string               $info
+ * @property string               $site
+ * @property string               $phone
+ * @property string               $gender
+ * @property string               $birthday
+ * @property int                  $newprivat
+ * @property string               $themes
+ * @property string               $timezone
+ * @property int                  $point
+ * @property int                  $money
+ * @property string               $status
+ * @property string               $color
+ * @property string               $avatar
+ * @property string               $picture
+ * @property int                  $rating
+ * @property int                  $posrating
+ * @property int                  $negrating
+ * @property int                  $sendprivatmail
+ * @property int                  $newchat
+ * @property bool                 $notify_mention
+ * @property bool                 $notify_reply
+ * @property bool                 $notify_comment
+ * @property string               $apikey
+ * @property string|null          $subscribe
+ * @property string               $remember_token
+ * @property string               $confirm_token
+ * @property CarbonImmutable|null $timeban
+ * @property CarbonImmutable|null $timebonus
+ * @property CarbonImmutable|null $updated_at
+ * @property CarbonImmutable      $created_at
+ * @property-read Collection<UserData> $data
+ */
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+{
+    use Authenticatable;
+    use Authorizable;
+    use CanResetPassword;
+
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory;
+    use MustVerifyEmail;
+    use Notifiable;
+    use SearchableTrait;
+    use SortableTrait;
+    use UploadTrait;
+
+    public const string BOSS = 'boss';   // Владелец
+    public const string ADMIN = 'admin';  // Админ
+    public const string MODER = 'moder';  // Модератор
+    public const string EDITOR = 'editor'; // Редактор
+    public const string USER = 'user';   // Пользователь
+    public const string PENDED = 'pended'; // Ожидающий
+    public const string BANNED = 'banned'; // Забаненный
+
+    /**
+     * Администраторы
+     */
+    public const array ADMIN_GROUPS = [
+        self::EDITOR,
+        self::MODER,
+        self::ADMIN,
+        self::BOSS,
+    ];
+
+    /**
+     * Участники
+     */
+    public const array USER_GROUPS = [
+        self::USER,
+        self::EDITOR,
+        self::MODER,
+        self::ADMIN,
+        self::BOSS,
+    ];
+
+    /**
+     * Все пользователи
+     */
+    public const array ALL_GROUPS = [
+        self::BANNED,
+        self::PENDED,
+        self::USER,
+        self::EDITOR,
+        self::MODER,
+        self::ADMIN,
+        self::BOSS,
+    ];
+
+    /**
+     * Genders
+     */
+    public const string MALE = 'male';
+    public const string FEMALE = 'female';
+
+    /**
+     * The name of the "updated at" column.
+     *
+     * updated_at управляется вручную (время последнего визита, пишет Metrika),
+     * поэтому Eloquent не должен трогать его на каждом update()
+     */
+    public const ?string UPDATED_AT = null;
+
+    /**
+     * The attributes that aren't mass assignable.
+     */
+    protected $guarded = [];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * Директория загрузки файлов
+     */
+    public string $uploadPath = '/uploads/pictures';
+
+    /**
+     * Директория загрузки аватаров
+     */
+    public string $uploadAvatarPath = '/uploads/avatars';
+
+    /**
+     * Morph name
+     */
+    public static string $morphName = 'users';
+
+    /**
+     * Get the attributes that should be cast.
+     */
+    protected function casts(): array
+    {
+        return [
+            'info'       => HtmlCast::class,
+            'updated_at' => 'datetime',
+            'timeban'    => 'datetime',
+            'timebonus'  => 'datetime',
+        ];
+    }
+
+    /**
+     * Возвращает поля участвующие в поиске
+     */
+    public function searchableFields(): array
+    {
+        return ['login', 'name', 'info', 'site', 'status'];
+    }
+
+    /**
+     * Get info
+     */
+    public function getInfo(): HtmlString
+    {
+        return renderHtml($this->info);
+    }
+
+    /**
+     * Возвращает список сортируемых полей
+     */
+    protected static function sortableFields(): array
+    {
+        return [
+            'point'   => ['field' => 'point', 'label' => __('users.assets')],
+            'rating'  => ['field' => 'rating', 'label' => __('users.reputation')],
+            'money'   => ['field' => 'money', 'label' => __('users.moneys')],
+            'created' => ['field' => 'created_at', 'label' => __('main.registration_date')],
+            'updated' => ['field' => 'updated_at', 'label' => __('users.last_visit')],
+        ];
+    }
+
+    /**
+     * Is admin
+     */
+    public function isAdmin(?string $level = null): bool
+    {
+        $level = $level ?? self::EDITOR;
+        $levels = array_flip(self::ADMIN_GROUPS);
+
+        return isset($levels[$this->level], $levels[$level])
+            && $levels[$this->level] >= $levels[$level];
+    }
+
+    /**
+     * Связь с таблицей online
+     */
+    public function online(): BelongsTo
+    {
+        return $this->belongsTo(Online::class, 'id', 'user_id')->withDefault();
+    }
+
+    /**
+     * Возвращает последний бан
+     */
+    public function lastBan(): HasOne
+    {
+        return $this->hasOne(Banhist::class, 'user_id', 'id')
+            ->whereIn('type', ['ban', 'change'])
+            ->orderByDesc('created_at')
+            ->withDefault();
+    }
+
+    /**
+     * Возвращает дополнительные поля
+     */
+    public function data(): HasMany
+    {
+        return $this->hasMany(UserData::class, 'user_id');
+    }
+
+    /**
+     * Возвращает имя или логин пользователя
+     */
+    public function getName(): string
+    {
+        if ($this->exists) {
+            return $this->name ?: $this->login;
+        }
+
+        return setting('deleted_user');
+    }
+
+    /**
+     * Возвращает ссылку на профиль пользователя
+     */
+    public function getProfile(): HtmlString
+    {
+        if ($this->id) {
+            $admin = null;
+            $name = check($this->getName());
+
+            if ($this->color) {
+                $name = '<span style="color:' . $this->color . '">' . $name . '</span>';
+            }
+
+            if (in_array($this->level, self::ADMIN_GROUPS, true)) {
+                $admin = ' <i class="fas fa-xs fa-star text-info" title="' . $this->getLevel() . '"></i>';
+            }
+
+            $html = '<a class="section-author fw-bold" href="/users/' . $this->login . '" data-login="' . $this->login . '">' . $name . '</a>';
+
+            return new HtmlString($html . $admin);
+        }
+
+        $html = '<span class="section-author fw-bold" data-login="' . setting('deleted_user') . '">' . setting('deleted_user') . '</span>';
+
+        return new HtmlString($html);
+    }
+
+    /**
+     * Возвращает пол пользователя
+     */
+    public function getGender(): HtmlString
+    {
+        if ($this->gender === 'female') {
+            return new HtmlString('<i class="fa fa-female fa-lg"></i>');
+        }
+
+        return new HtmlString('<i class="fa fa-male fa-lg"></i>');
+    }
+
+    /**
+     * Возвращает название уровня по ключу
+     */
+    public static function getLevelByKey(string $level): string
+    {
+        return match ($level) {
+            self::BOSS   => __('main.boss'),
+            self::ADMIN  => __('main.admin'),
+            self::MODER  => __('main.moder'),
+            self::EDITOR => __('main.editor'),
+            self::USER   => __('main.user'),
+            self::PENDED => __('main.pended'),
+            self::BANNED => __('main.banned'),
+            default      => setting('statusdef'),
+        };
+    }
+
+    /**
+     * Возвращает уровень пользователя
+     */
+    public function getLevel(): string
+    {
+        return self::getLevelByKey($this->level);
+    }
+
+    /**
+     * Возвращает карту login => name для резолва упоминаний
+     *
+     * @return array<string, string>
+     */
+    public static function names(): array
+    {
+        static $names = null;
+
+        return $names ??= Cache::rememberForever('users', static fn () => self::query()
+            ->whereNotNull('name')
+            ->where('name', '!=', '')
+            ->pluck('name', 'login')
+            ->all());
+    }
+
+    /**
+     * Is user online
+     */
+    public function isOnline(): bool
+    {
+        if (! $this->id) {
+            return false;
+        }
+
+        static $visits;
+
+        if (! $visits) {
+            $visits = Cache::remember('visit', 10, static function () {
+                return Online::query()
+                    ->whereNotNull('user_id')
+                    ->pluck('user_id', 'user_id')
+                    ->all();
+            });
+        }
+
+        return isset($visits[$this->id]);
+    }
+
+    /**
+     * User online status
+     */
+    public function getOnline(): HtmlString
+    {
+        $online = '';
+
+        if ($this->isOnline()) {
+            $online = '<div class="user-status bg-success" title="' . __('main.online') . '"></div>';
+        }
+
+        return new HtmlString($online);
+    }
+
+    /**
+     * Get last visit
+     */
+    public function getVisit(): string
+    {
+        if ($this->isOnline()) {
+            $visit = __('main.online');
+        } else {
+            $visit = dateFixed($this->updated_at);
+        }
+
+        return $visit;
+    }
+
+    /**
+     * Возвращает статус пользователя
+     */
+    public function getStatus(): HtmlString|string
+    {
+        static $status;
+
+        if (! $this->id) {
+            return setting('statusdef');
+        }
+
+        if (! $status) {
+            $status = $this->getStatuses(6 * 3600);
+        }
+
+        if (isset($status[$this->id])) {
+            return new HtmlString($status[$this->id]);
+        }
+
+        return setting('statusdef');
+    }
+
+    /**
+     * Возвращает аватар пользователя
+     */
+    public function getAvatar(): HtmlString
+    {
+        if (! $this->id) {
+            return $this->getAvatarGuest();
+        }
+
+        if ($this->avatar && file_exists(public_path($this->avatar))) {
+            $avatar = $this->getAvatarImage();
+        } else {
+            $avatar = $this->getAvatarDefault();
+        }
+
+        return new HtmlString('<a href="/users/' . $this->login . '">' . $avatar . '</a> ');
+    }
+
+    /**
+     * Возвращает изображение аватара
+     */
+    public function getAvatarImage(): HtmlString
+    {
+        if (! $this->id) {
+            return $this->getAvatarGuest();
+        }
+
+        if ($this->avatar && file_exists(public_path($this->avatar))) {
+            return new HtmlString('<img class="avatar-default rounded-circle" src="' . $this->avatar . '" alt="">');
+        }
+
+        return $this->getAvatarDefault();
+    }
+
+    /**
+     * Get guest avatar
+     */
+    public function getAvatarGuest(): HtmlString
+    {
+        return new HtmlString('<span class="avatar-default avatar-guest rounded-circle"><i class="fas fa-user"></i></span> ');
+    }
+
+    /**
+     * Возвращает аватар для пользователя по умолчанию
+     */
+    private function getAvatarDefault(): HtmlString
+    {
+        $name = $this->getName();
+        $color = '#' . substr(dechex(crc32($this->login)), 0, 6);
+        $letter = mb_strtoupper(Str::substr($name, 0, 1), 'utf-8');
+
+        return new HtmlString('<span class="avatar-default rounded-circle" style="background:' . $color . '">' . $letter . '</span>');
+    }
+
+    /**
+     * Кеширует статусы пользователей
+     */
+    public function getStatuses(int $seconds): array
+    {
+        return Cache::remember('status', $seconds, static function () {
+            $users = self::query()
+                ->select('users.id', 'users.status', 'status.name', 'status.color')
+                ->leftJoin('status', static function (JoinClause $join) {
+                    $join->whereRaw('users.point between status.topoint and status.point');
+                })
+                ->where('users.point', '>', 0)
+                ->toBase()
+                ->get();
+
+            $statuses = [];
+            foreach ($users as $user) {
+                if ($user->status) {
+                    $statuses[$user->id] = '<span style="color:#ff0000">' . check($user->status) . '</span>';
+                    continue;
+                }
+
+                if ($user->color) {
+                    $statuses[$user->id] = '<span style="color:' . $user->color . '">' . check($user->name) . '</span>';
+                    continue;
+                }
+
+                $statuses[$user->id] = check($user->name);
+            }
+
+            return $statuses;
+        });
+    }
+
+    /**
+     * Отправляет приватное сообщение
+     */
+    public function sendMessage(?self $author, string $text, bool $withAuthor = true): Message
+    {
+        return (new Message())->createDialogue($this, $author, $text, $withAuthor);
+    }
+
+    /**
+     * Возвращает количество писем пользователя
+     */
+    public function getCountMessages(): int
+    {
+        return Dialogue::query()->where('user_id', $this->id)->count();
+    }
+
+    /**
+     * Удаляет записи пользователя из всех таблиц
+     */
+    public function delete(): ?bool
+    {
+        return DB::transaction(function () {
+            deleteFile(public_path($this->picture));
+            deleteFile(public_path($this->avatar));
+
+            Message::query()->where('user_id', $this->id)->delete();
+            Dialogue::query()->where('user_id', $this->id)->delete();
+            Rating::query()->where('user_id', $this->id)->delete();
+            Banhist::query()->where('user_id', $this->id)->delete();
+
+            foreach (Registry::$onDeleteUser as $callback) {
+                $callback($this);
+            }
+
+            return parent::delete();
+        });
+    }
+
+    /**
+     * Updates count messages
+     */
+    public function updatePrivate(): void
+    {
+        if ($this->newprivat) {
+            $countDialogues = Dialogue::query()
+                ->where('user_id', $this->id)
+                ->where('reading', 0)
+                ->count();
+
+            if ($countDialogues !== $this->newprivat) {
+                $this->update([
+                    'newprivat'      => $countDialogues,
+                    'sendprivatmail' => 0,
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Check user banned
+     */
+    public function isBanned(): bool
+    {
+        return $this->level === self::BANNED;
+    }
+
+    /**
+     * Check user pended
+     */
+    public function isPended(): bool
+    {
+        return setting('regkeys') && $this->level === self::PENDED;
+    }
+
+    /**
+     * Check user active
+     */
+    public function isActive(): bool
+    {
+        return in_array($this->level, self::USER_GROUPS, true);
+    }
+
+    /**
+     * Getting daily bonus
+     */
+    public function gettingBonus(): void
+    {
+        if ($this->isActive() && (! $this->timebonus || $this->timebonus->lt(now()->subHours(23)))) {
+            $this->increment('money', setting('bonusmoney'));
+            $this->update(['timebonus' => now()]);
+
+            setFlash('success', __('main.daily_bonus', ['money' => plural(setting('bonusmoney'), setting('moneyname'))]));
+        }
+    }
+}

@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+// Theme essentials
+@import 'themes/fresh/sass/variables';
+@import 'bootstrap/scss/bootstrap';
+
+// Layout
+@import 'themes/fresh/sass/main';
+@import 'themes/fresh/sass/header';
+@import 'themes/fresh/sass/footer';
+
+// Components
+@import 'themes/fresh/sass/component/badge';
+@import 'themes/fresh/sass/component/dropdown';
+@import 'themes/fresh/sass/component/app-title';
+@import 'themes/default/sass/component/button';
+
+// Icons & libraries
+@import 'bootstrap5-tags/tags';

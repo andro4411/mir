@@ -1,0 +1,102 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Setting;
+use Illuminate\Database\Seeder;
+
+class SettingSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $data = [
+            ['name' => 'app_installed', 'value' => 0],
+            ['name' => 'addbansend', 'value' => 1],
+            ['name' => 'advertpoint', 'value' => 1000],
+            ['name' => 'archive_file_path', 'value' => ''],
+            ['name' => 'avtorlist', 'value' => 10],
+            ['name' => 'banlist', 'value' => 10],
+            ['name' => 'blacklist', 'value' => 10],
+            ['name' => 'bonusmoney', 'value' => 500],
+            ['name' => 'captcha_maxlength', 'value' => 5],
+            ['name' => 'captcha_symbols', 'value' => '1234567890'],
+            ['name' => 'captcha_type', 'value' => 'graphical'],
+            ['name' => 'chatpost', 'value' => 10],
+            ['name' => 'closedsite', 'value' => 0],
+            ['name' => 'comments_per_page', 'value' => 10],
+            ['name' => 'comment_text_min', 'value' => 5],
+            ['name' => 'comment_text_max', 'value' => 1000],
+            ['name' => 'comment_depth', 'value' => 3],
+            ['name' => 'comment_point', 'value' => 1],
+            ['name' => 'comment_money', 'value' => 50],
+            ['name' => 'copy', 'value' => '© Copyright Visavi.net'],
+            ['name' => 'copyfoto', 'value' => 1],
+            ['name' => 'currency', 'value' => __('seeds.settings.currency')],
+            ['name' => 'deleted_user', 'value' => __('seeds.settings.deleted_user')],
+            ['name' => 'description', 'value' => __('seeds.settings.description')],
+            ['name' => 'doslimit', 'value' => 0],
+            ['name' => 'editratingpoint', 'value' => 100],
+            ['name' => 'editstatusmoney', 'value' => 3000],
+            ['name' => 'editstatuspoint', 'value' => 1000],
+            ['name' => 'editcolormoney', 'value' => 5000],
+            ['name' => 'editcolorpoint', 'value' => 500],
+            ['name' => 'errorlog', 'value' => 1],
+            ['name' => 'feed_comments_show', 'value' => 1],
+            ['name' => 'feed_per_page', 'value' => 20],
+            ['name' => 'feed_cache_time', 'value' => 300],
+            ['name' => 'feed_comments_rating', 'value' => -5],
+            ['name' => 'filesize', 'value' => 5242880],
+            ['name' => 'floodstime', 'value' => 30],
+            ['name' => 'file_extensions', 'value' => 'zip,rar,txt,jpg,jpeg,gif,png,webp,mp3,mp4,webm,pdf'],
+            ['name' => 'media_extensions', 'value' => 'jpg,jpeg,gif,png,webp,mp4,webm'],
+            ['name' => 'guestsuser', 'value' => __('seeds.settings.guest_user')],
+            ['name' => 'incount', 'value' => 5],
+            ['name' => 'ipbanlist', 'value' => 10],
+            ['name' => 'language', 'value' => __('seeds.settings.language')],
+            ['name' => 'language_fallback', 'value' => 'ru'],
+            ['name' => 'listbanhist', 'value' => 10],
+            ['name' => 'loglist', 'value' => 10],
+            ['name' => 'logos', 'value' => __('seeds.settings.logos')],
+            ['name' => 'logotip', 'value' => '/assets/img/images/logo.png'],
+            ['name' => 'maxfiles', 'value' => 5],
+            ['name' => 'moneyname', 'value' => __('seeds.settings.moneyname')],
+            ['name' => 'nocheck', 'value' => 'txt,dat,gif,jpg,jpeg,png,zip'],
+            ['name' => 'onlinelist', 'value' => 10],
+            ['name' => 'onlines', 'value' => 1],
+            ['name' => 'openreg', 'value' => 1],
+            ['name' => 'performance', 'value' => 1],
+            ['name' => 'privatpost', 'value' => 10],
+            ['name' => 'privatprotect', 'value' => 50],
+            ['name' => 'ratinglist', 'value' => 20],
+            ['name' => 'registermoney', 'value' => 1000],
+            ['name' => 'regkeys', 'value' => 0],
+            ['name' => 'reglist', 'value' => 10],
+            ['name' => 'recaptcha_private', 'value' => ''],
+            ['name' => 'recaptcha_public', 'value' => ''],
+            ['name' => 'scorename', 'value' => __('seeds.settings.scorename')],
+            ['name' => 'screensize', 'value' => 1000],
+            ['name' => 'sendmailpacket', 'value' => 3],
+            ['name' => 'sendprivatmailday', 'value' => 3],
+            ['name' => 'slug_template', 'value' => '%id%'],
+            ['name' => 'stickerlist', 'value' => 20],
+            ['name' => 'stickermaxsize', 'value' => 1048576],
+            ['name' => 'stickermaxweight', 'value' => 500],
+            ['name' => 'stickerminweight', 'value' => 16],
+            ['name' => 'spamlist', 'value' => 10],
+            ['name' => 'statusdef', 'value' => 'Дух'],
+            ['name' => 'themes', 'value' => 'default'],
+            ['name' => 'timeonline', 'value' => 600],
+            ['name' => 'title', 'value' => 'Rotor'],
+            ['name' => 'userlist', 'value' => 10],
+            ['name' => 'usersearch', 'value' => 30],
+        ];
+
+        Setting::query()->truncate();
+        Setting::query()->insert($data);
+
+        clearCache('settings');
+    }
+}

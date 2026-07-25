@@ -1,0 +1,86 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Traits;
+
+use App\Models\File;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
+use Intervention\Image\Alignment;
+use Intervention\Image\ImageManager;
+
+trait UploadTrait
+{
+    /**
+     * Загружает изображение
+     *
+     * @param UploadedFile $file Объект изображения
+     */
+    public function uploadFile(UploadedFile $file, bool $record = true): array
+    {
+        $mimeType = $file->getMimeType();
+        $extension = strtolower($file->getClientOriginalExtension());
+        $basename = Str::substr(getBodyName($file->getClientOriginalName()), 0, 50) . '.' . $extension;
+        $filename = uniqueName($extension);
+        $path = $this->uploadPath . '/' . $filename;
+        $fullPath = public_path($path);
+        $isImage = str_starts_with($mimeType, 'image');
+        $isVideo = str_starts_with($mimeType, 'video');
+
+        if ($isImage) {
+            $imageManager = app(ImageManager::class);
+            $image = $imageManager->decode($file);
+
+            if ($image->width() <= 100 && $image->height() <= 100) {
+                $file->move(public_path($this->uploadPath), $filename);
+            } elseif ($image->isAnimated() && $image->width() <= setting('screensize') && $image->height() <= setting('screensize')) {
+                $file->move(public_path($this->uploadPath), $filename);
+            } else {
+                $image->scaleDown(setting('screensize'), setting('screensize'));
+
+                if (setting('copyfoto')) {
+                    $image->insert(
+                        public_path('assets/img/images/watermark.png'),
+                        10,
+                        10,
+                        Alignment::BOTTOM_RIGHT,
+                    );
+                }
+
+                $image->save($fullPath);
+            }
+        } else {
+            $file->move(public_path($this->uploadPath), $filename);
+        }
+
+        $filesize = filesize($fullPath);
+
+        if ($record) {
+            $upload = File::query()->create([
+                'relate_id'   => $this->id ?? 0,
+                'relate_type' => $this->getMorphClass(),
+                'path'        => $path,
+                'name'        => $basename,
+                'size'        => $filesize,
+                'extension'   => $extension,
+                'mime_type'   => $mimeType,
+                'user_id'     => getUser('id'),
+            ]);
+        }
+
+        return [
+            'id'        => $upload->id ?? 0,
+            'path'      => $path,
+            'name'      => $basename,
+            'size'      => formatSize($filesize),
+            'mime_type' => $mimeType,
+            'extension' => $extension,
+            'type'      => match (true) {
+                $isImage => 'image',
+                $isVideo => 'video',
+                default  => 'file',
+            },
+        ];
+    }
+}

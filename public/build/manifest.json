@@ -1,0 +1,147 @@
+{
+    "_main-BJDUmT42.js": {
+        "file": "assets/main-BJDUmT42.js",
+        "name": "main",
+        "dynamicImports": [
+            "public/assets/js/tiptap.js"
+        ]
+    },
+    "_sidebar-CyL47x4b.js": {
+        "file": "assets/sidebar-CyL47x4b.js",
+        "name": "sidebar"
+    },
+    "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2": {
+        "file": "fonts/fa-brands-400.woff2",
+        "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2"
+    },
+    "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2": {
+        "file": "fonts/fa-regular-400.woff2",
+        "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2"
+    },
+    "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2": {
+        "file": "fonts/fa-solid-900.woff2",
+        "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2"
+    },
+    "public/assets/css/chartist.css": {
+        "file": "assets/chartist-Av8YyAo1.css",
+        "name": "chartist",
+        "names": [
+            "chartist.css"
+        ],
+        "src": "public/assets/css/chartist.css",
+        "isEntry": true
+    },
+    "public/assets/js/chartist.js": {
+        "file": "assets/chartist-BsnN06Nv.js",
+        "name": "chartist",
+        "src": "public/assets/js/chartist.js",
+        "isEntry": true
+    },
+    "public/assets/js/tiptap.js": {
+        "file": "assets/tiptap-D6BjJNgN.js",
+        "name": "tiptap",
+        "src": "public/assets/js/tiptap.js",
+        "isDynamicEntry": true,
+        "imports": [
+            "_main-BJDUmT42.js"
+        ]
+    },
+    "resources/themes/default/js/app.js": {
+        "file": "assets/app-x4r2iPhr.js",
+        "name": "app",
+        "src": "resources/themes/default/js/app.js",
+        "isEntry": true,
+        "imports": [
+            "_main-BJDUmT42.js",
+            "_sidebar-CyL47x4b.js"
+        ],
+        "css": [
+            "assets/app-3ewh1XKM.css"
+        ]
+    },
+    "resources/themes/fresh/js/app.js": {
+        "file": "assets/app-C5-3xRlj.js",
+        "name": "app",
+        "src": "resources/themes/fresh/js/app.js",
+        "isEntry": true,
+        "imports": [
+            "_main-BJDUmT42.js"
+        ],
+        "css": [
+            "assets/app-BuuqHfD9.css"
+        ]
+    },
+    "resources/themes/mobile/js/app.js": {
+        "file": "assets/app-DE58_qq7.js",
+        "name": "app",
+        "src": "resources/themes/mobile/js/app.js",
+        "isEntry": true,
+        "imports": [
+            "_main-BJDUmT42.js"
+        ],
+        "css": [
+            "assets/app-CNBwWfFC.css"
+        ]
+    },
+    "resources/themes/motor/js/app.js": {
+        "file": "assets/app-By26XL5X.js",
+        "name": "app",
+        "src": "resources/themes/motor/js/app.js",
+        "isEntry": true,
+        "imports": [
+            "_main-BJDUmT42.js"
+        ],
+        "css": [
+            "assets/app-ih010VDE.css"
+        ]
+    },
+    "resources/themes/newspaper/js/app.js": {
+        "file": "assets/app-CyhulRCt.js",
+        "name": "app",
+        "src": "resources/themes/newspaper/js/app.js",
+        "isEntry": true,
+        "imports": [
+            "_main-BJDUmT42.js",
+            "_sidebar-CyL47x4b.js"
+        ],
+        "css": [
+            "assets/app-CARyeBCD.css"
+        ]
+    },
+    "resources/themes/nordic/js/app.js": {
+        "file": "assets/app-DMea8-IV.js",
+        "name": "app",
+        "src": "resources/themes/nordic/js/app.js",
+        "isEntry": true,
+        "imports": [
+            "_main-BJDUmT42.js",
+            "_sidebar-CyL47x4b.js"
+        ],
+        "css": [
+            "assets/app-CRiRwBSE.css"
+        ]
+    },
+    "resources/themes/vendor.scss": {
+        "file": "assets/vendor-yUUQWMbh.css",
+        "name": "vendor",
+        "names": [
+            "vendor.css"
+        ],
+        "src": "resources/themes/vendor.scss",
+        "isEntry": true,
+        "assets": [
+            "fonts/fa-brands-400.woff2",
+            "fonts/fa-regular-400.woff2",
+            "fonts/fa-solid-900.woff2"
+        ]
+    },
+    "lang/ua.js": {
+        "file": "lang/ua-104f0e7c.js"
+    },
+    "lang/ru.js": {
+        "file": "lang/ru-784aa1d8.js"
+    },
+    "lang/en.js": {
+        "file": "lang/en-2388536b.js"
+    }
+}

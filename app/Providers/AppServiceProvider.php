@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Providers;
+
+use App\Classes\Restatement;
+use Carbon\CarbonImmutable;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        if (! defined('CURL_SSLVERSION_TLSv1_2')) {
+            define('CURL_SSLVERSION_TLSv1_2', 6);
+        }
+
+        if (! defined('CURL_SSLVERSION_TLSv1_3')) {
+            define('CURL_SSLVERSION_TLSv1_3', 7);
+        }
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        Restatement::boot();
+
+        Route::pattern('id', '\d+');
+        Route::pattern('cid', '\d+');
+        Route::pattern('fid', '\d+');
+        Route::pattern('slug', '[a-z0-9-\.]+');
+        Route::pattern('login', '[\w\-]+');
+
+        DB::connection()->enableQueryLog();
+
+        Paginator::$defaultView = 'app/_paginator';
+        Paginator::$defaultSimpleView = 'app/_simple_paginator';
+
+        if (setting('app_installed')) {
+            $this->loadMigrationsFrom([database_path('upgrades')]);
+        }
+
+        // Only old database
+        Schema::defaultStringLength(191);
+
+        // Immutable date
+        Date::use(CarbonImmutable::class);
+
+        // Hook directive
+        Blade::directive('hook', static function ($expression) {
+            $args = explode(',', $expression, 2);
+
+            $hookName = trim($args[0]);
+            $args = isset($args[1]) ? trim($args[1]) : 'null';
+
+            return "<?= \\App\\Classes\\Hook::call($hookName, $args); ?>";
+        });
+
+        // Translation directive
+        Blade::directive('translation', static function () {
+            return '<?= translationScript(); ?>';
+        });
+
+        /*if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }*/
+
+        // If the public directory is renamed to public_html
+        /*$this->app->bind('path.public', function () {
+            return base_path('public_html');
+        });*/
+    }
+}

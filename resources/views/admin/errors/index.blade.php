@@ -1,0 +1,62 @@
+@extends('layout')
+
+@section('title', __('index.errors'))
+
+@section('breadcrumb')
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">{{ __('index.panel') }}</a></li>
+            <li class="breadcrumb-item active">{{ __('index.errors') }}</li>
+        </ol>
+    </nav>
+@stop
+
+@section('content')
+    @if (empty(setting('errorlog')))
+        <span class="text-danger">{{ __('admin.errors.hint') }}</span><br>
+    @endif
+
+    <div class="mb-3">
+        {{ __('admin.errors.errors') }}:
+        @foreach ($lists as $key => $value)
+            <a class="badge bg-{{ $key === $code ? 'success' : 'adaptive' }}" href="/admin/errors?code={{ $key }}">{{ $value }}</a>
+        @endforeach
+    </div>
+
+    @if ($logs->isNotEmpty())
+        @foreach ($logs as $data)
+            <div class="section mb-3 shadow">
+                <span class="section-title">{{ $data->request }}</span>
+                <small class="section-date text-muted fst-italic">{{ dateFixed($data->created_at) }}</small>
+
+                <div class="section-body border-top">
+                    @if ($data->message)
+                        <div class="mb-1 text-danger">
+                            {{ $data->message }}
+                        </div>
+                    @endif
+
+                    Referer: {{ $data->referer ?: __('main.undefined') }}<br>
+                    {{ __('main.user') }}: {{ $data->user->exists ? $data->user->getProfile() : setting('guestsuser') }}
+                    <div class="small text-muted fst-italic mt-2">{{ $data->brow }}, {{ $data->ip }}</div>
+                </div>
+            </div>
+        @endforeach
+
+        {{ $logs->links() }}
+
+        <div class="mb-3">
+            {{ __('main.total') }}: <b>{{ $logs->total() }}</b>
+        </div>
+
+        @if (isAdmin('boss'))
+            <form action="/admin/errors/clear" method="post" onsubmit="return confirm('{{ __('admin.logs.confirm_clear') }}')">
+                @csrf
+                <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i> {{ __('main.clear') }}</button>
+            </form><br>
+        @endif
+    @else
+        {{ showError(__('main.empty_records')) }}
+    @endif
+@stop

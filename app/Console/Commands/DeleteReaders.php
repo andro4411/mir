@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Console\Commands;
+
+use App\Models\Reader;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
+
+class DeleteReaders extends Command
+{
+    /**
+     * The name and signature of the console command.
+     */
+    protected $signature = 'delete:readers';
+
+    /**
+     * The console command description.
+     */
+    protected $description = 'Delete readers';
+
+    /**
+     * Удаляет старые записи статистики просмотров и скачиваний
+     */
+    public function handle(): int
+    {
+        Reader::query()
+            ->where('created_at', '<', now()->subMonth())
+            ->delete();
+
+        $this->info('Readers successfully deleted.');
+
+        return SymfonyCommand::SUCCESS;
+    }
+}

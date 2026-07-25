@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'empty_categories'         => 'Категорії ще не створені!',
+    'empty_stickers'           => 'Стікери не знайдені!',
+    'total_stickers'           => 'Всього стікерів',
+    'upload'                   => 'Завантажити',
+    'confirm_delete_category'  => 'Ви впевнені, що хочете видалити цю категорію?',
+    'confirm_delete_sticker'   => 'Ви впевнені, що хочете видалити цей стікер?',
+    'create_sticker'           => 'Додавання стікера',
+    'category'                 => 'Категорія',
+    'sticker_code'             => 'Код стікера',
+    'valid_sticker_code'       => 'Дозволено літери, цифри, підкреслення та дефіс!',
+    'edit_category'            => 'Редагування категорії',
+    'edit_sticker'             => 'Редагування стікера',
+    'category_not_exist'       => 'Цієї категорії не існує!',
+    'sticker_not_exist'        => 'Цього стікера не існує!',
+    'category_success_created' => 'Нову категорію успішно створено!',
+    'category_success_changed' => 'Категорія успішно змінена!',
+    'category_has_stickers'    => 'У даній категорії є стікери!',
+    'category_success_deleted' => 'Категорія успішно видалена!',
+    'sticker_length'           => 'Занадто довгий або короткий код стікера!',
+    'sticker_exists'           => 'Стікер з цим кодом вже є у списку!',
+    'sticker_success_created'  => 'Стікер успішно завантажений!',
+    'sticker_success_changed'  => 'Стікер успішно змінено!',
+    'sticker_success_deleted'  => 'Стікер успішно видалено!',
+];

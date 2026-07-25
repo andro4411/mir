@@ -1,0 +1,199 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
+
+use App\Classes\Feed;
+use App\Classes\Registry;
+use App\Classes\Validator;
+use App\Models\Ban;
+use App\Models\Comment;
+use App\Models\Search;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Mobicms\Captcha\Image as MobicmsCaptcha;
+use Symfony\Component\HttpFoundation\Response;
+use Visavi\Captcha\CaptchaBuilder as AnimatedCaptchaBuilder;
+use Visavi\Captcha\PhraseBuilder as AnimatedPhraseBuilder;
+
+class HomeController extends Controller
+{
+    /**
+     * Главная страница
+     */
+    public function index(): View
+    {
+        return view('index');
+    }
+
+    /**
+     * Лента (AJAX)
+     */
+    public function feed(Request $request): string|RedirectResponse
+    {
+        if (! $request->ajax()) {
+            return redirect(url('/') . ($request->has('page') ? '?page=' . $request->input('page') : ''));
+        }
+
+        return (string) (new Feed())->getFeed();
+    }
+
+    /**
+     * Закрытие сайта
+     */
+    public function closed(): Response
+    {
+        if (setting('closedsite') !== 2) {
+            return redirect('/');
+        }
+
+        return response()->view('pages/closed', [], 503);
+    }
+
+    /**
+     * Поиск по сайту
+     */
+    public function search(Request $request, Validator $validator): View|RedirectResponse
+    {
+        $posts = paginate([], 10);
+        $query = (string) $request->input('query', $request->input('q', ''));
+        $query = trim(preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $query));
+        $searchQuery = implode(' ', array_filter(explode(' ', $query), static fn ($w) => mb_strlen($w) >= 3));
+
+        $types = Search::getRelateTypes();
+
+        $sort = check($request->input('sort', 'relevance'));
+        $order = match ($sort) {
+            'date'     => ['created_at desc'],
+            'date_asc' => ['created_at asc'],
+            default    => ['match(text) against(? in boolean mode) desc', [$searchQuery . '*']],
+        };
+
+        $type = check($request->input('type'));
+        $type = isset($types[$type]) ? $type : null;
+
+        if ($query) {
+            $validator->length($searchQuery, 3, 64, ['find' => __('main.request_length')]);
+
+            if ($validator->isValid()) {
+                $posts = Search::query()
+                    ->whereIn('relate_type', array_keys($types))
+                    ->when($type, function ($query) use ($type) {
+                        $query->where('relate_type', $type);
+                    })
+                    ->where(function ($query) {
+                        $query->where('relate_type', '!=', Comment::$morphName)
+                            ->orWhereIn('relate_id', Comment::visible()->select('id'));
+                    })
+                    ->whereFullText('text', $searchQuery . '*', ['mode' => 'boolean'])
+                    ->with('relate')
+                    ->orderByRaw(...$order)
+                    ->paginate(10)
+                    ->appends(compact('query', 'sort', 'type'));
+
+                $morphWith = array_filter(array_column(Registry::$search, 'with', 'class'));
+                $posts->loadMorph('relate', [Comment::class => ['relate'], ...$morphWith]);
+            } else {
+                setInput($request->all());
+                setFlash('danger', $validator->getErrors());
+            }
+        }
+
+        return view('search/index', compact('posts', 'types', 'type', 'sort', 'query'));
+    }
+
+    /**
+     * Бан по IP
+     */
+    public function ipban(Request $request): Response
+    {
+        $ban = Ban::query()
+            ->where('ip', getIp())
+            ->first();
+
+        if (! $ban) {
+            clearCache('ipBan');
+
+            return redirect('/');
+        }
+
+        if (
+            ! $ban->user_id
+            && $ban->created_at->lt(now()->subMinute())
+            && $request->isMethod('post')
+            && captchaVerify()
+        ) {
+            $ban->delete();
+            clearCache('ipBan');
+
+            setFlash('success', __('pages.ip_success_unbanned'));
+
+            return redirect('/');
+        }
+
+        return response()->view('pages/ipban', compact('ban'), 429);
+    }
+
+    /**
+     * Защитная картинка
+     */
+    public function captcha(Request $request): Response
+    {
+        if (setting('captcha_type') === 'animated') {
+            $phrase = new AnimatedPhraseBuilder();
+            $phrase = $phrase->getPhrase(setting('captcha_maxlength'), setting('captcha_symbols'));
+
+            $captcha = new AnimatedCaptchaBuilder($phrase);
+            $captcha = $captcha->render();
+        } else {
+            $captcha = new MobicmsCaptcha();
+            $captcha->imageWidth = 180;
+            $captcha->imageHeight = 50;
+            $captcha->lengthMax = setting('captcha_maxlength');
+            $captcha->characterSet = (string) setting('captcha_symbols');
+            $phrase = $captcha->getCode();
+            $captcha = $captcha->build();
+        }
+
+        $request->session()->put('protect', $phrase);
+
+        return response($captcha)
+            ->header('Content-Type', setting('captcha_type') === 'animated' ? 'image/gif' : 'image/png')
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
+    }
+
+    /**
+     * Быстрое изменение языка
+     */
+    public function language(string $lang, Request $request): JsonResponse
+    {
+        $languages = getAvailableLanguages();
+
+        if (preg_match('/^[a-z]+$/', $lang) && in_array($lang, $languages, true)) {
+            if ($user = $request->user()) {
+                $user->update([
+                    'language' => $lang,
+                ]);
+            } else {
+                $request->session()->put('language', $lang);
+            }
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+    public function error403(): View
+    {
+        abort(403);
+    }
+
+    public function error404(): View
+    {
+        abort(404);
+    }
+}

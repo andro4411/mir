@@ -1,0 +1,68 @@
+@extends('layout')
+
+@section('title', __('messages.notifications'))
+
+@section('breadcrumb')
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+            <li class="breadcrumb-item"><a href="/messages">{{ __('index.messages') }}</a></li>
+            <li class="breadcrumb-item active">{{ __('messages.notifications') }}</li>
+        </ol>
+    </nav>
+@stop
+
+@section('content')
+    @if ($messages->isNotEmpty())
+        @foreach ($messages as $data)
+            <div class="section mb-3 shadow">
+                <div class="user-avatar">
+                    <span class="avatar-default avatar-guest rounded-circle"><i class="fas fa-headset"></i></span>
+                    <div class="user-status bg-success" title="Online"></div>
+                </div>
+
+                <div class="section-user d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <b>{{ __('messages.system') }}</b>
+
+                        @unless ($data->reading)
+                            <span class="badge bg-info">{{ __('messages.new') }}</span>
+                        @endunless
+                    </div>
+
+                    <div class="section-date text-muted fst-italic small">
+                        {{ dateFixed($data->created_at) }}
+                    </div>
+                </div>
+
+                <div class="section-body border-top">
+                    <div class="section-message">
+                        {{ $data->getText() }}
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+        {{ $messages->links() }}
+
+        <div class="mb-3">
+            {{ __('main.total') }}: <b>{{ $messages->total() }}</b>
+        </div>
+
+        <form action="/messages/delete/0" method="post" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-link p-0"><i class="fa fa-times"></i> {{ __('messages.delete_talk') }}</button>
+        </form><br>
+    @else
+        {{ showError(__('messages.empty_notifications')) }}
+    @endif
+
+    <i class="fa fa-search"></i> <a href="/users">{{ __('index.user_search') }}</a><br>
+@stop
+
+@push('scripts')
+    <script type="module">
+        updateMessageCount({{ $countMessages }});
+    </script>
+@endpush

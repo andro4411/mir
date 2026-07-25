@@ -1,0 +1,88 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
+
+/**
+ * Class Dialogue
+ *
+ * @property int             $id
+ * @property int             $message_id
+ * @property int             $user_id
+ * @property int             $author_id
+ * @property string          $type
+ * @property int             $reading
+ * @property CarbonImmutable $created_at
+ * @property-read User    $author
+ * @property-read Message $message
+ */
+class Dialogue extends Model
+{
+    public const string IN = 'in';   // Принятые
+    public const string OUT = 'out';  // Отправленные
+
+    /**
+     * The name of the "updated at" column.
+     */
+    public const ?string UPDATED_AT = null;
+
+    /**
+     * The attributes that aren't mass assignable.
+     */
+    protected $guarded = [];
+
+    /**
+     * Get the attributes that should be cast.
+     */
+    protected function casts(): array
+    {
+        return [
+            'user_id' => 'int',
+        ];
+    }
+
+    /**
+     * Возвращает связь пользователя
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id')->withDefault();
+    }
+
+    /**
+     * Возвращает связь пользователя
+     */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
+    }
+
+    /**
+     * Message
+     */
+    public function message(): BelongsTo
+    {
+        return $this->belongsTo(Message::class, 'message_id')->withDefault();
+    }
+
+    /**
+     * Удаление сообщений диалога
+     */
+    public function delete(): ?bool
+    {
+        return DB::transaction(function () {
+            // Если сообщение осталось только у одного пользователя
+            if ($this->message->dialogues->count() === 1) {
+                $this->message->delete();
+            }
+
+            return parent::delete();
+        });
+    }
+}

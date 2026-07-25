@@ -1,0 +1,155 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
+
+/**
+ * @property int                  $id
+ * @property string               $url
+ * @property string               $name
+ * @property bool                 $active
+ * @property array                $cached_data
+ * @property CarbonImmutable|null $cached_at
+ * @property CarbonImmutable      $created_at
+ * @property CarbonImmutable      $updated_at
+ */
+class ModuleRegistry extends Model
+{
+    protected $guarded = [];
+
+    protected function casts(): array
+    {
+        return [
+            'active'      => 'bool',
+            'cached_data' => 'array',
+            'cached_at'   => 'datetime',
+        ];
+    }
+
+    /**
+     * Fetches the data from the registry.
+     */
+    public bool $fetchFailed = false;
+
+    public function fetch(bool $force = false): array
+    {
+        $ttl = (int) config('modules.registry_cache_ttl');
+
+        // Реестр уже опрашивался: отдаём кэш сразу (даже пустой у недоступного реестра),
+        // протухший обновляем после отправки ответа. Синхронный путь — только для
+        // нового реестра и force
+        if (! $force && $this->cached_at !== null) {
+            if (! $this->cached_at->gt(now()->subSeconds($ttl))) {
+                dispatch(fn () => $this->fetch(true))->afterResponse();
+            }
+
+            return $this->cached_data ?? [];
+        }
+
+        try {
+            $response = Http::timeout(10)->get($this->url);
+
+            if (! $response->ok()) {
+                return $this->markFailed();
+            }
+
+            $data = $response->json();
+
+            if (! is_array($data)) {
+                return $this->markFailed();
+            }
+
+            $this->update([
+                'name'        => $data['name'] ?? $this->name,
+                'cached_data' => $data,
+                'cached_at'   => now(),
+            ]);
+
+            return $data;
+        } catch (\Exception) {
+            return $this->markFailed();
+        }
+    }
+
+    /**
+     * Помечает реестр недоступным и продлевает кэш, чтобы не опрашивать его каждый запрос.
+     */
+    private function markFailed(): array
+    {
+        $this->fetchFailed = true;
+        $this->update(['cached_at' => now()]);
+
+        return $this->cached_data ?? [];
+    }
+
+    /**
+     * Returns an array of available modules.
+     */
+    public static function getAvailableModules(bool $force = false): array
+    {
+        $registries = self::query()->where('active', true)->get();
+        $modules = [];
+
+        foreach ($registries as $registry) {
+            $data = $registry->fetch($force);
+            $registryLabel = $registry->name ?: $registry->url;
+
+            foreach ($data['modules'] ?? [] as $module) {
+                if (! isset($module['module'])) {
+                    continue;
+                }
+
+                $name = $module['module'];
+
+                if (isset($modules[$name])) {
+                    $modules[$name]['conflict'][] = $registryLabel;
+                    continue;
+                }
+
+                $versions = $module['versions'] ?? [];
+                $best = self::bestCompatibleVersion($versions);
+                $latest = $versions[0] ?? [];
+                $version = $best ?? $latest;
+
+                $extra = ['registry' => $registryLabel, 'conflict' => []];
+
+                if ($best && isset($latest['version']) && version_compare($latest['version'], $best['version'], '>')) {
+                    $extra['latest_version'] = $latest['version'];
+                    $extra['latest_requires'] = $latest['requires'] ?? null;
+                }
+
+                $modules[$name] = array_merge(
+                    array_diff_key($module, ['versions' => true]),
+                    $version,
+                    $extra,
+                );
+            }
+        }
+
+        return $modules;
+    }
+
+    /**
+     * Returns the best compatible version of a module.
+     */
+    private static function bestCompatibleVersion(array $versions): ?array
+    {
+        $compatible = array_filter(
+            $versions,
+            static fn (array $v) => empty($v['requires']) || version_compare(ROTOR_VERSION, $v['requires'], '>='),
+        );
+
+        if (empty($compatible)) {
+            return null;
+        }
+
+        usort($compatible, static fn ($a, $b) => version_compare($b['version'], $a['version']));
+
+        return $compatible[0];
+    }
+}

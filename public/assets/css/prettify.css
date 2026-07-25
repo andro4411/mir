@@ -1,0 +1,30 @@
+.code .com { color: var(--base-comment); }
+.code .lit { color: var(--base-number); }
+.code .pun, .code .opn, .code .clo { color: var(--base-emphasis); }
+.code .fun { color: var(--base-fun); }
+.code .str { color: var(--base-str); }
+.code .atv { color: var(--base-atv); }
+.code .kwd { color: var(--base-attr); }
+.code .tag { color: var(--base-tag); }
+.code .typ, .code .var { color: var(--base-class); }
+.code .dec { color: var(--base-dec); }
+.code .atn { color: var(--base-symbol); }
+.code .pln { color: var(--base-code); }
+
+.code {
+  background: var(--base-bg);
+  color: var(--base-color);
+  display: block;
+  white-space: pre;
+  overflow-x:auto;
+  word-wrap: normal;
+  tab-size: 2;
+  padding: 5px;
+  font-size: 13px;
+  margin: 0.5rem 0;
+}
+
+.code ol {
+    margin-bottom: 0;
+    padding-left: 3em;
+}

@@ -1,0 +1,138 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Notice;
+use Illuminate\Database\Seeder;
+
+class NoticeSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $data = [
+            [
+                'type'       => 'register',
+                'name'       => __('seeds.notices.register_name'),
+                'text'       => __('seeds.notices.register_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'down_upload',
+                'name'       => __('seeds.notices.down_upload_name'),
+                'text'       => __('seeds.notices.down_upload_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'down_publish',
+                'name'       => __('seeds.notices.down_publish_name'),
+                'text'       => __('seeds.notices.down_publish_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'down_unpublish',
+                'name'       => __('seeds.notices.down_unpublish_name'),
+                'text'       => __('seeds.notices.down_unpublish_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'down_change',
+                'name'       => __('seeds.notices.down_change_name'),
+                'text'       => __('seeds.notices.down_change_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'notify',
+                'name'       => __('seeds.notices.notify_name'),
+                'text'       => __('seeds.notices.notify_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'comment_reply',
+                'name'       => __('seeds.notices.comment_reply_name'),
+                'text'       => __('seeds.notices.comment_reply_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'comment_added',
+                'name'       => __('seeds.notices.comment_added_name'),
+                'text'       => __('seeds.notices.comment_added_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'rating',
+                'name'       => __('seeds.notices.rating_name'),
+                'text'       => __('seeds.notices.rating_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'explain',
+                'name'       => __('seeds.notices.explain_name'),
+                'text'       => __('seeds.notices.explain_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'offer_reply',
+                'name'       => __('seeds.notices.offer_reply_name'),
+                'text'       => __('seeds.notices.offer_reply_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'article_publish',
+                'name'       => __('seeds.notices.article_publish_name'),
+                'text'       => __('seeds.notices.article_publish_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+            [
+                'type'       => 'article_unpublish',
+                'name'       => __('seeds.notices.article_unpublish_name'),
+                'text'       => __('seeds.notices.article_unpublish_text'),
+                'user_id'    => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'protect'    => 1,
+            ],
+        ];
+
+        Notice::query()->truncate();
+        Notice::query()->insert($data);
+    }
+}

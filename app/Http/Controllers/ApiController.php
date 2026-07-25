@@ -1,0 +1,311 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers;
+
+use App\Http\Resources\DialogueResource;
+use App\Http\Resources\MessageResource;
+use App\Http\Resources\NewMessageResource;
+use App\Http\Resources\UserProfileResource;
+use App\Http\Resources\UserResource;
+use App\Models\Dialogue;
+use App\Models\Flood;
+use App\Models\Message;
+use App\Models\User;
+use Closure;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\View\View;
+
+class ApiController extends Controller
+{
+    /**
+     * Главная страница
+     */
+    public function index(): View
+    {
+        return view('api/index');
+    }
+
+    /**
+     * Авторизация и получение токена
+     */
+    public function auth(Request $request): JsonResponse
+    {
+        $request->validate([
+            'login'    => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ]);
+
+        $user = getUserByLoginOrEmail($request->input('login'));
+
+        if (! $user || ! password_verify($request->input('password'), $user->password)) {
+            abort(401, __('users.incorrect_login_or_password'));
+        }
+
+        if ($user->level === User::BANNED) {
+            abort(403, 'User banned');
+        }
+
+        if (! $user->apikey) {
+            $user->update(['apikey' => Str::random(32)]);
+        }
+
+        return response()->json(['token' => $user->apikey]);
+    }
+
+    /**
+     * Api пользователей
+     */
+    public function user(): JsonResource
+    {
+        $user = getUser();
+
+        return new UserProfileResource($user);
+    }
+
+    /**
+     * Api пользователей
+     */
+    public function users(string $login): JsonResource
+    {
+        $user = getUserByLogin($login);
+
+        if (! $user) {
+            abort(404, __('validator.user'));
+        }
+
+        return new UserResource($user);
+    }
+
+    /**
+     * Api диалогов
+     */
+    public function dialogues(Request $request): JsonResource
+    {
+        $user = getUser();
+
+        $lastMessage = Dialogue::query()
+            ->select(
+                'author_id',
+                DB::raw('max(message_id) as message_id'),
+                DB::raw('min(case when reading then 1 else 0 end) as all_reading')
+            )
+            ->where('user_id', $user->id)
+            ->groupBy('author_id');
+
+        $dialogues = Message::query()
+            ->select('d.*', 'm.text', 'd2.all_reading', 'd3.reading as recipient_read')
+            ->from('messages as m')
+            ->join('dialogues as d', 'd.message_id', 'm.id')
+            ->joinSub($lastMessage, 'd2', static function (JoinClause $join) {
+                $join->on('d.message_id', 'd2.message_id');
+            })
+            ->leftJoin('dialogues as d3', function ($join) {
+                $join->on('d.user_id', 'd3.author_id')
+                    ->whereColumn('d.message_id', 'd3.message_id');
+            })
+            ->where('d.user_id', $user->id)
+            ->with('author')
+            ->orderBy('d.created_at', $this->getOrder($request))
+            ->paginate($this->getPerPage($request));
+
+        return DialogueResource::collection($dialogues);
+    }
+
+    /**
+     * Api приватных сообщений
+     */
+    public function talk(string $login, Request $request): JsonResource
+    {
+        $user = getUser();
+
+        if (is_numeric($login)) {
+            $author = (new User())->setAttribute('id', $login);
+        } else {
+            $author = getUserByLogin($login);
+
+            if (! $author) {
+                abort(404, __('validator.user'));
+            }
+        }
+
+        if ($user->id === $author->id) {
+            abort(200, __('messages.empty_dialogue'));
+        }
+
+        $messages = Message::query()
+            ->select('d.*', 'm.id', 'm.text', 'd2.reading as recipient_read')
+            ->from('messages as m')
+            ->join('dialogues as d', 'd.message_id', 'm.id')
+            ->leftJoin('dialogues as d2', function ($join) {
+                $join->on('d.user_id', 'd2.author_id')
+                    ->whereColumn('d.message_id', 'd2.message_id');
+            })
+            ->where('d.user_id', $user->id)
+            ->where('d.author_id', $author->id)
+            ->orderBy('d.created_at', $this->getOrder($request))
+            ->with('user', 'author', 'files')
+            ->paginate($this->getPerPage($request));
+
+        Dialogue::query()
+            ->where('user_id', $user->id)
+            ->where('author_id', $author->id)
+            ->where('reading', 0)
+            ->update(['reading' => 1]);
+
+        $dialogue = $messages->first();
+        $dialogue?->setAttribute('all_reading', true);
+
+        return MessageResource::collection($messages)
+            ->additional(['dialogue' => $dialogue ? DialogueResource::make($dialogue) : null]);
+    }
+
+    /**
+     * Отправляет приватное сообщение
+     */
+    public function createTalk(string $login, Request $request, Flood $flood): JsonResponse
+    {
+        $user = getUser();
+        $recipient = getUserByLogin($login);
+
+        $validated = $request->validate([
+            'text' => [
+                'required',
+                'string',
+                'min:' . setting('comment_text_min'),
+                'max:' . setting('comment_text_max'),
+                function (string $attribute, mixed $value, Closure $fail) use ($user, $recipient, $flood) {
+                    if (! $recipient) {
+                        $fail(__('validator.user'));
+                    } elseif ($recipient->id === $user->id) {
+                        $fail(__('messages.send_yourself'));
+                    } elseif ($flood->isFlood()) {
+                        $fail(__('validator.flood', ['sec' => $flood->getPeriod()]));
+                    }
+                },
+            ],
+            'files'   => ['nullable', 'array', 'max:' . setting('maxfiles')],
+            'files.*' => ['file', 'max:' . setting('filesize'), 'mimes:' . setting('file_extensions')],
+        ]);
+
+        $text = antimat($validated['text']);
+        $message = $recipient->sendMessage($user, $text);
+
+        foreach ($request->file('files', []) as $file) {
+            $message->uploadFile($file);
+        }
+
+        $flood->saveState();
+
+        $message->load('user', 'files');
+        $message->setAttribute('type', Message::OUT);
+
+        return response()->json([
+            'message' => __('messages.success_sent'),
+            'data'    => MessageResource::make($message),
+        ], 201);
+    }
+
+    /**
+     * Api новых сообщений
+     */
+    public function newMessages(): JsonResponse
+    {
+        $user = getUser();
+
+        $countMessages = Dialogue::query()
+            ->where('user_id', $user->id)
+            ->where('reading', 0)
+            ->count();
+
+        if (! $countMessages) {
+            return response()->json(['count' => 0, 'dialogues' => []]);
+        }
+
+        $dialogues = Dialogue::query()
+            ->select(
+                'author_id',
+                DB::raw('max(created_at) as last_created_at')
+            )
+            ->selectRaw('count(*) as cnt')
+            ->where('user_id', $user->id)
+            ->where('reading', 0)
+            ->groupBy('author_id')
+            ->with('author')
+            ->get();
+
+        return response()->json([
+            'count'     => $countMessages,
+            'dialogues' => NewMessageResource::collection($dialogues),
+        ]);
+    }
+
+    /**
+     * Api конфигурации
+     */
+    public function config(): JsonResponse
+    {
+        $data = Cache::remember('apiConfig', 600, static fn () => [
+            'site' => [
+                'title'             => setting('title'),
+                'language'          => setting('language'),
+                'money_name'        => setting('moneyname'),
+                'score_name'        => setting('scorename'),
+                'site_closed'       => (bool) setting('closedsite'),
+                'registration_open' => (bool) setting('openreg'),
+            ],
+            'upload' => [
+                'max_files'     => setting('maxfiles'),
+                'max_file_size' => setting('filesize'),
+                'extensions'    => explode(',', setting('file_extensions')),
+            ],
+            'forum' => [
+                'title_min' => setting('forum_title_min'),
+                'title_max' => setting('forum_title_max'),
+                'text_min'  => setting('forum_text_min'),
+                'text_max'  => setting('forum_text_max'),
+            ],
+            'vote' => [
+                'title_min'   => setting('vote_title_min'),
+                'title_max'   => setting('vote_title_max'),
+                'answer_min'  => setting('vote_answer_min'),
+                'answer_max'  => setting('vote_answer_max'),
+                'answers_min' => 2,
+                'answers_max' => 10,
+            ],
+            'message' => [
+                'text_min' => setting('comment_text_min'),
+                'text_max' => setting('comment_text_max'),
+            ],
+        ]);
+
+        return response()->json($data);
+    }
+
+    /**
+     * Get order direction from request
+     */
+    private function getOrder(Request $request, string $default = 'desc'): string
+    {
+        $order = $request->input('order', $default);
+
+        return in_array($order, ['asc', 'desc']) ? $order : $default;
+    }
+
+    /**
+     * Get per page from request
+     */
+    private function getPerPage(Request $request): int
+    {
+        $perPage = $request->integer('per_page', 10);
+
+        return max(1, min($perPage, 100));
+    }
+}

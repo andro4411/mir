@@ -1,0 +1,97 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use App\Casts\HtmlCast;
+use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\HtmlString;
+
+/**
+ * Class Banhist
+ *
+ * @property int             $id
+ * @property int             $user_id
+ * @property int             $send_user_id
+ * @property string          $type
+ * @property string          $reason
+ * @property int             $term
+ * @property bool            $explain
+ * @property CarbonImmutable $created_at
+ */
+class Banhist extends Model
+{
+    /**
+     * The table associated with the model.
+     */
+    protected $table = 'banhist';
+
+    /**
+     * The name of the "updated at" column.
+     */
+    public const ?string UPDATED_AT = null;
+
+    /**
+     * The attributes that aren't mass assignable.
+     */
+    protected $guarded = [];
+
+    /**
+     * Get the attributes that should be cast.
+     */
+    protected function casts(): array
+    {
+        return [
+            'user_id' => 'int',
+            'reason'  => HtmlCast::class,
+        ];
+    }
+
+    /**
+     * Get reason
+     */
+    public function getReason(): HtmlString
+    {
+        return renderHtml($this->reason);
+    }
+
+    /**
+     * Типы банов
+     */
+    public const string BAN = 'ban';    // Бан
+    public const string UNBAN = 'unban';  // Разбан
+    public const string CHANGE = 'change'; // Изменение
+
+    /**
+     * Возвращает связь пользователя
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id')->withDefault();
+    }
+
+    /**
+     * Возвращает связь пользователя
+     */
+    public function sendUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'send_user_id')->withDefault();
+    }
+
+    /**
+     * Возвращает тип бана
+     */
+    public function getType(): HtmlString
+    {
+        $type = match ($this->type) {
+            self::BAN   => '<span class="text-danger">' . __('main.ban') . '</span>',
+            self::UNBAN => '<span class="text-success">' . __('main.unban') . '</span>',
+            default     => '<span class="text-warning">' . __('main.changed') . '</span>',
+        };
+
+        return new HtmlString($type);
+    }
+}

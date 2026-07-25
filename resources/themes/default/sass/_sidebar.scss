@@ -1,0 +1,151 @@
+// Component: Sidebar
+
+.app-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  width: $sidebar-width;
+  overflow: auto;
+  z-index: 10;
+  background-color: $sidebar-color;
+  color: $sidebar-dark-color;
+  box-shadow: 0 8px 17px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease,
+  width 0.3s ease;
+  opacity: 0.98;
+  &::-webkit-scrollbar { width: 6px; }
+  &::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); }
+  @media print { display: none; }
+
+  .user-menu {
+    cursor: pointer;
+
+    .treeview-menu a {
+      color: #ffc107;
+    }
+
+    .treeview-item {
+      padding: 8px 20px;
+    }
+  }
+}
+
+.app-sidebar__overlay {
+  @media(max-width: 767px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.app-sidebar__user-avatar {
+  flex: 0 0 auto;
+  margin-right: 10px;
+}
+
+.app-sidebar__user-name,
+.app-sidebar__user-designation {
+  margin-bottom: 0;
+}
+
+.app-sidebar__footer {
+  margin: 0 10px;
+  padding: 10px 5px;
+  border-top: 1px solid rgba(0,0,0, 0.25);
+  color: #fff;
+  a:not(.btn) {
+    color: #fff;
+  }
+}
+
+.app-menu {
+  @extend .list-unstyled;
+  margin-bottom: 0;
+}
+
+.menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 12px;
+  border-left: 3px solid transparent;
+  transition: border-left-color 0.3s ease,
+  background-color 0.3s ease;
+  @if $sidebar-accent == dark { color: $sidebar-dark-link-color }
+  @if $sidebar-accent == light { color: $sidebar-light-link-color }
+  &.active,
+  &:hover,
+  &:focus {
+    background: darken($sidebar-color, 7);
+    border-left-color: $primary-color;
+    text-decoration: none;
+    @if $sidebar-accent == dark { color: $sidebar-dark-link-color }
+    @if $sidebar-accent == light { color: $primary-color }
+  }
+}
+
+.menu-icon {
+  flex: 0 0 auto;
+  margin-right: 8px;
+}
+
+.menu-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1 1 auto;
+  margin-right: 5px
+}
+
+.treeview {
+  &.is-expanded {
+    [data-bs-toggle='treeview'] {
+      border-left-color: $primary-color;
+      background: darken($sidebar-color, 7);
+    }
+    .treeview-menu { max-height: 100vh; }
+    .treeview-indicator { transform: rotate(180deg); }
+  }
+}
+
+.treeview-menu {
+  @extend .list-unstyled;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  @if $sidebar-accent == dark {
+    background: lighten($sidebar-color, 4)
+  }
+  @if $sidebar-accent == light {
+    background: darken($sidebar-color, 4)
+  }
+}
+
+.treeview-item {
+  display: flex;
+  align-items: center;
+  padding: 5px 5px 5px 20px;
+  font-size: 1em;
+  @if $sidebar-accent == dark { color: $sidebar-dark-link-color }
+  @if $sidebar-accent == light { color: $sidebar-light-link-color }
+  &.active,
+  &:hover,
+  &:focus {
+    background: darken($sidebar-color, 7);
+    text-decoration: none;
+    @if $sidebar-accent == dark { color: $sidebar-dark-link-color }
+    @if $sidebar-accent == light { color: $primary-color }
+  }
+  .icon { margin-right: 5px; }
+}
+
+.treeview-indicator {
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}

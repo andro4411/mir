@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RedirectMatch 403 ^/app/?$
+    RedirectMatch 403 ^/bootstrap/?$
+    RedirectMatch 403 ^/resources/?$
+    RedirectMatch 403 ^/storage/?$
+    RedirectMatch 403 ^/vendor/?$
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    RewriteCond %{REQUEST_URI} !^public
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+<Files ~ ".env|artisan">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
